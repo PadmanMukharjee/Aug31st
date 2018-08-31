@@ -1,0 +1,12 @@
+E:\M3Pact\Development\Dev2.0\Notification\bin\Debug\netstandard2.0\Notification.deps.json
+E:\M3Pact\Development\Dev2.0\Notification\bin\Debug\netstandard2.0\Notification.dll
+E:\M3Pact\Development\Dev2.0\Notification\bin\Debug\netstandard2.0\Notification.pdb
+E:\M3Pact\Development\Dev2.0\Notification\bin\Debug\netstandard2.0\ConfigManager.dll
+E:\M3Pact\Development\Dev2.0\Notification\bin\Debug\netstandard2.0\ConfigManager.pdb
+E:\M3Pact\Development\Dev2.0\Notification\obj\Debug\netstandard2.0\Notification.csprojResolveAssemblyReference.cache
+E:\M3Pact\Development\Dev2.0\Notification\obj\Debug\netstandard2.0\Notification.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\Notification\obj\Debug\netstandard2.0\Notification.AssemblyInfoInputs.cache
+E:\M3Pact\Development\Dev2.0\Notification\obj\Debug\netstandard2.0\Notification.AssemblyInfo.cs
+E:\M3Pact\Development\Dev2.0\Notification\obj\Debug\netstandard2.0\Notification.csproj.CopyComplete
+E:\M3Pact\Development\Dev2.0\Notification\obj\Debug\netstandard2.0\Notification.dll
+E:\M3Pact\Development\Dev2.0\Notification\obj\Debug\netstandard2.0\Notification.pdb

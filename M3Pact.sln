@@ -1,0 +1,193 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{666AA57F-F308-4204-A429-82BA7FEA37D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{DFBC6892-3672-4EED-B55A-0D62FFB8A262}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{60E97D06-020B-4C3C-A017-CAF00226B83D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{C0CBA519-34B4-46BB-B996-61F2AAFCD2F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{44E59DC2-991A-4A08-AC85-4EB5BEEFC179}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.Business", "M3Pact.Business\M3Pact.Business.csproj", "{A12C24E2-EC56-48D7-B5AF-9DC7A140F4A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.Repository", "M3Pact.DataAccess\M3Pact.Repository.csproj", "{FCBCE7A9-7F28-400E-8E69-D6CEB9D62E0F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.Infrastructure", "M3Pact.Infrastructure\M3Pact.Infrastructure.csproj", "{32C6E61B-49AA-4608-A85D-B2D52E49EC80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.BusinessModel", "M3Pact.BusinessModel\M3Pact.BusinessModel.csproj", "{98AD1423-09EB-421B-B99A-109533DF2F41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.DomainModel", "M3Pact.DomainModel\M3Pact.DomainModel.csproj", "{B6E58922-DFFB-4488-A35A-5F3BB3934790}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.ViewModel", "M3Pact.ViewModel\M3Pact.ViewModel.csproj", "{1154B711-6F71-4F77-83AA-EBD08B14F92C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{B8AA6D99-A062-4219-B56B-0213167B528A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3PactTests", "M3PactTests\M3PactTests.csproj", "{0E2CC90F-5BCD-462F-B6AA-BB969D7F8D9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M3Pact.Web", "M3Pact.Web\M3Pact.Web.csproj", "{DBAB92F7-FCAF-4FB6-8E52-42E8F812E803}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.WebAPI", "M3Pact.WebAPI\M3Pact.WebAPI.csproj", "{085A985F-468B-4D42-814B-690233CAC6B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.Infrastructure.Interfaces", "M3Pact.Infrastructure.Interfaces\M3Pact.Infrastructure.Interfaces.csproj", "{880508FD-A7E2-42FE-9147-3A99E5D425EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigManager", "ConfigManager\ConfigManager.csproj", "{B80CDDC1-9FBF-4BBC-90DB-39C70579B679}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification", "Notification\Notification.csproj", "{A06642E1-E86B-4579-B70B-9243673FDC97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.LoggerUtility", "M3Pact.LoggerUtility\M3Pact.LoggerUtility.csproj", "{B2B63C6A-C814-4CD3-9250-2FED26227B1A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M3Pact.Scheduler", "M3Pact.Scheduler\M3Pact.Scheduler.csproj", "{044BF778-DB1B-47B2-B995-83A1AEF321AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A12C24E2-EC56-48D7-B5AF-9DC7A140F4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A12C24E2-EC56-48D7-B5AF-9DC7A140F4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A12C24E2-EC56-48D7-B5AF-9DC7A140F4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A12C24E2-EC56-48D7-B5AF-9DC7A140F4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBCE7A9-7F28-400E-8E69-D6CEB9D62E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBCE7A9-7F28-400E-8E69-D6CEB9D62E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBCE7A9-7F28-400E-8E69-D6CEB9D62E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBCE7A9-7F28-400E-8E69-D6CEB9D62E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32C6E61B-49AA-4608-A85D-B2D52E49EC80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C6E61B-49AA-4608-A85D-B2D52E49EC80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32C6E61B-49AA-4608-A85D-B2D52E49EC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C6E61B-49AA-4608-A85D-B2D52E49EC80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98AD1423-09EB-421B-B99A-109533DF2F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98AD1423-09EB-421B-B99A-109533DF2F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98AD1423-09EB-421B-B99A-109533DF2F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98AD1423-09EB-421B-B99A-109533DF2F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6E58922-DFFB-4488-A35A-5F3BB3934790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6E58922-DFFB-4488-A35A-5F3BB3934790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6E58922-DFFB-4488-A35A-5F3BB3934790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6E58922-DFFB-4488-A35A-5F3BB3934790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1154B711-6F71-4F77-83AA-EBD08B14F92C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1154B711-6F71-4F77-83AA-EBD08B14F92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1154B711-6F71-4F77-83AA-EBD08B14F92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1154B711-6F71-4F77-83AA-EBD08B14F92C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E2CC90F-5BCD-462F-B6AA-BB969D7F8D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E2CC90F-5BCD-462F-B6AA-BB969D7F8D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E2CC90F-5BCD-462F-B6AA-BB969D7F8D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E2CC90F-5BCD-462F-B6AA-BB969D7F8D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBAB92F7-FCAF-4FB6-8E52-42E8F812E803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBAB92F7-FCAF-4FB6-8E52-42E8F812E803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBAB92F7-FCAF-4FB6-8E52-42E8F812E803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBAB92F7-FCAF-4FB6-8E52-42E8F812E803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085A985F-468B-4D42-814B-690233CAC6B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085A985F-468B-4D42-814B-690233CAC6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085A985F-468B-4D42-814B-690233CAC6B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085A985F-468B-4D42-814B-690233CAC6B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{880508FD-A7E2-42FE-9147-3A99E5D425EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880508FD-A7E2-42FE-9147-3A99E5D425EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880508FD-A7E2-42FE-9147-3A99E5D425EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880508FD-A7E2-42FE-9147-3A99E5D425EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B80CDDC1-9FBF-4BBC-90DB-39C70579B679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B80CDDC1-9FBF-4BBC-90DB-39C70579B679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B80CDDC1-9FBF-4BBC-90DB-39C70579B679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B80CDDC1-9FBF-4BBC-90DB-39C70579B679}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A06642E1-E86B-4579-B70B-9243673FDC97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06642E1-E86B-4579-B70B-9243673FDC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06642E1-E86B-4579-B70B-9243673FDC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06642E1-E86B-4579-B70B-9243673FDC97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2B63C6A-C814-4CD3-9250-2FED26227B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B63C6A-C814-4CD3-9250-2FED26227B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B63C6A-C814-4CD3-9250-2FED26227B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B63C6A-C814-4CD3-9250-2FED26227B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044BF778-DB1B-47B2-B995-83A1AEF321AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044BF778-DB1B-47B2-B995-83A1AEF321AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044BF778-DB1B-47B2-B995-83A1AEF321AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044BF778-DB1B-47B2-B995-83A1AEF321AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A12C24E2-EC56-48D7-B5AF-9DC7A140F4A2} = {DFBC6892-3672-4EED-B55A-0D62FFB8A262}
+		{FCBCE7A9-7F28-400E-8E69-D6CEB9D62E0F} = {60E97D06-020B-4C3C-A017-CAF00226B83D}
+		{32C6E61B-49AA-4608-A85D-B2D52E49EC80} = {44E59DC2-991A-4A08-AC85-4EB5BEEFC179}
+		{98AD1423-09EB-421B-B99A-109533DF2F41} = {C0CBA519-34B4-46BB-B996-61F2AAFCD2F6}
+		{B6E58922-DFFB-4488-A35A-5F3BB3934790} = {C0CBA519-34B4-46BB-B996-61F2AAFCD2F6}
+		{1154B711-6F71-4F77-83AA-EBD08B14F92C} = {C0CBA519-34B4-46BB-B996-61F2AAFCD2F6}
+		{0E2CC90F-5BCD-462F-B6AA-BB969D7F8D9A} = {B8AA6D99-A062-4219-B56B-0213167B528A}
+		{DBAB92F7-FCAF-4FB6-8E52-42E8F812E803} = {666AA57F-F308-4204-A429-82BA7FEA37D6}
+		{085A985F-468B-4D42-814B-690233CAC6B7} = {666AA57F-F308-4204-A429-82BA7FEA37D6}
+		{880508FD-A7E2-42FE-9147-3A99E5D425EA} = {44E59DC2-991A-4A08-AC85-4EB5BEEFC179}
+		{B80CDDC1-9FBF-4BBC-90DB-39C70579B679} = {44E59DC2-991A-4A08-AC85-4EB5BEEFC179}
+		{A06642E1-E86B-4579-B70B-9243673FDC97} = {44E59DC2-991A-4A08-AC85-4EB5BEEFC179}
+		{B2B63C6A-C814-4CD3-9250-2FED26227B1A} = {44E59DC2-991A-4A08-AC85-4EB5BEEFC179}
+		{044BF778-DB1B-47B2-B995-83A1AEF321AB} = {666AA57F-F308-4204-A429-82BA7FEA37D6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6964F0CE-56C2-4CE9-BBBF-2E2285C08074}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 15
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://ggk-upl-tfs.ggktech.local:8080/tfs/meridiancollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = M3Pact.Business\\M3Pact.Business.csproj
+		SccProjectTopLevelParentUniqueName1 = M3Pact.sln
+		SccProjectName1 = M3Pact.Business
+		SccLocalPath1 = M3Pact.Business
+		SccProjectUniqueName2 = M3Pact.DataAccess\\M3Pact.Repository.csproj
+		SccProjectTopLevelParentUniqueName2 = M3Pact.sln
+		SccProjectName2 = M3Pact.DataAccess
+		SccLocalPath2 = M3Pact.DataAccess
+		SccProjectUniqueName3 = M3Pact.Infrastructure\\M3Pact.Infrastructure.csproj
+		SccProjectTopLevelParentUniqueName3 = M3Pact.sln
+		SccProjectName3 = M3Pact.Infrastructure
+		SccLocalPath3 = M3Pact.Infrastructure
+		SccProjectUniqueName4 = M3Pact.BusinessModel\\M3Pact.BusinessModel.csproj
+		SccProjectTopLevelParentUniqueName4 = M3Pact.sln
+		SccProjectName4 = M3Pact.BusinessModel
+		SccLocalPath4 = M3Pact.BusinessModel
+		SccProjectUniqueName5 = M3Pact.DomainModel\\M3Pact.DomainModel.csproj
+		SccProjectTopLevelParentUniqueName5 = M3Pact.sln
+		SccProjectName5 = M3Pact.DomainModel
+		SccLocalPath5 = M3Pact.DomainModel
+		SccProjectUniqueName6 = M3Pact.ViewModel\\M3Pact.ViewModel.csproj
+		SccProjectTopLevelParentUniqueName6 = M3Pact.sln
+		SccProjectName6 = M3Pact.ViewModel
+		SccLocalPath6 = M3Pact.ViewModel
+		SccProjectUniqueName7 = M3PactTests\\M3PactTests.csproj
+		SccProjectTopLevelParentUniqueName7 = M3Pact.sln
+		SccProjectName7 = M3PactTests
+		SccLocalPath7 = M3PactTests
+		SccProjectUniqueName8 = M3Pact.Web\\M3Pact.Web.csproj
+		SccProjectTopLevelParentUniqueName8 = M3Pact.sln
+		SccProjectName8 = M3Pact.Web
+		SccLocalPath8 = M3Pact.Web
+		SccProjectUniqueName9 = M3Pact.WebAPI\\M3Pact.WebAPI.csproj
+		SccProjectTopLevelParentUniqueName9 = M3Pact.sln
+		SccProjectName9 = M3Pact.WebAPI
+		SccLocalPath9 = M3Pact.WebAPI
+		SccProjectUniqueName10 = M3Pact.Infrastructure.Interfaces\\M3Pact.Infrastructure.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName10 = M3Pact.sln
+		SccProjectName10 = M3Pact.Infrastructure.Interfaces
+		SccLocalPath10 = M3Pact.Infrastructure.Interfaces
+		SccProjectUniqueName11 = ConfigManager\\ConfigManager.csproj
+		SccProjectTopLevelParentUniqueName11 = M3Pact.sln
+		SccProjectName11 = ConfigManager
+		SccLocalPath11 = ConfigManager
+		SccProjectUniqueName12 = Notification\\Notification.csproj
+		SccProjectTopLevelParentUniqueName12 = M3Pact.sln
+		SccProjectName12 = Notification
+		SccLocalPath12 = Notification
+		SccProjectUniqueName13 = M3Pact.LoggerUtility\\M3Pact.LoggerUtility.csproj
+		SccProjectTopLevelParentUniqueName13 = M3Pact.sln
+		SccProjectName13 = M3Pact.LoggerUtility
+		SccLocalPath13 = M3Pact.LoggerUtility
+		SccProjectUniqueName14 = M3Pact.Scheduler\\M3Pact.Scheduler.csproj
+		SccProjectTopLevelParentUniqueName14 = M3Pact.sln
+		SccProjectName14 = M3Pact.Scheduler
+		SccLocalPath14 = M3Pact.Scheduler
+	EndGlobalSection
+EndGlobal

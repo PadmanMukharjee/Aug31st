@@ -1,0 +1,10 @@
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\bin\M3Pact.Web.dll.config
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\bin\M3Pact.Web.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\bin\M3Pact.Web.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\obj\Debug\M3Pact.Web.csprojResolveAssemblyReference.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\obj\Debug\M3Pact.Web.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\obj\Debug\M3Pact.Web.csproj.CopyComplete
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\obj\Debug\M3Pact.Web.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.Web\obj\Debug\M3Pact.Web.pdb

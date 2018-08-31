@@ -1,0 +1,8 @@
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\bin\Debug\netstandard2.0\Meridian.AuthServer.DataModel.deps.json
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\bin\Debug\netstandard2.0\Meridian.AuthServer.DataModel.dll
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\bin\Debug\netstandard2.0\Meridian.AuthServer.DataModel.pdb
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\obj\Debug\netstandard2.0\Meridian.AuthServer.DataModel.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\obj\Debug\netstandard2.0\Meridian.AuthServer.DataModel.AssemblyInfoInputs.cache
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\obj\Debug\netstandard2.0\Meridian.AuthServer.DataModel.AssemblyInfo.cs
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\obj\Debug\netstandard2.0\Meridian.AuthServer.DataModel.dll
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.DataModel\obj\Debug\netstandard2.0\Meridian.AuthServer.DataModel.pdb

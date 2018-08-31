@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+    <PackageReference Include="System.DirectoryServices.Protocols" Version="4.5.0-preview2-26406-04" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.AuthServer.BusinessInterfaces\Meridian.AuthServer.BusinessInterfaces.csproj" />
+    <ProjectReference Include="..\Meridian.AuthServer.BusinessModel\Meridian.AuthServer.BusinessModel.csproj" />
+    <ProjectReference Include="..\Meridian.AuthServer.RepositoryInterfaces\Meridian.AuthServer.RepositoryInterfaces.csproj" />
+    <ProjectReference Include="..\Meridian.AuthServer.Repository\Meridian.AuthServer.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+﻿.businessunit-client {
+    text-decoration: underline;
+}
+.admin_popup {
+    height: 150px;
+}
+.validation-message {
+    color: red;
+    font-size: 11px;
+}
+@media screen and (max-width: 640px) {
+    .right_col {
+        padding-top: 180px !important;
+    }
+
+    .ui-dialog {
+        width: 340px !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    >>> .ui-table-wrapper {
+        overflow: initial;
+    }
+}

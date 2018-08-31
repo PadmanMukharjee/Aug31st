@@ -1,0 +1,121 @@
+
+.checkListBtn.active, .checkListBtn:active {
+    background-color: #be3333;
+    padding: 0.75px 6px;
+}
+
+.ui-dialog.ui-widget .ui-dialog-content .colwidth {
+    padding: 1em 1.5em 5em 1.5em !important;
+}
+
+.pad-top-10 {
+    padding-top: 10px;
+}
+
+.ui-datatable thead th {
+    white-space: normal !important;
+}
+
+.x_title .date_span {
+    color: #be3333;
+    padding-left: 5px;
+}
+
+    .x_title .date_span .date_picker_span {
+        color: #000000 !important;
+    }
+
+input {
+    color: rgb(84, 84, 84) !important;
+}
+
+.ui-messages-error {
+    color: #ab1a0f;
+    background-color: #ffcbc8;
+    border-color: #ffcbc8;
+}
+
+.monthlyweeklyswitch {
+}
+
+.error_msg {
+    color: red !important;
+    font-size: 11px;
+    /*display:block;
+    margin:10px 0px 0px 35px;*/
+}
+
+.mini_table {
+    margin: 10px;
+    width: 95%;
+}
+
+    .mini_table tbody tr:first-child {
+        background-color: #4d4d4d !important;
+        height: 30px;
+        color: white
+    }
+
+    .mini_table thead > tr > th, .mini_table tbody > tr > td, .mini_table tr th {
+        padding: .25em .5em;
+    }
+
+    .mini_table tr th {
+        font-weight: normal;
+    }
+dp-month-calendar.dp-material .dp-calendar-month {
+    color: #000000 !important;
+}
+.f-size-16 {
+    font-size: 16px;
+}
+.float_button{
+    float:right;
+}
+:host >>> .ui-table .ui-table-thead > tr > .question_width{
+    width:40% !important;
+}
+.answer_width{
+    width:10%;
+}
+.explanation_width{
+    width:60%;
+}
+.date_width {
+    width: 15%;
+}
+.white {
+    color: white;
+}
+:host >>> .ui-table .ui-table-tbody > tr > td {
+    overflow-wrap: break-word;
+}
+
+@media screen and (max-width:1440px) {
+    .page-title .title_left {
+        width: 40%;
+    }
+}
+@media screen and (min-width:1024px) {
+    :host >>> .ui-table-wrapper {
+        overflow: auto !important;
+    }
+    :host >>> .ui-table .ui-table-thead > tr > th, :host >>> .ui-table .ui-table-tbody > tr > td, :host >>> .ui-table .ui-table-tfoot > tr > td {
+        width: 100px !important;
+    }
+    .question_width{
+        width:400px !important;
+    }
+}
+@media screen and (max-width:1024px) {
+    :host >>> .ui-table .ui-table-thead > tr > th, .ui-table .ui-table-tbody > tr > td, .ui-table .ui-table-tfoot > tr > td {
+        width: 100px !important;
+    }
+
+    :host >>> .ui-table-scrollable-body > table > .ui-table-tbody > tr:first-child > td {
+        width: 600px;
+    }
+    :host >>> .ui-table .ui-table-thead > tr > .question_responsive {
+        width: 400px !important;
+    }
+}

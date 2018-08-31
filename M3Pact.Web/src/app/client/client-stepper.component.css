@@ -1,0 +1,221 @@
+﻿.flexer, .progress-indicator {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+    .flexer-element, .progress-indicator > li {
+        -ms-flex: 1;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        flex: 1;
+    }
+
+/***************************************************************************/
+
+.linkDisabled {
+    opacity: 0.1 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+.progress-indicator {
+    margin: 0;
+    padding: 20px 0 0 9%;
+    font-size: 80%;
+    /*text-transform: uppercase;*/
+}
+
+    .progress-indicator h6 {
+        /*text-align: left;*/
+        /*margin: 3% 0 0 -6%;*/
+        margin: 4% 30% 1% -25%;
+        font-size: 15px;
+        font-family: Roboto, Calibri, "Helvetica Neue",sans-serif;
+        font-weight: normal;
+    }
+
+@media screen and (max-width:1024px) {
+    .progress-indicator h6 {
+        margin: 4% 30% 1% -10%;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .progress-indicator h6 {
+        margin: 4% 37% 1% -43%;
+    }
+}
+
+.progress-indicator li {
+    width: 10%;
+    text-align: center;
+}
+
+.progress-indicator > li {
+    list-style: none;
+    text-align: center;
+    width: 15%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    text-overflow: ellipsis;
+    color: #919191;
+    display: block;
+}
+
+    .progress-indicator > li:hover {
+        color: #6f6f6f;
+    }
+
+    .progress-indicator > li.completed, .progress-indicator > li.completed .bubble {
+        color: #018E00;
+    }
+
+    .progress-indicator > li > h6.completedCSS {
+        color: #018E00;
+    }
+
+    .progress-indicator > li > h6.activeCSS {
+        color: #be3333;
+    }
+
+        .progress-indicator > li > h6.activeCSS .completedCSS {
+            color: #018E00;
+        }
+
+    .progress-indicator > li .bubble {
+        border-radius: 75px;
+        width: 50px;
+        height: 50px;
+        background-color: #919191;
+        display: block;
+        margin-top: -5px;
+        /*margin: 0 auto .5em;*/
+        /*border-bottom: 1px solid #888;*/
+    }
+
+.progress-indicator .last_bubble {
+    border-radius: 75px;
+    width: 50px;
+    height: 50px;
+    background-color: #919191;
+    display: block;
+    margin-top: -5px;
+    /*margin: 0 auto .5em;*/
+    /*border-bottom: 1px solid #888;*/
+}
+
+.progress-indicator > li .bubble:after, .progress-indicator > li .bubble:before {
+    display: block;
+    position: absolute;
+    top: 19px;
+    width: 100%;
+    height: 2px;
+    content: '';
+    background-color: #919191;
+}
+
+.progress-indicator > li.completed .bubble, .progress-indicator > li.completed .bubble:after, .progress-indicator > li.completed .bubble:before {
+    background-color: #5CB85C;
+    border-color: #247830;
+}
+
+.progress-indicator > li.completed .last_bubble {
+    background-color: #5CB85C;
+    border-color: #247830;
+}
+
+.progress-indicator > li .bubble:before {
+    left: 0;
+}
+
+.progress-indicator > li .bubble:after {
+    right: 0;
+}
+
+.progress-indicator > li.active, .progress-indicator > li.active .bubble {
+    color: #be3333;
+}
+
+    .progress-indicator > li.active .last_bubble {
+        color: #BC3036 !important;
+        background-color: #BC3036 !important;
+        border-color: #122a3f;
+    }
+
+.progress-indicator > li a:hover .last_bubble {
+    background-color: #be3333;
+    border-color: #1f306e;
+}
+
+.progress-indicator > li.active .bubble, .progress-indicator > li.active .bubble:after, .progress-indicator > li.active .bubble:before {
+    background-color: #be3333;
+    border-color: #122a3f;
+}
+
+.progress-indicator > li a:hover .bubble, .progress-indicator > li a:hover .bubble:after, .progress-indicator > li a:hover .bubble:before {
+    background-color: #be3333;
+    border-color: #1f306e;
+}
+
+.progress-indicator > li a:hover .bubble {
+    color: #be3333;
+}
+
+.progress-indicator > li.disabled a:hover .bubble, .progress-indicator > li.disabled a:hover .bubble:after, .progress-indicator > li.disabled a:hover .bubble:before {
+    background-color: #919191;
+    border-color: #1f306e;
+}
+
+.progress-indicator > li.disabled a:hover .bubble {
+    color: #919191;
+}
+
+.progress-indicator > li.disabled a:hover .last_bubble {
+    background-color: #919191;
+    border-color: #1f306e;
+}
+
+.progress-indicator > li.disabled a:hover .last_bubble {
+    color: #919191;
+}
+
+.bubble .fa {
+    margin: 15px 0 0 3px;
+    -webkit-margin: 15px 0 0 3px;
+    position: relative;
+    z-index: 7;
+    color: #fff;
+}
+
+.bubble .fa-3x {
+    font-size: 4.0em;
+    text-align: center;
+    width: 50px;
+}
+
+.last_bubble .fa-3x {
+    font-size: 4.0em;
+    text-align: center;
+    width: 50px;
+}
+
+.last_bubble .fa {
+    margin: 15px 0 0 0px;
+    -webkit-margin: 15px 0 0 0px;
+    position: relative;
+    z-index: 7;
+    color: #fff;
+}
+
+.red-link {
+    color: #BC3036 !important;
+}
+@media screen and (max-width: 640px) {
+    .res_padding {
+        padding-top: 180px !important;
+    }
+}

@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Meridian_M3Pact_DB", "Meridian_M3Pact_DB\Meridian_M3Pact_DB.sqlproj", "{4A482C99-022F-4677-AACD-E6D58F6CE5C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A482C99-022F-4677-AACD-E6D58F6CE5C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A482C99-022F-4677-AACD-E6D58F6CE5C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A482C99-022F-4677-AACD-E6D58F6CE5C1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4A482C99-022F-4677-AACD-E6D58F6CE5C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A482C99-022F-4677-AACD-E6D58F6CE5C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A482C99-022F-4677-AACD-E6D58F6CE5C1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D846EF9-6525-4341-8B8C-82AAA7061206}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://ggk-upl-tfs.ggktech.local:8080/tfs/meridiancollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Meridian_M3Pact_DB\\Meridian_M3Pact_DB.sqlproj
+		SccProjectName1 = Meridian_M3Pact_DB
+		SccLocalPath1 = Meridian_M3Pact_DB
+	EndGlobalSection
+EndGlobal

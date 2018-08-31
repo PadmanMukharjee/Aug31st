@@ -1,0 +1,130 @@
+﻿<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.ALL_CHECKLISTS}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p-table [value]="allChecklists" [paginator]="true" [rows]="rowsIn" (onPage)="onTablePageChange($event)" (onFilter)="onTableFilter($event)" selectionMode="single" class="word-Wrap" #table>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th *ngIf="canEdit" class="text-center w-75">{{labels.EDIT}}</th>
+                            <th *ngIf="!canEdit" class="text-center w-75">{{labels.VIEW}}</th>
+                            <th pSortableColumn="name" class="w-120">{{labels.CHECKLIST_NAME}}<p-sortIcon field="name"></p-sortIcon></th>
+                            <th class="w-75" pSortableColumn="selectedSystems.length">{{labels.SYSTEMS}}<p-sortIcon field="selectedSystems.length"></p-sortIcon></th>
+                            <th class="w-75" pSortableColumn="selectedSites.length">{{labels.SITES}}<p-sortIcon field="selectedSites.length"></p-sortIcon></th>
+                            <th class="w-75" pSortableColumn="selectedClients.length">{{labels.ASSIGNED_TO_CLIENTS}}<p-sortIcon field="selectedClients.length"></p-sortIcon></th>
+                            <th class="w-75" pSortableColumn="type">{{labels.CHECKLIST_TYPE}}<p-sortIcon field="type"></p-sortIcon></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="w-120">
+                                <input pInputText type="text" (input)="table.filter($event.target.value, 'name', 'contains')" class="filterTextbox">
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="w-75">
+                                <input pInputText type="text" (input)="table.filter($event.target.value, 'type', 'contains')" class="filterTextbox">
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-checklist>
+                        <tr>
+                            <td class="textCenter">
+                                <span [ngClass]="canEdit ? 'fa fa-pencil' : 'fa fa-eye'" (click)="onRowSelect(checklist)"></span>
+                            </td>
+                            <td>{{checklist.name}}</td>
+                            <td>
+                                <span *ngIf="checklist.selectedSystems.length === 0">{{checklist.selectedSystems.length}}</span>
+                                <span *ngIf="checklist.selectedSystems.length !== 0" (click)="onSelectSystems(checklist)" class="text_underline">{{checklist.selectedSystems.length}}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="checklist.selectedSites.length === 0">{{checklist.selectedSites.length}}</span>
+                                <span *ngIf="checklist.selectedSites.length !== 0" (click)="onSelectSites(checklist)" class="text_underline">{{checklist.selectedSites.length}}</span>
+                            </td>
+                            <td>
+                                <span *ngIf="checklist.selectedClients.length === 0">{{checklist.selectedClients.length}}</span>
+                                <span *ngIf="checklist.selectedClients.length !== 0" (click)="onSelectClients(checklist)" class="text_underline">{{checklist.selectedClients.length}}</span>
+                            </td>
+                            <td>{{checklist.type}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td *ngIf="checklistfiltered==undefined" [attr.colspan]="6">
+                                Loading...
+                            </td>
+                            <td *ngIf="checklistfiltered!=undefined" [attr.colspan]="6">
+                                {{sharedLabels.NO_DATA}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="paginatorright">
+                        <tr>
+                            <td class="table-style"> <b>{{paginationCount}}</b></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="displayClientDialog">
+        <p-dialog header="Clients List" [(visible)]="displayClientDialog" [responsive]="true" showEffect="fade" [modal]="true">
+            <div>
+                <span>{{checklist.name}} is assigned for below Clients</span>
+            </div>
+            <div class="ui-g ui-fluid verticalScroll" *ngIf="selectedClients">
+                <ul>
+                    <li *ngFor="let selectedClient of selectedClients">{{selectedClient.clientCode}} - {{selectedClient.name}}</li>
+                </ul>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeClientDialog()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+    <div *ngIf="displaySiteDialog">
+        <p-dialog header="Site List" [(visible)]="displaySiteDialog" [responsive]="true" showEffect="fade" [modal]="true">
+            <div>
+                <span>{{checklist.name}} is assigned for below Sites</span>
+            </div>
+            <div class="ui-g ui-fluid verticalScroll" *ngIf="selectedSites">
+                <ul>
+                    <li *ngFor="let selectedSite of selectedSites">{{selectedSite.siteName}}</li>
+                </ul>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeSiteDialog()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+    <div *ngIf="displaySystemDialog">
+        <p-dialog header="System List" [(visible)]="displaySystemDialog" [responsive]="true" showEffect="fade" [modal]="true">
+            <div>
+                <span>{{checklist.name}} is assigned for below Systems</span>
+            </div>
+            <div class="ui-g ui-fluid verticalScroll" *ngIf="selectedSystems">
+                <ul>
+                    <li *ngFor="let selectedSystem of selectedSystems">{{selectedSystem.systemName}}</li>
+                </ul>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeSystemDialog()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

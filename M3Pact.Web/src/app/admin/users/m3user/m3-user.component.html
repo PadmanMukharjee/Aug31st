@@ -1,0 +1,162 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{this.m3UserModel.isUserExist?labels.EDIT_USER:labels.CREATE_USER}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <form class="form-horizontal form-label-left input_mask" #mthreeusersForm="ngForm" (ngSubmit)="SaveM3User(mthreeusersForm)">
+            <div class="x_content">
+                <div class="col-xs-12 col-xm-12 col-md-12 col-lg-12">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">{{labels.EMPLOYEE_DETAILS}}</legend>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.LASTNAMESEARCH}}</b></label>
+                                <div class="col-lg-6 col-md-6 col-sm-9 col-xs-12">
+                                    <p-autoComplete placeholder="Enter last name" emptyMessage="No results found" field="value" minLength="3" id="lastNameSearch" (onSelect)="userNameSelected($event)" name="username" [suggestions]="userNameSuggesstions" (completeMethod)="searchAutofillUserNames($event)" #autoCompleteObject></p-autoComplete>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-offset-6 col-sm-12"></div>
+                            </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-sm-12 res_no_padding">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12 res_no_padding"><b>{{sharedLabels.EMPLOYEEID}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label" name="MobileNumber">{{m3UserModel.user.userId}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-offset-6 col-sm-12"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.FIRSTNAME}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label" name="firstName">{{m3UserModel.user.firstName}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.LASTNAME}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label" name="MobileNumber">{{m3UserModel.user.lastName}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.TITLE}}</b></label>
+                                <div class="col-lg-7 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label text-left" name="Title">{{m3UserModel.title}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.REPORTSTO}}</b></label>
+                                <div class="col-lg-7 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label" name="ReportsTo">{{m3UserModel.reportsTo}}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.MOBILENUMBER}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label" name="MobileNumber">{{m3UserModel.user.mobileNumber}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.BUSINESSUNIT}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label" name="BusinessUnit">{{m3UserModel.businessUnit}}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.EMAIL}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="control-label responsive_wrap_m3" name="Email">{{m3UserModel.user.email}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label col-lg-5 col-md-3 col-sm-3 col-xs-6 "><b>{{sharedLabels.ACTIVE}}</b></label>
+                                <label class="col-lg-3 col-md-9 col-sm-9 col-xs-6 responsive_flex text-left">
+                                    <input type="checkbox" [disabled]="viewRoleOnly" [(ngModel)]="m3UserModel.user.isActive" name="isActive" />
+                                    <!--<span class="slider round"></span>-->
+                                </label>
+                            </div>
+                            
+                        </div>
+                 </fieldset>
+
+                </div>
+                <div class="col-xs-12 col-xm-12 col-md-12 col-lg-12">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">{{labels.ROLE_CLIENTS}}</legend>
+                        <div class="control-group">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.ROLE}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                    <p-dropdown [options]="roles" [(ngModel)]="m3UserModel.user.roleCode" placeholder="{{sharedLabels.SELECT}}" [disabled]="viewRoleOnly || !(m3UserModel.user.isActive)" name="roleCode"></p-dropdown>
+                                </div>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.SELECTEDCLIENTS}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12" *ngIf="m3UserModel.user.roleCode!='Admin'">
+                                    <p-multiSelect selectedItemsLabel="{{labels.CLIENT_FILTER_TEXT}}" [options]="clients" name="clients" [disabled]="viewRoleOnly || !(m3UserModel.user.isActive)" [(ngModel)]="m3UserModel.clients"></p-multiSelect>
+                                </div>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12" *ngIf="m3UserModel.user.roleCode=='Admin'">
+                                    <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-12 labelStyle">{{sharedLabels.ALLCLIENTS}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group" *ngIf="showSaveButton()">
+                    <div class="col-xs-12">
+                        <button type="submit" #mthreeusersFormSubmit class="btn btn-dark btn-sm btn-round pull-right">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="displayDialog">
+        <p-dialog header="{{displayLabel}}"
+                  [(visible)]="displayDialog"
+                  [responsive]="true"
+                  showEffect="fade"
+                  [modal]="true"
+                  [contentStyle]="{'overflow':'visible'}"
+                  [height]="150"
+                  [width]="350">
+            <div>
+                <span>{{dialogueMsg}}</span>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="displayDialogclose()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+    <p-dialog [header]="labels.CONFIRMATION"
+              [(visible)]="showConfirmation"
+              [responsive]="true"
+              showEffect="fade"
+              [modal]="true"
+              [contentStyle]="{'overflow':'visible'}"
+              [closable]="false"
+              [height]="150"
+              [width]="350">
+        <div class="ui-dialog-content">
+            <span>{{confirmationMsg}}</span>
+        </div>
+
+        <p-footer>
+            <button class="btn btn-dark btn-round btn-sm" type="submit" (click)="confirmationClick('y')">
+                {{sharedLabels.BUTTONS.YES}}
+            </button>
+            <button class="btn btn-dark btn-round btn-sm" type="button" (click)="confirmationClick('n')">
+                {{sharedLabels.BUTTONS.NO}}
+            </button>
+        </p-footer>
+    </p-dialog>
+</div>

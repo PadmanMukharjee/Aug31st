@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.AuthServer.BusinessModel\Meridian.AuthServer.BusinessModel.csproj" />
+    <ProjectReference Include="..\Meridian.AuthServer.DataModel\Meridian.AuthServer.DataModel.csproj" />
+  </ItemGroup>
+
+</Project>

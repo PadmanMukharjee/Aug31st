@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Meridian_M3Pact_DB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{4a482c99-022f-4677-aacd-e6d58f6ce5c1}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Meridian_M3Pact_DB</RootNamespace>
+    <AssemblyName>Meridian_M3Pact_DB</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="DataModificationScripts" />
+    <Folder Include="dbo\Sequences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Payer.sql" />
+    <Build Include="dbo\Tables\Question.sql" />
+    <Build Include="dbo\Tables\Roles.sql" />
+    <Build Include="dbo\Tables\Site.sql" />
+    <Build Include="dbo\Tables\Speciality.sql" />
+    <Build Include="dbo\Tables\Client.sql" />
+    <Build Include="dbo\Tables\UserClientMap.sql" />
+    <Build Include="dbo\Tables\Title.sql" />
+    <Build Include="dbo\Tables\UserLogin.sql" />
+    <Build Include="dbo\Tables\Employee.sql" />
+    <Build Include="dbo\Tables\ClientConfigStep.sql" />
+    <Build Include="dbo\Tables\ClientConfigStepStatus.sql" />
+    <Build Include="dbo\Tables\Log.sql" />
+    <Build Include="dbo\Tables\Month.sql" />
+    <Build Include="dbo\Tables\ClientConfigStepDetail.sql" />
+    <Build Include="dbo\Tables\ClientCloseMonth.sql" />
+    <Build Include="dbo\Tables\ClientTarget.sql" />
+    <Build Include="dbo\Tables\BusinessDays.sql" />
+    <Build Include="dbo\Tables\Holiday.sql" />
+    <Build Include="dbo\Tables\DateDimension.sql" />
+    <Build Include="dbo\Tables\BusinessUnit.sql" />
+    <Build Include="dbo\Tables\DepositLog.sql" />
+    <Build Include="dbo\Tables\CheckList.sql" />
+    <Build Include="dbo\Tables\System.sql" />
+    <Build Include="dbo\Tables\CheckListQuestionMap.sql" />
+    <Build Include="dbo\Tables\CheckListType.sql" />
+    <Build Include="dbo\Tables\ClientPayer.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetDepositLogsForClientDate.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetProjectedCashOfLastWorkingDays.sql" />
+    <Build Include="dbo\Stored Procedures\usp_Payer_Get_Active_Unassigned_To_Client.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetDepositLogForClient_old.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetDepositLogForClient_TEST.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetDepositLogForClient.sql" />
+    <Build Include="dbo\Stored Procedures\usp_ClientConfigStep_Get_Step_Status_Details.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetProjectedCashBasedOnLastNumberOfWeeks.sql" />
+    <Build Include="dbo\Stored Procedures\SaveClientTargets.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetDepositLogStartDateAndNumberOfDepositDates.sql" />
+    <Build Include="dbo\Tables\ApplicationType.sql" />
+    <Build Include="dbo\Tables\ApplicationApiResource.sql" />
+    <Build Include="dbo\Tables\Application.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateClientTargets.sql" />
+    <Build Include="dbo\Stored Procedures\clientUser_Get_Next_Value_Sequence.sql" />
+    <Build Include="dbo\Sequences\ClientUser_Sequence.sql" />
+    <Build Include="dbo\Tables\RoleAction.sql" />
+    <Build Include="dbo\Tables\ScreenAction.sql" />
+    <Build Include="dbo\Tables\Screen.sql" />
+    <Build Include="dbo\Tables\ScreenUserRoleMap.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetDepositLogStartDateAndNumberOfDepositDates.sql" />
+    <Build Include="dbo\Tables\ClientCheckListMap.sql" />
+    <Build Include="dbo\Tables\CheckListAttribute.sql" />
+    <Build Include="dbo\Tables\CheckListAttributeMap.sql" />
+    <Build Include="dbo\Tables\ClientCheckListStatusDetail.sql" />
+    <Build Include="dbo\Tables\ClientCheckListQuestionResponse.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetKPIQuestionsBasedonCheckListType.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetViewAllChecklists.sql" />
+    <Build Include="dbo\Tables\KPIMeasure.sql" />
+    <Build Include="dbo\Tables\KPI.sql" />
+    <Build Include="dbo\Tables\KPIAlert.sql" />
+    <Build Include="dbo\Stored Procedures\GetMonthlyPendingChecklist.sql" />
+    <Build Include="dbo\Stored Procedures\GetPendingChecklistQuestions.sql" />
+    <Build Include="dbo\Stored Procedures\GetWeeklyPendingChecklist.sql" />
+    <Build Include="dbo\Tables\ClientKPIUserMap.sql" />
+    <Build Include="dbo\Tables\ClientKPIMap.sql" />
+    <Build Include="dbo\Tables\M3MetricsQuestion.sql" />
+    <Build Include="dbo\Tables\ApiResource.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetNumberOfDepositWeeksForClient.sql" />
+    <Build Include="dbo\Stored Procedures\usp_AddUniversalKPIsToNewClient.sql" />
+    <Build Include="dbo\Sequences\Question_Sequence.sql" />
+    <Build Include="dbo\Stored Procedures\Question_Get_Next_Value_Sequence.sql" />
+    <Build Include="dbo\Stored Procedures\usp_UpdateClientKPIEffectiveDateOnChecklistUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\GetClientAssignedWeeklyMonthlyKPIs.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetKPIQuestionsForClient.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetAssignedM3KPIsForClient.sql" />
+    <Build Include="dbo\Tables\DeviatedClientKPI.sql" />
+    <Build Include="dbo\Tables\MailRecepientsDetailsDayWise.sql" />
+    <Build Include="dbo\Tables\JobStatus.sql" />
+    <Build Include="dbo\Tables\JobProcessGroup.sql" />
+    <Build Include="dbo\Tables\JobAppSettings.sql" />
+    <Build Include="dbo\Tables\JobRun.sql" />
+    <Build Include="dbo\Stored Procedures\usp_Escalate_Mail_Daily_Job.sql" />
+    <Build Include="dbo\Tables\HeatMapItem.sql" />
+    <Build Include="dbo\Tables\ClientHeatMapItemScore.sql" />
+    <Build Include="dbo\Tables\ClientHeatMapRisk.sql" />
+    <Build Include="dbo\Stored Procedures\usp_Get_HeatMap_For_Clients.sql" />
+    <Build Include="dbo\Tables\M3metricClientKpiDaily.sql" />
+    <Build Include="dbo\Tables\Attribute.sql" />
+    <Build Include="dbo\Tables\ClientConfig.sql" />
+    <Build Include="dbo\Tables\DepositLogMonthlyDetails.sql" />
+    <Build Include="dbo\Stored Procedures\usp_CloseOrReopenMonthOfYearForClient.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetMonthDepositsOfAYearForClient.sql" />
+    <Build Include="dbo\Tables\ControlType.sql" />
+    <Build Include="dbo\Tables\AdminConfigValues.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetAllClientsData.sql" />
+    <Build Include="dbo\Tables\ClientUserNoticeAlerts.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetToDoListActions.sql" />
+	<Build Include="dbo\Stored Procedures\usp_GetClientHistoryData.sql" />
+    <Build Include="dbo\Tables\ClientNoticePeriodMail.sql" />
+    <Build Include="dbo\Stored Procedures\usp_ClientNoticePeriodMail.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataModificationScripts\01_Site.sql" />
+    <None Include="DataModificationScripts\02_ApplicationType.sql" />
+    <None Include="DataModificationScripts\03_Application.sql" />
+    <None Include="DataModificationScripts\04_ApiResource.sql" />
+    <None Include="DataModificationScripts\06_ClientConfigStep.sql" />
+    <None Include="DataModificationScripts\05_ApplicationApiResource.sql" />
+    <None Include="DataModificationScripts\07_Roles.sql" />
+    <None Include="DataModificationScripts\08_BusinessUnit.sql" />
+    <None Include="DataModificationScripts\09_System.sql" />
+    <None Include="DataModificationScripts\10_Screen.sql" />
+    <None Include="DataModificationScripts\11_ScreenUserRoleMap.sql" />
+    <None Include="DataModificationScripts\12_ScreenAction.sql" />
+    <None Include="DataModificationScripts\13_RoleAction.sql" />
+    <None Include="DataModificationScripts\18_CheckListAttribute.sql" />
+    <None Include="DataModificationScripts\15_M3MetricsQuestion.sql" />
+    <None Include="DataModificationScripts\16_KPIMeasure.sql" />
+    <None Include="DataModificationScripts\14_CheckListType.sql" />
+    <None Include="DataModificationScripts\19_ClientConfigStepStatus.sql" />
+    <None Include="DataModificationScripts\20_Month.sql" />
+    <None Include="DataModificationScripts\21_Employee.sql" />
+    <None Include="DataModificationScripts\22_Attribute.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+    <None Include="DataModificationScripts\17_JobStatusAndJobProcess.sql" />
+    <None Include="DataModificationScripts\23_ControlType.sql" />
+    <None Include="DataModificationScripts\24_AdminConfig.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script.PreDeployment.sql" />
+  </ItemGroup>
+</Project>

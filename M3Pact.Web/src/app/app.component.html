@@ -1,0 +1,17 @@
+<app-loader></app-loader>
+<div class="container body">
+    <div class="main_container">
+        <app-nav-menu *ngIf="currentUser != null"></app-nav-menu>
+        <!-- top navigation -->
+        <app-page-top *ngIf="currentUser != null"></app-page-top>
+        <!-- /top navigation -->
+        <!-- page content -->
+        <div [class.al-main]="currentUser != null">
+            <div [class.al-content]="currentUser != null">
+                <section class="content container-fluid" [class.top-padding]="currentUser != null">
+                    <router-outlet></router-outlet>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

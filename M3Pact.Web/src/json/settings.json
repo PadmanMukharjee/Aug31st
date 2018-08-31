@@ -1,0 +1,5 @@
+{
+  "baseApiUrl": "http://localhost:64919/",
+  "authUrl": "http://172.16.0.30:38/",
+  "authUrl1": "http://172.16.0.30:29/"
+}

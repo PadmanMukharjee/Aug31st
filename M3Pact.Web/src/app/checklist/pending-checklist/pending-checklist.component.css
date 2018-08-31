@@ -1,0 +1,59 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    height: auto;
+}
+
+.question {
+    font-size: 14px;
+}
+
+.explain {
+    width: 100%
+}
+
+.titleSize {
+    font-size: 22px;
+}
+
+.questionStyle {
+    float: right;
+    margin-right: 10px;
+}
+.monthlyweeklyswitch{
+    padding-top:10px;
+    float:right !important;
+}
+.questions:not(:first-child) {
+    padding-top: 10px;
+}
+.questions{
+    overflow-wrap:break-word;
+}
+
+.pendingCheckList {
+    font-size: 18px;
+    width: 200%;
+    margin-top: 5px;
+    color: #be3333;
+}
+
+@media screen and (max-width:1024px) {
+    .pendingCheckList {
+        width: 100%;
+        font-size: 15px;
+    }
+}
+
+.active, .active:hover {
+    background-color: #be3333 !important;
+    color: white;
+    border-color: #be3333 !important;
+}
+@media screen and (max-width: 640px) {
+
+    .pendingCheckList {
+        width: 175% !important;
+    }
+}

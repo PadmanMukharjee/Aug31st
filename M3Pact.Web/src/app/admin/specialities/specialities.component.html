@@ -1,0 +1,127 @@
+﻿<p-growl [(value)]="growlMessage"></p-growl>
+<div class="right_col admin_padding_res">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.SPECIALITIES}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">                       
+                        <button *ngIf="canEdit && editActions.includes('AddSpecialty')" type="button" class="btn btn-dark btn-round btn-sm pull-right" (click)="showDialogToAdd()"><span class="fa fa-plus">&nbsp;</span>{{sharedLabels.BUTTONS.ADD}}</button>
+                    </div>
+                    <p-table [value]="specialities" [paginator]="true"  [rows]="rowsIn" (onPage)="onTablePageChange($event)" (onFilter)="onTableFilter($event)" selectionMode="single" [(selection)]="selectedSpeciality">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>{{labels.SPECIALITY}}</th>
+                                <th class="textCenter">{{sharedLabels.ACTIVE}}</th>
+                                <th>{{sharedLabels.SELECTEDCLIENTS}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-speciality>
+                            <tr>
+                                <td>
+                                    <span *ngIf="speciality.isActiveSpeciality && canEdit && editActions.includes('EditSpecialty')" class="fa fa-pencil" (click)="onRowSelect(speciality)">&nbsp;</span>
+                                    {{speciality.specialityCode}}
+                                </td>
+                                <td class="textCenter">
+                                    <label class="switch">
+                                        <input type="checkbox" [(ngModel)]="speciality.isActiveSpeciality" (change)="changeStateOfSpecialty(speciality)" [disabled]="!(canEdit)" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <span *ngIf="speciality.clientsCount === 0">{{speciality.clientsCount}}</span>
+                                    <span *ngIf="speciality.clientsCount !== 0" (click)="onClientsColumnSelect(speciality)" class="text_underline">{{speciality.clientsCount}}</span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td *ngIf="specialitiesFiltered==undefined" [attr.colspan]="3">
+                                    Loading...
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <tr>
+                                <td class="table-style"> <b>{{paginationCount}}</b></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            </div>
+        </div>
+            <div *ngIf="displayDialog" class = "admin">
+                <p-dialog header="{{dialogHeader}}" [(visible)]="displayDialog" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true" [width]="350" (onHide)="clearMessages()" class="admin_dialogbox">
+                    <div class="ui-g ui-fluid" *ngIf="speciality">
+                        <form #specialityForm="ngForm" (ngSubmit)="saveSpecialty()">
+                            <div class="ui-g-12">
+                                <div class="ui-g-3">
+                                    <label for="speciality">{{labels.SPECIALITY}}<span class="required">*</span></label>
+                                </div>
+                                <div class="ui-g-6 margin-top-3">
+                                    <input pInputText class="specialty specialty_reponsive" id="vin" required name="specialityCode" [(ngModel)]="speciality.specialityCode" #specilityCtrl="ngModel" />
+                                    <div *ngIf="!valid" class="error-message_color">
+                                        {{validationConstants.SPECILTY_REQUIRED}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-g-12">
+                                <p-messages [(value)]="messageList"></p-messages>
+                            </div>
+                            <input pInputText id="vin" name="specialityId" [(ngModel)]="speciality.id" type="hidden" />
+                            <div class="ui-g-12">
+                                <div class="ui-dialog-buttonpane ui-helper-clearfix text-center">
+                                    <button type="submit" class="btn btn-dark btn-round btn-sm pull-right">{{sharedLabels.BUTTONS.SAVE}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>                                                              
+                </p-dialog>
+            </div>
+    <div *ngIf="displayClients" class="admin">
+        <p-dialog header="Warning!" [(visible)]="displayClients" [resizable] = "false" [responsive]="true" [modal]="true" (onHide)="keepActiveSpecialty()">
+            <label>
+                {{labels.DEACTIVE_MESSAGE}}
+            </label>
+            <br />
+            <div class="ui-g ui-fluid verticalScroll">
+                <ul>
+                    <li *ngFor="let client of clientsOfSpecialty">
+                        {{client}}
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="keepActiveSpecialty()">Ok</button>
+            </div>
+        </p-dialog>
+    </div>
+    <div *ngIf="displayingClients">
+        <p-dialog header="Clients List" [(visible)]="displayingClients" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true">
+            <div>
+                <span>{{sharedLabels.CLIENT_COUNT_HEADER_MEASSAGE}} {{speciality.specialityCode}} speciality</span>
+            </div>
+            <div class="ui-g ui-fluid verticalScroll">
+                <ul>
+                    <li *ngFor="let client of speciality.clients">
+                        {{client}}
+                    </li>
+                </ul>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeDialog()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+
+@media screen and (max-width: 640px) {
+    .top_nav .dropdown-menu li {
+        width: 50%;
+    }
+
+    .nav-sm ul.nav.child_menu {
+        max-height: 160px;
+        overflow-y: scroll;
+    }
+}
+
+#todo {
+    color: #000;
+    font-size: 1.5em;    
+}
+
+.alert1 {
+    position: absolute;
+    top: 0.3rem;
+    right: 8rem;
+    width: 6rem;
+    font-size: 120%;
+    padding: .4em;
+    line-height: 1em; 
+    min-width: 0.5em;  
+}
+.li_user_login .circle-icon {
+    background: #FF0000;
+    top: 0.3rem;
+    color: #fff !important;
+    left: 2rem;
+    width: 1.5rem;
+    font-size: 60%;
+    padding: .4em;
+    line-height: 0.5em;
+    border-radius: 50%;
+}
+
+.fa-stack-2x {
+    font-size: 1.38em !important;
+}
+.space{
+    right:1rem;
+    padding:.4em;
+}
+.responsive-mail {
+    padding: 7px;
+}
+@media (max-width: 1024px) {
+    .responsive-margin{
+        margin-left:15px;
+    }
+}
+
+@media (max-width: 640px) {
+    .responsive-mail {
+        float: right !important;
+        margin-right: 24px !important;
+    }
+}

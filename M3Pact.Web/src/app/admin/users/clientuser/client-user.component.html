@@ -1,0 +1,147 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{isEditOperation?labels.EDIT_USER:labels.CREATE_USER}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <form class="form-horizontal form-label-left input_mask" #clientusersForm="ngForm" (ngSubmit)="addClientUser(clientusersForm)">
+            <div class="x_content">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">{{labels.USER_DETAILS}}</legend>
+                        <div class="control-group">
+                            <div class="form-row">
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <label class="control-label col-lg-4 col-md-3 col-sm-3 col-xs-12"><b>{{clientUsersLables.CLIENTID}}</b></label>
+                                    <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                        <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-12">{{clientUser.userId}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <label class="control-label col-lg-4 col-md-3 col-sm-3 col-xs-12"><b><label class="required">*</label>{{sharedLabels.FIRSTNAME}}</b></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-9 col-xs-12 alignInput">
+                                        <input type="text" class="form-control" tabindex="1" [(ngModel)]="clientUser.firstName" id="firstName" name="firstName" value="" [disabled]="!(clientUser.isActive)" required #firstNameCtrl="ngModel">
+                                        <validation-message [frmcontrol]="firstNameCtrl" [frmSubmitted]="clientusersForm.submitted" [fldText]="'First Name'" [frmControlEmptyCheck]="clientusersForm.submitted">
+                                        </validation-message>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <label class="control-label col-lg-4 col-md-3 col-sm-3 col-xs-12"><b><label class="required">*</label>{{sharedLabels.LASTNAME}}</b></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-9 col-xs-12 alignInput">
+                                        <input type="text" class="form-control" tabindex="2" [(ngModel)]="clientUser.lastName" name="lastName" [disabled]="!(clientUser.isActive)" required #lastNameCtrl="ngModel" pattern="^[-a-zA-Z]+(\s+[-a-zA-Z]+)*$">
+                                        <validation-message [frmcontrol]="lastNameCtrl" [frmSubmitted]="clientusersForm.submitted" [fldText]="'Last Name'">
+                                        </validation-message>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <label class="control-label col-lg-4 col-md-3 col-sm-3 col-xs-12"><b><label class="required">*</label>{{sharedLabels.EMAIL}}</b></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-9 col-xs-12 alignInput">
+                                        <input type="email" class="form-control" tabindex="3" [(ngModel)]="clientUser.email" emailvalidator name="emailAddress" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$"
+                                               [readonly]="!(clientUser.isActive)" required #emailCtrl="ngModel">
+                                        <validation-message [frmcontrol]="emailCtrl" [frmSubmitted]="clientusersForm.submitted" [fldText]="'Email Address'">
+                                        </validation-message>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <label class="control-label col-lg-4 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.MOBILENUMBER}}</b></label>
+                                    <div class="col-lg-6 col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" [(ngModel)]="clientUser.mobileNumber" pattern="^[0-9]{0,}$"
+                                               tabindex="4" name="mobileNumber" required #mobileNumberCtrl="ngModel" minlength="10" maxlength="10" [disabled]="!(clientUser.isActive)" />
+                                        <validation-message [frmcontrol]="mobileNumberCtrl" [frmSubmitted]="clientusersForm.submitted" [fldText]="'Mobile Number'">
+                                        </validation-message>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-12">
+                                    <label class="control-label col-lg-4 col-md-3 col-sm-3 col-xs-12"><b>{{sharedLabels.ACTIVE}}</b></label>
+                                    <label class="control-label col-lg-3 col-md-9 col-sm-9 col-xs-12">
+                                        <input type="checkbox" [(ngModel)]="clientUser.isActive" name="IsActive" [disabled]="!(clientUser.userId)" style="float:left" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-xm-12 col-md-12 col-lg-12">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">{{labels.ROLE_CLIENTS}}</legend>
+                        <div class="control-group">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-12 responsive_flex responsive_wrap"><b>{{sharedLabels.ROLE}}:</b></label>
+                                <div class="control-label col-lg-3 col-md-9 col-sm-9 col-xs-12 no_padding responsive_flex">
+                                    <span class="col-lg-3 col-md-9 col-sm-9 col-xs-12 float-left"><b>Client</b></span>
+                                </div>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-12 responsive_flex responsive_wrap"><b>{{sharedLabels.SELECTCLIENTS}}</b></label>
+                                <div class="col-lg-3 col-md-9 col-sm-9 col-xs-12 alignInput">
+                                    <p-multiSelect [options]="clients" [filter]="true" [disabled]="!(clientUser.isActive)" [(ngModel)]="clientUser.selectedClientData" [name]="clients" #clientsCtrl="ngModel"></p-multiSelect>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <button type="submit" #clientusersFormSubmit class="btn btn-dark btn-sm btn-round pull-right">{{sharedLabels.BUTTONS.SAVE}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="displayDialog">
+        <p-dialog header="{{displayLabel}}"
+                  [(visible)]="displayDialog"
+                  [responsive]="true"
+                  showEffect="fade"
+                  [modal]="true"
+                  [contentStyle]="{'overflow':'visible'}"
+                  (onHide)="closeDialog()"
+                  [height]="150"
+                  [width]="350">
+            <div>
+                <span>{{dialogueMsg}}</span>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeDialog()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+    <div>
+        <p-dialog [header]="clientUsersLables.CONFIRMATION"
+                  [(visible)]="showConfirmation"
+                  [responsive]="true"
+                  showEffect="fade"
+                  [modal]="true"
+                  [contentStyle]="{'overflow':'visible'}"
+                  [closable]="false"
+                  [height]="150"
+                  [width]="350">
+            <div class="ui-dialog-content">
+                <span>{{confirmationMsg}}</span>
+            </div>
+
+            <p-footer>
+                <button class="btn btn-dark btn-round btn-sm" type="submit" (click)="confirmationClick('y')">
+                    {{sharedLabels.BUTTONS.YES}}
+                </button>
+                <button class="btn btn-dark btn-round btn-sm" type="button" (click)="confirmationClick('n')">
+                    {{sharedLabels.BUTTONS.NO}}
+                </button>
+            </p-footer>
+        </p-dialog>
+    </div>
+</div>
+
+

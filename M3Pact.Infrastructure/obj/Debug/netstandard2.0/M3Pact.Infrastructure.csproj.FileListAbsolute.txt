@@ -1,0 +1,12 @@
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\bin\Debug\netstandard2.0\M3Pact.Infrastructure.deps.json
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\bin\Debug\netstandard2.0\M3Pact.Infrastructure.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\bin\Debug\netstandard2.0\M3Pact.Infrastructure.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\bin\Debug\netstandard2.0\ConfigManager.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\bin\Debug\netstandard2.0\ConfigManager.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\obj\Debug\netstandard2.0\M3Pact.Infrastructure.csprojResolveAssemblyReference.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\obj\Debug\netstandard2.0\M3Pact.Infrastructure.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\obj\Debug\netstandard2.0\M3Pact.Infrastructure.AssemblyInfoInputs.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\obj\Debug\netstandard2.0\M3Pact.Infrastructure.AssemblyInfo.cs
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\obj\Debug\netstandard2.0\M3Pact.Infrastructure.csproj.CopyComplete
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\obj\Debug\netstandard2.0\M3Pact.Infrastructure.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.Infrastructure\obj\Debug\netstandard2.0\M3Pact.Infrastructure.pdb

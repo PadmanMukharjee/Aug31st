@@ -1,0 +1,9 @@
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\bin\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.deps.json
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\bin\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.dll
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\bin\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.pdb
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\obj\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.csprojResolveAssemblyReference.cache
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\obj\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\obj\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.AssemblyInfoInputs.cache
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\obj\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.AssemblyInfo.cs
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\obj\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.dll
+E:\M3Pact\Development\Dev2.0\AuthServer\Meridian.AuthServer.BusinessModel\obj\Debug\netstandard2.0\Meridian.AuthServer.BusinessModel.pdb

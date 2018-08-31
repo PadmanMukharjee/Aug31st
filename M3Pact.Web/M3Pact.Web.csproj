@@ -1,0 +1,803 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DBAB92F7-FCAF-4FB6-8E52-42E8F812E803}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>M3Pact.Web</RootNamespace>
+    <AssemblyName>M3Pact.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".angular-cli.json" />
+    <Content Include="package.json" />
+    <None Include="packages.config" />
+    <Content Include="README.md" />
+    <Content Include="src\app\admin\business-days\business-days.component.css" />
+    <Content Include="src\app\admin\business-days\business-days.component.html" />
+    <Content Include="src\app\admin\business-units\business-units.component.css" />
+    <Content Include="src\app\admin\business-units\business-units.component.html" />
+    <Content Include="src\app\admin\checklistitem\checklistitem.component.css" />
+    <Content Include="src\app\admin\checklistitem\checklistitem.component.html" />
+    <Content Include="src\app\admin\checklist\checklist.component.css" />
+    <Content Include="src\app\admin\checklist\checklist.component.html" />
+    <Content Include="src\app\admin\configuration\configuration.component.css" />
+    <Content Include="src\app\admin\configuration\configuration.component.html" />
+    <Content Include="src\app\admin\heatmap\heatmap.component.css" />
+    <Content Include="src\app\admin\heatmap\heatmap.component.html" />
+    <Content Include="src\app\admin\kpi\create-kpi\kpi.component.css" />
+    <Content Include="src\app\admin\kpi\create-kpi\kpi.component.html" />
+    <Content Include="src\app\admin\kpi\view-kpi\view-kpi.component.html" />
+    <Content Include="src\app\admin\payers\payers.component.css" />
+    <Content Include="src\app\admin\sites\sites.component.css" />
+    <Content Include="src\app\admin\sites\sites.component.html" />
+    <Content Include="src\app\admin\payers\payers.component.html" />
+    <Content Include="src\app\admin\specialities\specialities.component.css" />
+    <Content Include="src\app\admin\specialities\specialities.component.html" />
+    <Content Include="src\app\admin\systems\systems.component.html" />
+    <Content Include="src\app\admin\users\all-users\all-users.component.html" />
+    <Content Include="src\app\admin\users\clientuser\client-user.component.css" />
+    <Content Include="src\app\admin\users\clientuser\client-user.component.html" />
+    <Content Include="src\app\admin\users\m3user\m3-user.component.css" />
+    <Content Include="src\app\admin\users\m3user\m3-user.component.html" />
+    <Content Include="src\app\admin\view-all-checklist\view-all-checklist.component.html" />
+    <Content Include="src\app\app.component.scss" />
+    <Content Include="src\app\checklist\completed-checklist\completed-checklist.component.css" />
+    <Content Include="src\app\checklist\completed-checklist\completed-checklist.component.html" />
+    <Content Include="src\app\checklist\pending-checklist\pending-checklist.component.css" />
+    <Content Include="src\app\checklist\pending-checklist\pending-checklist.component.html" />
+    <Content Include="src\app\client\assign-client-user\assign-client-user.component.html" />
+    <Content Include="src\app\client\client-data\client-data.component.css" />
+    <Content Include="src\app\client\client-data\client-data.component.html" />
+    <Content Include="src\app\client\client-history\client-history.component.css" />
+    <Content Include="src\app\client\client-history\client-history.component.html" />
+    <Content Include="src\app\client\client-stepper.component.css" />
+    <Content Include="src\app\client\client-stepper.component.html" />
+    <Content Include="src\app\client\kpi-setup\kpi-setup.component.css" />
+    <Content Include="src\app\client\kpi-setup\kpi-setup.component.html" />
+    <Content Include="src\app\client\log-setup\log-setup.component.html" />
+    <Content Include="src\app\client\targets\targets.component.css" />
+    <Content Include="src\app\client\targets\targets.component.html" />
+    <Content Include="src\app\client\view-all-clients\view-all-clients.component.css" />
+    <Content Include="src\app\client\view-all-clients\view-all-clients.component.html" />
+    <Content Include="src\app\common\components\validation-message\validation-message.component.html" />
+    <Content Include="src\app\dashboard\dashboard.scss" />
+    <Content Include="src\app\report\report.component.css" />
+    <Content Include="src\app\report\report.component.html" />
+    <Content Include="src\app\deposit-log\combo-chart\combo-chart.component.html" />
+    <Content Include="src\app\deposit-log\deposit-log.component.css" />
+    <Content Include="src\app\deposit-log\deposit-log.component.html" />
+    <Content Include="src\app\heatmap\heatmap.component.css" />
+    <Content Include="src\app\heatmap\heatmap.component.html" />
+    <Content Include="src\app\layout\blue.theme.scss" />
+    <Content Include="src\app\layout\color-variables.scss" />
+    <Content Include="src\app\layout\color.scss" />
+    <Content Include="src\app\layout\components\error-page\error-page.scss" />
+    <Content Include="src\app\layout\components\loader\loader.scss" />
+    <Content Include="src\app\layout\components\page-top\page-top.scss" />
+    <Content Include="src\app\layout\initial.scss" />
+    <Content Include="src\app\layout\red.theme.scss" />
+    <Content Include="src\app\layout\sass\bootstrap-overrides\overrides.scss" />
+    <Content Include="src\app\layout\sass\bootstrap-overrides\_card.scss" />
+    <Content Include="src\app\layout\sass\bootstrap-overrides\_dropdown.scss" />
+    <Content Include="src\app\layout\sass\bootstrap-overrides\_tabs.scss" />
+    <Content Include="src\app\layout\sass\conf\colorSchemes\_blur.scss" />
+    <Content Include="src\app\layout\sass\conf\colorSchemes\_dark.scss" />
+    <Content Include="src\app\layout\sass\conf\colorSchemes\_mint.scss" />
+    <Content Include="src\app\layout\sass\conf\colorSchemes\_ng2.scss" />
+    <Content Include="src\app\layout\sass\conf\conf.scss" />
+    <Content Include="src\app\layout\sass\conf\_mixins.scss" />
+    <Content Include="src\app\layout\sass\conf\_variables.scss" />
+    <Content Include="src\app\layout\sass\primeng\_primeng.min.scss" />
+    <Content Include="src\app\layout\sass\primeng\_primengsubtheme.scss" />
+    <Content Include="src\app\layout\sass\primeng\_primengtheme.scss" />
+    <Content Include="src\app\layout\sass\_auth.scss" />
+    <Content Include="src\app\layout\sass\_buttons.scss" />
+    <Content Include="src\app\layout\sass\_form.scss" />
+    <Content Include="src\app\layout\sass\_icons.scss" />
+    <Content Include="src\app\layout\sass\_layout.scss" />
+    <Content Include="src\app\layout\sass\_overrides.scss" />
+    <Content Include="src\app\layout\sass\_socicon.scss" />
+    <Content Include="src\app\layout\sass\_table.scss" />
+    <Content Include="src\app\layout\sass\_treeView.scss" />
+    <Content Include="src\app\layout\sass\_typography.scss" />
+    <Content Include="src\app\layout\sass\_viewsetting.scss" />
+    <Content Include="src\app\layout\theme.scss" />
+    <Content Include="src\app\login\forgotpassword\forgotpassword.component.html" />
+    <Content Include="src\app\login\index.html" />
+    <Content Include="src\app\login\login.css" />
+    <Content Include="src\app\login\resetpassword\resetpassword.component.html" />
+    <Content Include="src\app\nav-menu\nav-menu.component.css" />
+    <Content Include="src\app\nav-menu\nav-menu.component.html" />
+    <Content Include="src\app\todo-list\todo-list.component.css" />
+    <Content Include="src\app\todo-list\todo-list.component.html" />
+    <Content Include="src\assets\build\css\custom.scss" />
+    <Content Include="src\assets\build\css\custom.min.css" />
+    <Content Include="src\assets\build\css\switch.css" />
+    <Content Include="src\assets\build\js\custom.js" />
+    <Content Include="src\assets\build\js\custom.min.js" />
+    <Content Include="src\assets\img\barchart-1.png" />
+    <Content Include="src\assets\img\gauge-1.png" />
+    <Content Include="src\assets\production\images\favicon.ico" />
+    <Content Include="src\assets\production\images\imaccroppedslider.png" />
+    <Content Include="src\assets\production\images\imageSeven.jpg" />
+    <Content Include="src\assets\production\images\img.jpg" />
+    <Content Include="src\assets\production\images\ipad2croppedslider.png" />
+    <Content Include="src\assets\production\images\ipadcroppedslider.png" />
+    <Content Include="src\assets\production\images\login_image_bg.png" />
+    <Content Include="src\assets\production\images\logo_bg_SVG.svg" />
+    <Content Include="src\assets\production\images\MERIDIAN-COLOR-LOGO-WHITE.png" />
+    <Content Include="src\assets\production\images\MERIDIAN-COLOR-LOGO.png" />
+    <Content Include="src\assets\production\images\meridian_icon.png" />
+    <Content Include="src\assets\production\images\meridian_top_logo.png" />
+    <Content Include="src\assets\production\images\user.png" />
+    <Content Include="src\assets\src\js\custom.js" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap-datepicker.min.css" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="src\assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="src\assets\vendors\bootstrap\dist\js\bootstrap-datepicker.min.js" />
+    <Content Include="src\assets\vendors\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="src\assets\vendors\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="src\assets\vendors\bootstrap\dist\js\npm.js" />
+    <Content Include="src\assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="src\assets\vendors\bootstrap\Gruntfile.js" />
+    <Content Include="src\assets\vendors\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="src\assets\vendors\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="src\assets\vendors\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="src\assets\vendors\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\affix.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\alert.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\button.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\carousel.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\collapse.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\dropdown.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\modal.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\popover.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\scrollspy.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\tab.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\tooltip.js" />
+    <Content Include="src\assets\vendors\bootstrap\js\transition.js" />
+    <Content Include="src\assets\vendors\bootstrap\package.js" />
+    <Content Include="src\assets\vendors\font-awesome\css\font-awesome.css" />
+    <Content Include="src\assets\vendors\font-awesome\css\font-awesome.min.css" />
+    <Content Include="src\assets\vendors\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="src\assets\vendors\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="src\assets\vendors\jquery\AUTHORS.txt" />
+    <Content Include="src\assets\vendors\jquery\dist\jquery.js" />
+    <Content Include="src\assets\vendors\jquery\dist\jquery.min.js" />
+    <Content Include="src\assets\vendors\jquery\external\sizzle\dist\sizzle.js" />
+    <Content Include="src\assets\vendors\jquery\external\sizzle\dist\sizzle.min.js" />
+    <Content Include="src\assets\vendors\jquery\external\sizzle\LICENSE.txt" />
+    <Content Include="src\assets\vendors\jquery\LICENSE.txt" />
+    <Content Include="src\assets\vendors\jquery\src\ajax.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\jsonp.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\load.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\parseJSON.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\parseXML.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\script.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\var\location.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\var\nonce.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\var\rquery.js" />
+    <Content Include="src\assets\vendors\jquery\src\ajax\xhr.js" />
+    <Content Include="src\assets\vendors\jquery\src\attributes.js" />
+    <Content Include="src\assets\vendors\jquery\src\attributes\attr.js" />
+    <Content Include="src\assets\vendors\jquery\src\attributes\classes.js" />
+    <Content Include="src\assets\vendors\jquery\src\attributes\prop.js" />
+    <Content Include="src\assets\vendors\jquery\src\attributes\support.js" />
+    <Content Include="src\assets\vendors\jquery\src\attributes\val.js" />
+    <Content Include="src\assets\vendors\jquery\src\callbacks.js" />
+    <Content Include="src\assets\vendors\jquery\src\core.js" />
+    <Content Include="src\assets\vendors\jquery\src\core\access.js" />
+    <Content Include="src\assets\vendors\jquery\src\core\init.js" />
+    <Content Include="src\assets\vendors\jquery\src\core\parseHTML.js" />
+    <Content Include="src\assets\vendors\jquery\src\core\ready.js" />
+    <Content Include="src\assets\vendors\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="src\assets\vendors\jquery\src\css.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\addGetHookIf.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\adjustCSS.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\curCSS.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\defaultDisplay.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\showHide.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\support.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\var\cssExpand.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\var\getStyles.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\var\isHidden.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\var\rmargin.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="src\assets\vendors\jquery\src\css\var\swap.js" />
+    <Content Include="src\assets\vendors\jquery\src\data.js" />
+    <Content Include="src\assets\vendors\jquery\src\data\Data.js" />
+    <Content Include="src\assets\vendors\jquery\src\data\var\acceptData.js" />
+    <Content Include="src\assets\vendors\jquery\src\data\var\dataPriv.js" />
+    <Content Include="src\assets\vendors\jquery\src\data\var\dataUser.js" />
+    <Content Include="src\assets\vendors\jquery\src\deferred.js" />
+    <Content Include="src\assets\vendors\jquery\src\deprecated.js" />
+    <Content Include="src\assets\vendors\jquery\src\dimensions.js" />
+    <Content Include="src\assets\vendors\jquery\src\effects.js" />
+    <Content Include="src\assets\vendors\jquery\src\effects\animatedSelector.js" />
+    <Content Include="src\assets\vendors\jquery\src\effects\Tween.js" />
+    <Content Include="src\assets\vendors\jquery\src\event.js" />
+    <Content Include="src\assets\vendors\jquery\src\event\ajax.js" />
+    <Content Include="src\assets\vendors\jquery\src\event\alias.js" />
+    <Content Include="src\assets\vendors\jquery\src\event\focusin.js" />
+    <Content Include="src\assets\vendors\jquery\src\event\support.js" />
+    <Content Include="src\assets\vendors\jquery\src\event\trigger.js" />
+    <Content Include="src\assets\vendors\jquery\src\exports\amd.js" />
+    <Content Include="src\assets\vendors\jquery\src\exports\global.js" />
+    <Content Include="src\assets\vendors\jquery\src\intro.js" />
+    <Content Include="src\assets\vendors\jquery\src\jquery.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\buildFragment.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\getAll.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\setGlobalEval.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\support.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\var\rscriptType.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\var\rtagName.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\wrapMap.js" />
+    <Content Include="src\assets\vendors\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="src\assets\vendors\jquery\src\offset.js" />
+    <Content Include="src\assets\vendors\jquery\src\outro.js" />
+    <Content Include="src\assets\vendors\jquery\src\queue.js" />
+    <Content Include="src\assets\vendors\jquery\src\queue\delay.js" />
+    <Content Include="src\assets\vendors\jquery\src\selector-native.js" />
+    <Content Include="src\assets\vendors\jquery\src\selector-sizzle.js" />
+    <Content Include="src\assets\vendors\jquery\src\selector.js" />
+    <Content Include="src\assets\vendors\jquery\src\serialize.js" />
+    <Content Include="src\assets\vendors\jquery\src\traversing.js" />
+    <Content Include="src\assets\vendors\jquery\src\traversing\findFilter.js" />
+    <Content Include="src\assets\vendors\jquery\src\traversing\var\dir.js" />
+    <Content Include="src\assets\vendors\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="src\assets\vendors\jquery\src\traversing\var\siblings.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\arr.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\class2type.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\concat.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\document.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\documentElement.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\hasOwn.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\indexOf.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\pnum.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\push.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\rcssNum.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\rnotwhite.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\slice.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\support.js" />
+    <Content Include="src\assets\vendors\jquery\src\var\toString.js" />
+    <Content Include="src\assets\vendors\jquery\src\wrap.js" />
+    <Content Include="src\json\environment.json" />
+    <Content Include="src\json\settings.development.json" />
+    <Content Include="src\json\settings.json" />
+    <Content Include="src\json\settings.production.json" />
+    <Content Include="src\styles.scss" />
+    <Content Include="src\tsconfig.app.json" />
+    <Content Include="src\tsconfig.spec.json" />
+    <Content Include="src\Web.config" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tslint.json" />
+    <Content Include="typedoc.json" />
+    <Content Include="src\assets\build\css\___6000.tmp" />
+    <Content Include="src\assets\production\___ABEE.tmp" />
+    <Content Include="src\assets\production\___EABF.tmp" />
+    <Content Include="src\assets\src\scss\custom.scss" />
+    <Content Include="src\assets\vendors\bootstrap\.bower.json" />
+    <Content Include="src\assets\vendors\bootstrap\bower.json" />
+    <Content Include="src\assets\vendors\bootstrap\CHANGELOG.md" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="src\assets\vendors\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="src\assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="src\assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="src\assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="src\assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="src\assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="src\assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="src\assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="src\assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="src\assets\vendors\bootstrap\grunt\.jshintrc" />
+    <Content Include="src\assets\vendors\bootstrap\grunt\configBridge.json" />
+    <Content Include="src\assets\vendors\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="src\assets\vendors\bootstrap\js\.jscsrc" />
+    <Content Include="src\assets\vendors\bootstrap\js\.jshintrc" />
+    <Content Include="src\assets\vendors\bootstrap\less\.csscomb.json" />
+    <Content Include="src\assets\vendors\bootstrap\less\.csslintrc" />
+    <Content Include="src\assets\vendors\bootstrap\less\alerts.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\badges.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\bootstrap.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\breadcrumbs.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\button-groups.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\buttons.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\carousel.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\close.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\code.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\component-animations.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\dropdowns.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\forms.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\glyphicons.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\grid.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\input-groups.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\jumbotron.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\labels.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\list-group.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\media.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\alerts.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\buttons.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\center-block.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\forms.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\gradients.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\grid.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\image.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\labels.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\list-group.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\opacity.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\pagination.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\panels.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\resize.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\size.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\table-row.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\modals.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\navbar.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\navs.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\normalize.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\pager.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\pagination.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\panels.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\popovers.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\print.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\progress-bars.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\responsive-embed.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\responsive-utilities.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\scaffolding.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\tables.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\theme.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\thumbnails.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\tooltip.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\type.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\utilities.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\variables.less" />
+    <Content Include="src\assets\vendors\bootstrap\less\wells.less" />
+    <Content Include="src\assets\vendors\bootstrap\LICENSE" />
+    <Content Include="src\assets\vendors\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="src\assets\vendors\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="src\assets\vendors\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="src\assets\vendors\bootstrap\package.json" />
+    <Content Include="src\assets\vendors\bootstrap\README.md" />
+    <Content Include="src\assets\vendors\font-awesome\.bower.json" />
+    <Content Include="src\assets\vendors\font-awesome\.gitignore" />
+    <Content Include="src\assets\vendors\font-awesome\.npmignore" />
+    <Content Include="src\assets\vendors\font-awesome\bower.json" />
+    <Content Include="src\assets\vendors\font-awesome\css\font-awesome.css.map" />
+    <Content Include="src\assets\vendors\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="src\assets\vendors\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="src\assets\vendors\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="src\assets\vendors\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="src\assets\vendors\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="src\assets\vendors\font-awesome\less\animated.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\bordered-pulled.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\core.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\fixed-width.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\font-awesome.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\icons.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\larger.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\list.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\mixins.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\path.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\rotated-flipped.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\screen-reader.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\stacked.less" />
+    <Content Include="src\assets\vendors\font-awesome\less\variables.less" />
+    <Content Include="src\assets\vendors\font-awesome\scss\font-awesome.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_animated.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_core.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_icons.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_larger.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_list.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_mixins.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_path.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_stacked.scss" />
+    <Content Include="src\assets\vendors\font-awesome\scss\_variables.scss" />
+    <Content Include="src\assets\vendors\jquery\.bower.json" />
+    <Content Include="src\assets\vendors\jquery\bower.json" />
+    <Content Include="src\assets\vendors\jquery\dist\jquery.min.map" />
+    <Content Include="src\assets\vendors\jquery\external\sizzle\dist\sizzle.min.map" />
+    <Content Include="src\assets\vendors\jquery\README.md" />
+    <Content Include="src\assets\vendors\jquery\src\.jshintrc" />
+    <Content Include="src\app\dashboard\dashboard.scss" />
+    <Content Include="src\app\deposit-log\combo-chart\combo-chart.component.scss" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="karma.conf.js" />
+    <Content Include="protractor.conf.js" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\dashboard\dashboard.html" />
+    <Content Include="src\app\layout\components\error-page\error-page.html" />
+    <Content Include="src\app\layout\components\loader\loader.html" />
+    <Content Include="src\app\layout\components\page-top\page-top.html" />
+    <Content Include="src\app\login\login.component.html" />
+    <Content Include="src\assets\icon\favicon.ico" />
+    <Content Include="src\assets\img\act-logo.png" />
+    <Content Include="src\assets\img\app\profile\User.png" />
+    <Content Include="src\assets\img\app\profile\User_logo.png" />
+    <Content Include="src\assets\img\favicon-96x96.png" />
+    <Content Include="src\assets\img\images.jpg" />
+    <Content Include="src\assets\img\pearup-layout-logo.png" />
+    <Content Include="src\assets\img\pearup-logo.png" />
+    <Content Include="src\assets\img\pearup_logo.png" />
+    <Content Include="src\assets\img\sky-bg.jpg" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\admin\business-days\business-days.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\business-days\business-days.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\business-days\holiday.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\business-days\pie-chart.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\business-units\busienss-units.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\business-units\business-units.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\business-units\business-units.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\checklistitem\checklistitem.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\admin\checklistitem\checklistitem.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\checklist\checklist.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\admin\checklist\checklist.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\configuration\configuration.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\configuration\configuration.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\configuration\models\attributes.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\guards\resolve\checklist.resolve.ts" />
+    <TypeScriptCompile Include="src\app\admin\heatmap\heatmap.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\admin\heatmap\heatmap.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\heatmap\heatmap.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\heatmap\HeatMapItemModel.ts" />
+    <TypeScriptCompile Include="src\app\admin\kpi\create-kpi\measure.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\kpi\view-kpi\view-kpi.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\kpi\view-kpi\view-kpi.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\models\checklist.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\models\checklist-item-table.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\models\checklist-item.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\kpi\create-kpi\kpi.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\kpi\create-kpi\kpi.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\kpi\create-kpi\kpi.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\models\checklist-type.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\payers\payers.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\payers\payers.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\payers\payers.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\services\checklist.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\admin.module.ts" />
+    <TypeScriptCompile Include="src\app\admin\admin.routing.ts" />
+    <TypeScriptCompile Include="src\app\admin\sites\site.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\specialities\specialities.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\specialities\specialities.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\specialities\specialities.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\systems\systems.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\systems\systems.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\systems\systems.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\all-users\all-users.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\all-users\all-users.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\all-users\models\all-users.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\all-users\models\all-users-viewmodel.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\all-users\models\selected-clients.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\clientuser\client-user.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\clientuser\client-user.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\m3user\m3-user.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\m3user\m3-user.model.ts" />
+    <TypeScriptCompile Include="src\app\admin\users\m3user\m3-user.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\view-all-checklist\view-all-checklist.component.ts" />
+    <TypeScriptCompile Include="src\app\admin\models\view-all-checklist.model.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.constants.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\app.routing.ts" />
+    <TypeScriptCompile Include="src\app\app.service.ts" />
+    <TypeScriptCompile Include="src\app\checklist\checklist.module.ts" />
+    <TypeScriptCompile Include="src\app\checklist\checklist.routing.ts" />
+    <TypeScriptCompile Include="src\app\checklist\checklist.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\checklist\checklist.service.ts" />
+    <TypeScriptCompile Include="src\app\checklist\completed-checklist\completed-checklist.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\checklist\completed-checklist\completed-checklist.component.ts" />
+    <TypeScriptCompile Include="src\app\checklist\models\checklist-datarequest.model.ts" />
+    <TypeScriptCompile Include="src\app\checklist\models\client-checklistresponse.model.ts" />
+    <TypeScriptCompile Include="src\app\checklist\models\submit-checklistresponse.model.ts" />
+    <TypeScriptCompile Include="src\app\checklist\pending-checklist\pending-checklist.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\checklist\pending-checklist\pending-checklist.component.ts" />
+    <TypeScriptCompile Include="src\app\client\assign-client-user\assign-client-user.component.ts" />
+    <TypeScriptCompile Include="src\app\client\assign-client-user\assign-client-user.model.ts" />
+    <TypeScriptCompile Include="src\app\client\assign-client-user\assign-client-user.service.ts" />
+    <TypeScriptCompile Include="src\app\client\client-data\client-data.component.ts" />
+    <TypeScriptCompile Include="src\app\client\client-history\client-history.component.ts" />
+    <TypeScriptCompile Include="src\app\client\client-history\client-history.model.ts" />
+    <TypeScriptCompile Include="src\app\client\client-history\client-history.service.ts" />
+    <TypeScriptCompile Include="src\app\client\client-stepper.model.ts" />
+    <TypeScriptCompile Include="src\app\client\client-stepper.module.ts" />
+    <TypeScriptCompile Include="src\app\client\client-data.routing.ts" />
+    <TypeScriptCompile Include="src\app\client\client-data.service.ts" />
+    <TypeScriptCompile Include="src\app\client\client-stepper.component.ts" />
+    <TypeScriptCompile Include="src\app\client\kpi-setup\kpi-setup.component.ts" />
+    <TypeScriptCompile Include="src\app\client\kpi-setup\kpi-setup.model.ts" />
+    <TypeScriptCompile Include="src\app\client\log-setup\log-setup.component.ts" />
+    <TypeScriptCompile Include="src\app\client\targets\models\manually-edited-targets.model.ts" />
+    <TypeScriptCompile Include="src\app\client\targets\targets.component.ts" />
+    <TypeScriptCompile Include="src\app\client\targets\targets.service.ts" />
+    <TypeScriptCompile Include="src\app\client\log-setup\log-setup.model.ts" />
+    <TypeScriptCompile Include="src\app\client\view-all-clients\view-all-clients.component.ts" />
+    <TypeScriptCompile Include="src\app\client\view-all-clients\view-all-clients.service.ts" />
+    <TypeScriptCompile Include="src\app\common\common.constants.ts" />
+    <TypeScriptCompile Include="src\app\common\common.helper.ts" />
+    <TypeScriptCompile Include="src\app\common\common.module.ts" />
+    <TypeScriptCompile Include="src\app\common\common.service.ts" />
+    <TypeScriptCompile Include="src\app\common\components\pdfViewer\pdf-viewer.component.ts" />
+    <TypeScriptCompile Include="src\app\common\components\validation-message\validation-message.component.ts" />
+    <TypeScriptCompile Include="src\app\common\directives\autofocus.directive.ts" />
+    <TypeScriptCompile Include="src\app\common\directives\readonly.directive.ts" />
+    <TypeScriptCompile Include="src\app\common\models\message-config.model.ts" />
+    <TypeScriptCompile Include="src\app\common\models\validation.model.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.module.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.routing.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.service.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\index.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\models\workspace.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\deposi-log.animations.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\deactivate-guard.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\month-deposit.model.ts" />
+    <TypeScriptCompile Include="src\app\heatmap\models\heatmap-dropdown.model.ts" />
+    <TypeScriptCompile Include="src\app\report\report.component.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\combo-chart\combo-chart.component.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\combo-chart\combo-series-vertical.component.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\combo-chart\index.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\deposit-log-constants.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\deposit-log.component.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\deposit-log.module.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\deposit-log.routing.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\deposit-log.service.ts" />
+    <TypeScriptCompile Include="src\app\environment.ts" />
+    <TypeScriptCompile Include="src\app\global.state.ts" />
+    <TypeScriptCompile Include="src\app\heatmap\heatmap.component.ts" />
+    <TypeScriptCompile Include="src\app\heatmap\heatmap.module.ts" />
+    <TypeScriptCompile Include="src\app\heatmap\heatmap.routing.ts" />
+    <TypeScriptCompile Include="src\app\heatmap\heatmap.service.ts" />
+    <TypeScriptCompile Include="src\app\heatmap\models\heatmap-request.model.ts" />
+    <TypeScriptCompile Include="src\app\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\components\error-page\error-page.component.ts" />
+    <TypeScriptCompile Include="src\app\layout\components\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\components\loader\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\components\loader\loader.component.ts" />
+    <TypeScriptCompile Include="src\app\layout\components\page-top\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\components\page-top\page-top.component.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\scroll-position\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\scroll-position\scroll-position.directive.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\slim-scroll\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\slim-scroll\slim-scroll.directive.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\slim-scroll\slim-scroll.loader.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\theme-run\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\directives\theme-run\theme-run.directive.ts" />
+    <TypeScriptCompile Include="src\app\layout\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\nga.module.ts" />
+    <TypeScriptCompile Include="src\app\layout\pipes\app-picture\app-picture.pipe.ts" />
+    <TypeScriptCompile Include="src\app\layout\pipes\app-picture\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\pipes\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\pipes\profile-picture\index.ts" />
+    <TypeScriptCompile Include="src\app\layout\pipes\profile-picture\profile-picture.pipe.ts" />
+    <TypeScriptCompile Include="src\app\layout\theme.config.ts" />
+    <TypeScriptCompile Include="src\app\layout\theme.configProvider.ts" />
+    <TypeScriptCompile Include="src\app\layout\theme.constants.ts" />
+    <TypeScriptCompile Include="src\app\login\forgotpassword\forgotpassword.component.ts" />
+    <TypeScriptCompile Include="src\app\login\forgotpassword\forgotpassword.model.ts" />
+    <TypeScriptCompile Include="src\app\login\forgotpassword\forgotpassword.service.ts" />
+    <TypeScriptCompile Include="src\app\login\index.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\login\login.module.ts" />
+    <TypeScriptCompile Include="src\app\login\login.routing.ts" />
+    <TypeScriptCompile Include="src\app\login\login.service.ts" />
+    <TypeScriptCompile Include="src\app\login\resetpassword\resetpassword.component.ts" />
+    <TypeScriptCompile Include="src\app\login\resetpassword\resetpassword.model.ts" />
+    <TypeScriptCompile Include="src\app\login\resetpassword\resetpassword.service.ts" />
+    <TypeScriptCompile Include="src\app\nav-menu\models\menuItem.model.ts" />
+    <TypeScriptCompile Include="src\app\nav-menu\nav-menu.component.ts" />
+    <TypeScriptCompile Include="src\app\nav-menu\nav-menu.service.ts" />
+    <TypeScriptCompile Include="src\app\report\report.module.ts" />
+    <TypeScriptCompile Include="src\app\report\report.routing.ts" />
+    <TypeScriptCompile Include="src\app\client\targets\models\business-days.model.ts" />
+    <TypeScriptCompile Include="src\app\client\targets\models\monthly-target.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\client-payer-deposit.model.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\DepositLog\client.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\deposit-log-attribute.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\deposit-log-client-data.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\deposit-log-client-data-amount.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\deposit-log-mtd.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\deposit-log-projection.model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\deposit-log-model.ts" />
+    <TypeScriptCompile Include="src\app\deposit-log\models\payer-data.model.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\index.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\interest.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\interests-category.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\responseModel.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\user.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\user-login.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\alert.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\authentication.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\index.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\auth-guard.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\user.service.ts" />
+    <TypeScriptCompile Include="src\app\admin\sites\sites.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\animations\shared-animations.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\common-utility.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\config-utility.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\config.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\custom-pipes\range.pipe.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\data-utility.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\exception-handler\custom-exception-handler.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\extension.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\global-constants\global-constants.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\global-constants\global-enum.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\global-events-manager.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\http\auth-interceptor.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\http\http-utility.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\resources\screencode.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\resources\constants.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\resources\labels.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\resources\url.ts" />
+    <TypeScriptCompile Include="src\app\shared\utilities\test-helper.spec.ts" />
+    <TypeScriptCompile Include="src\app\shared\validators\email.validator.ts" />
+    <TypeScriptCompile Include="src\app\shared\validators\equal-passwords.validator.ts" />
+    <TypeScriptCompile Include="src\app\shared\validators\index.ts" />
+    <TypeScriptCompile Include="src\app\admin\sites\sites.component.ts" />
+    <TypeScriptCompile Include="src\app\todo-list\enums\redirect-url.enum.ts" />
+    <TypeScriptCompile Include="src\app\todo-list\models\todo-list.model.ts" />
+    <TypeScriptCompile Include="src\app\todo-list\todo-list.component.ts" />
+    <TypeScriptCompile Include="src\app\todo-list\todo-list.module.ts" />
+    <TypeScriptCompile Include="src\app\todo-list\todo-list.routing.ts" />
+    <TypeScriptCompile Include="src\app\todo-list\todo-list.service.ts" />
+    <TypeScriptCompile Include="src\custom-typings.d.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\shared\models\ClientData\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56613</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56613/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

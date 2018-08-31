@@ -1,0 +1,54 @@
+
+>>> .ui-dropdown .ui-dropdown-panel {
+    z-index: 1 !important;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.video {
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+:host >>> .ui-dropdown {
+    width: 100% !important;
+}
+
+.dashboardTile baseTile gridLayoutItem readonly largerTileWidth largeTitleWidth transformElement {
+    width: 100%;
+}
+
+.x_panel {
+    width: 50%;
+}
+
+ .ui-dropdown {
+    width: 100% !important;
+}
+
+
+@media screen and (max-width: 640px) {
+    .right_col {
+        padding-top: 180px !important;
+    }
+}
+
+@media screen and (min-width: 1620px) {
+    .row.shift-up {
+        > * {
+            margin-top: -573px;
+        }
+    }
+}
+
+@media screen and (max-width: 1620px) {
+    .card.feed-panel.large-card {
+        height: 824px;
+    }
+}

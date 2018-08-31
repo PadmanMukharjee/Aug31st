@@ -1,0 +1,58 @@
+<div class="col-md-3 left_col menu_fixed" id="menu">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title b_zero"></div>
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section left_menu_position">
+                <hr />
+                <ul class="nav side-menu main_leftmenu_lbl">
+                    <li *ngFor="let menuItem of MenuItems; let i=index;" [class.current-page]="clicked === menuItem"
+                        (click)="clicked = menuItem">
+                        <a (click)="parentMenuClick(menuItem)" name="{{menuItem}}">
+                            <i class="nav menu_position" *ngIf="menuItem.icon"
+                               [ngClass]="menuItem.icon">
+                            </i>
+                            <span id="ul_olm_Menu{{i}}">
+                                <label>
+                                    {{menuItem.nodeName}}
+                                </label>
+                                <span class="toggle ul-style" [ngClass]="getCaretClass(menuItem)"
+                                      *ngIf="showCaret(menuItem)">
+                                </span>
+                            </span>
+                        </a>
+                        <div *ngIf="menuItem.expand">
+                            <ul class="nav child_menu d_block" id="ul_olm_subMenu{{i}}">
+                                <li *ngFor="let submenuItem of menuItem.subNodes">
+                                    <a (click)="childMenuClick(submenuItem)" name="a_olm_{{submenuItem}}" id="a_olm_{{submenuItem}}">
+                                        <i class="nav" *ngIf="submenuItem.icon"
+                                           [ngClass]="">
+                                        </i>
+                                        {{submenuItem.nodeName}}
+                                        <span class="toggle-sm postion_menu-sub" [ngClass]="getCaretClass(submenuItem)"
+                                              *ngIf="showCaret(submenuItem)">
+                                        </span>
+                                    </a>
+                                    <div *ngIf="submenuItem.expand">
+                                        <ul class="nav child_menu d_block" id="ul_olm_subMenu2{{i}}">
+                                            <li *ngFor="let subMenuItem2 of submenuItem.subNodes" class="sub_child_menu">
+                                                <a (click)="menuClick(subMenuItem2)" name="a_olm_{{subMenuItem2}}" id="a_olm_{{subMenuItem2}}">
+                                                    <i class="nav" *ngIf="subMenuItem2.icon"
+                                                       [ngClass]="">
+                                                    </i>
+                                                    {{subMenuItem2.nodeName}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /sidebar menu -->
+    </div>
+</div>
+

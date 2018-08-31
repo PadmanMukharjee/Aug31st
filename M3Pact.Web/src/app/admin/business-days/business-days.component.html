@@ -1,0 +1,198 @@
+﻿<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.BUSINESS_DAYS}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="bussiness-Flex">
+                <div class="col-md-6 col-sm-12 bussiness-Holiday-Flex business-Days-Border">
+                    <div class="business-Heading">{{labels.ADD_HOLIDAYS}}</div>
+                    <div class="content-frame">
+                        <section class="content-header" id="content_header">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 flex_option">
+                                    <label class="control-label year_label">{{sharedLabels.YEAR}}:&nbsp;</label>
+                                    <p-dropdown [options]="years" [(ngModel)]="selectedYear" name="roleCode" (onFilter)="onTableFilter($event)" (onPage)="onTablePageChange($event)"  (onChange)="getHolidaysOfYearReset(HolidayTable)"></p-dropdown>
+                                </div>
+                                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="addHoliday()" *ngIf="canEdit"><span class="fa fa-plus">&nbsp;</span>{{sharedLabels.BUTTONS.ADD}}</button>
+                            </div>
+                        </section>
+                        <section class="content" id="content" [ngStyle]="{'margin-top': canEdit ? '0' : '5px' }">
+                            <p-table #HolidayTable [value]="holidays" [paginator]="true" [rows]="rowsIn" (onFilter)="onTableFilter($event)" (onPage)="onTablePageChange($event)" class="bussinessTable">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th *ngIf="canEdit"></th>
+                                        <th>{{labels.NAME}}</th>
+                                        <th>{{labels.DATE}}</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-holiday>
+                                    <tr>
+                                        <td *ngIf="canEdit">
+                                            <div class="textCenter" *ngIf="setEditOrDeleteBtn(holiday.holidayDate)">
+                                                <span (click)="modifySelectedHoliday(holiday,true)">
+                                                    <i class="fa fa-trash" aria-hidden="true">
+                                                    </i>
+                                                </span>
+                                                <span (click)="modifySelectedHoliday(holiday,false)">
+                                                    <i class="fa fa-pencil" aria-hidden="true">
+                                                    </i>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td> {{ holiday.holidayName }} </td>
+                                        <td>{{ holiday.holidayDate | date:'MM/dd/y'}} </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage" let-columns>
+                                    <tr>
+                                        <td *ngIf="filteredBusinessDays==undefined" [attr.colspan]="2">
+                                            Loading...
+                                        </td>
+                                        <td *ngIf="filteredBusinessDays!=undefined" [attr.colspan]="3">
+                                            {{labels.NO_HOLIDAYS}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template  pTemplate="paginatorright">
+                                    <tr>
+                                        <td class="table-style"> <b>{{paginationCount}}</b></td>
+                                    </tr>
+                               </ng-template>
+                            </p-table>
+                        </section>
+                    </div>
+                    <br />
+                    <button type="button" class="btn btn-dark btn-round btn-sm pull-right"
+                            (click)="updateClientTargets()" *ngIf="canEdit">
+                        {{labels.REFRESH_CLIENT_TARGETS}}
+                    </button>
+                </div>
+                <div class="col-md-6 col-sm-12 business-Days-Border bussiness-day-Flex">
+                    <div class="col-xs-12 textCenter">
+                        <h3>
+                            <label class="center" for="site">
+                                {{labels.TOTAL}}: {{totalBusinessDays}} {{labels.BUSINESS_DAYS}}
+                            </label>
+                        </h3>
+                    </div>
+                    <div class="col-xs-12 textCenter responsive-height">
+                        <ngx-charts-pie-chart [view]="pieChartProperties.view"
+                                              [scheme]="pieChartProperties.colorScheme"
+                                              [results]="pieChartProperties.data"
+                                              [legend]="pieChartProperties.showLegend"
+                                              [explodeSlices]="pieChartProperties.explodeSlices"
+                                              [labels]="pieChartProperties.showLabels"
+                                              [doughnut]="pieChartProperties.doughnut"
+                                              [gradient]="pieChartProperties.gradient"
+                                              [labelFormatting]="monthFormatting"
+                                              [trimLabels]="pieChartProperties.trimLabels">
+                        </ngx-charts-pie-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="displayDialog" class="admin_units_popup">
+            <p-dialog header="{{holidayDialogLabel}}"
+                      [(visible)]="displayDialog"
+                      [responsive]="true"
+                      showEffect="fade"
+                      [resizable] = "false"
+                      [modal]="true"
+                      [contentStyle]="{'overflow':'visible'}"
+                      (onHide)="clearDialog()">
+
+                <div class="ui-g ui-fluid" *ngIf="selectedHoliday">
+                    <form #selectedHolidayForm="ngForm" (ngSubmit)="addOrEditHoliday(selectedHolidayForm)">
+                        <div class="control-group">
+                            <div class="ui-g-12" *ngIf="!isDeleteAction">
+                                <div class="ui-g-4">
+                                    <label class="pull-right" for="site">{{labels.HOLIDAY_NAME}}<span class="required">*</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="ui-g-6 margin-top-3" *ngIf="!isDeleteAction">
+                                        <input type="text" name="txtholidayname" class="textWidth" id="txtholidayname" [(ngModel)]="selectedHoliday.holidayName" required #holidayName="ngModel" />
+                                        <validation-message [frmcontrol]="holidayName" [frmSubmitted]="selectedHolidayForm.submitted" [fldText]="'Holiday Name'" [frmControlEmptyCheck]="selectedHolidayForm.submitted">
+                                        </validation-message>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-g-12" *ngIf="!isDeleteAction">
+                                <div class="ui-g-4">
+                                    <label class="pull-right" for="site">
+                                        {{labels.HOLIDAY_DATE}}
+                                        <span class="required">*</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="ui-g-6 margin-top-3 businessDayCalenderWidth" *ngIf="!isDeleteAction">
+                                        <p-calendar [(ngModel)]="selectedHoliday.holidayDate"
+                                                    name="date"
+                                                    [showIcon]="true"
+                                                    [minDate]="minDateValue"
+                                                    (onChange)="isHolidayValid()"
+                                                    required #holidayDate="ngModel">
+                                        </p-calendar>
+                                        <validation-message [frmcontrol]="holidayDate" [frmSubmitted]="selectedHolidayForm.submitted" [selectRequiredMessage]="'Holiday Date'" [fldText]="'Holiday Date'">
+                                        </validation-message>
+                                        <span class="required" *ngIf="showErrorMsg">
+                                            {{errorMsg}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="required msg_color" *ngIf="showErrorDiv">
+                                <div class="ui-g-12">
+                                    <p-messages [(value)]="msgs"></p-messages>
+                                </div>
+                            </div>
+                            <div class="ui-g-12" *ngIf="isDeleteAction">
+                                <label class="center" for="site">
+                                    {{labels.DELETE_MSG}}
+                                </label>
+                            </div>
+                            <div class="col-md-12 ui-dialog-buttonpane ui-helper-clearfix pull-right">
+                                <button type="submit"
+                                        *ngIf="!isDeleteAction">
+                                    {{labels.SAVE}}
+                                </button>
+                                <button type="button"
+                                        *ngIf="isDeleteAction"
+                                        (click)="deleteHoliday(selectedHoliday)">
+                                    {{labels.DELETE}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </p-dialog>
+        </div>
+        <div *ngIf="clientTargetDialog">
+            <p-dialog header="{{labels.CONFIRMATIONSCREEN}}"
+                      [(visible)]="clientTargetDialog"
+                      [responsive]="true"
+                      showEffect="fade"
+                      [resizable] = "false"
+                      [modal]="true"
+                      [contentStyle]="{'overflow':'visible'}"
+                      (onHide)="hideClientPopUp()">
+                <div class="ui-g-12">
+                    <label class="center" for="site">
+                        {{clientTargetMsg}}
+                    </label>
+                </div>
+                <button type="button" class="ui-dialog-buttonpane btn-round ui-helper-clearfix pull-right"
+                        (click)="hideClientPopUp()">
+                    {{labels.OK}}
+                </button>
+            </p-dialog>
+        </div>
+    </div>
+</div>

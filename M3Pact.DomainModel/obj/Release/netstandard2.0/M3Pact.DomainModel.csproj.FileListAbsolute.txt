@@ -1,0 +1,16 @@
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\M3Pact.DomainModel.deps.json
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\M3Pact.DomainModel.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\M3Pact.DomainModel.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\ConfigManager.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\M3Pact.BusinessModel.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\M3Pact.Infrastructure.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\M3Pact.BusinessModel.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\M3Pact.Infrastructure.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\bin\Release\netstandard2.0\ConfigManager.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\obj\Release\netstandard2.0\M3Pact.DomainModel.csprojResolveAssemblyReference.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\obj\Release\netstandard2.0\M3Pact.DomainModel.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\obj\Release\netstandard2.0\M3Pact.DomainModel.AssemblyInfoInputs.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\obj\Release\netstandard2.0\M3Pact.DomainModel.AssemblyInfo.cs
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\obj\Release\netstandard2.0\M3Pact.DomainModel.csproj.CopyComplete
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\obj\Release\netstandard2.0\M3Pact.DomainModel.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.DomainModel\obj\Release\netstandard2.0\M3Pact.DomainModel.pdb

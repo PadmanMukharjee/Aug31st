@@ -1,0 +1,202 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="row">
+    <div class="client_details">
+        <div class="x_panel">
+            <div class="x_title">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6"> <h4>KPI Setup</h4></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="">
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row" *ngIf="canEdit">
+                                <button *ngIf="canEdit && editActions.includes('AddKPI')" class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="showDialogToAdd()"><span class="fa fa-plus">&nbsp;</span>{{sharedLabels.ADD}}</button>
+                            </div>
+                            <p-table [value]="clientAssignedKpi.kpiQuestions" [paginator]="true" [rows]="10" selectionMode="single">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="kpi_widthh_res">{{labels.KPI}}</th>
+                                        <th>{{labels.TYPE}}</th>
+                                        <th>{{labels.ISUNIVERSAL}}</th>
+                                        <th>{{labels.COMPANYSTANDARD}}</th>
+                                        <th>{{labels.CLIENTSTANDARD}}</th>
+                                        <th>{{labels.SLA}}</th>
+                                        <th>{{labels.SENDALERTS}}</th>
+                                    </tr>
+                                </ng-template>
+                                    <ng-template pTemplate="body" let-kpiclientQuestion>
+                                        <tr class="wrap-word">
+                                            <td class="kpi_widthh_res p_relative">
+                                                <span *ngIf="canEdit && editActions.includes('EditKPI')" class="fa fa-pencil" (click)="onRowSelect(kpiclientQuestion)"></span>
+                                                &nbsp;{{kpiclientQuestion.kpi.kpiDescription}}  &nbsp;
+                                                <span class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-right p_absolute" *ngIf="kpiclientQuestion.info">
+                                                    <span data-toggle="tooltip" attr.data-tooltip="{{ kpiclientQuestion.info }}">
+                                                        <i class="fa fa-info-circle"></i>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td>{{kpiclientQuestion.kpi.checklistTypeViewModel.checkListTypeCode=='WEEK'?'Weekly':kpiclientQuestion.kpi.checklistTypeViewModel.checkListTypeCode=='MONTH'?'Monthly':'M3Metrics'}}</td>
+                                            <td>{{kpiclientQuestion.kpi.isUniversal==true?'YES':'NO'}}</td>
+                                            <td>{{kpiclientQuestion.kpi.companyStandard}}</td>
+                                            <td>{{kpiclientQuestion.clientStandard==NULL?'N/A':kpiclientQuestion.clientStandard}}</td>
+                                            <td>{{kpiclientQuestion.sla==NULL?'N/A':kpiclientQuestion.sla==true ?'YES':'NO'}}</td>
+                                            <td>
+                                                <span *ngIf="kpiclientQuestion.sendTo?.length === 0">{{kpiclientQuestion.sendTo?.length}}</span>
+                                                <span *ngIf="kpiclientQuestion.sendTo?.length !== 0" (click)="onSelectUsers(kpiclientQuestion)" class="text_underline">{{kpiclientQuestion.sendTo?.length}}</span>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="displayDialog" class="admin admin_width res_margin dialog_reponsive">
+    <p-dialog header="{{popupHeader}}" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [resizable] = "false" showEffect="fade" [width]="400" [height]="550" [minWidth]="200" [minY]="70" (onHide)="disbleEdit()" class="">
+        <div class="colWidth">
+            <form #kpiForm="ngForm" (ngSubmit)="saveKPISetup(kpiForm)">
+                <div class="row padding_popup">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <label class="pull-right"><span class="required">*</span><b>{{labels.KPI}}</b></label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 questionPadding">
+                                <div *ngIf="kpiQuestion.kpi?.isUniversal || kpiQuestion.futureRemoverOrUniversal">
+                                    <label>{{kpiQuestion.kpi.kpiDescription}}</label>
+                                </div>
+                                <div *ngIf="!kpiQuestion.kpi?.isUniversal && !kpiQuestion.futureRemoverOrUniversal">
+                                    <p-dropdown [options]="kpiQuestionOptions" name="kpiQuestionOptions" placeholder="select" optionLabel="kpiDescription" [(ngModel)]="kpiQuestion.kpi" filter="true" (click)="kpiSelected()" (onChange)="OnKpiSelect()" #kpiNamectrl="ngModel"></p-dropdown>
+                                    <div *ngIf="!valid" class="error-message_color">
+                                        {{validationConstants.KPI_SELECT}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt" *ngIf="kpiQuestion.kpi?.checklistTypeViewModel.checkListTypeCode=='M3'">
+                            <div class="col-lg-4 col-md-4">
+                                <label class="pull-right"><b>{{labels.CLIENTSTANDARD}}</b></label>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <div *ngIf="kpiQuestion.kpi!=null">
+                                    <p-dropdown [options]="alertLevel" name="alertLevel" placeholder="Select" [(ngModel)]="kpiQuestion.alertLevel" autoWidth="false" required="true"></p-dropdown>
+                                    <input type="number"
+                                           *ngIf="showDefaultStandard"
+                                           name="alertValue"
+                                           [(ngModel)]="kpiQuestion.alertValue"
+                                           min="0"
+                                           max="99999999999"
+                                           #alertLevelCtrl="ngModel"
+                                           (keyup)="checkValidStandard()" 
+                                           (change)="checkValidStandard()">
+                                    <input type="text"
+                                           name="alertValue"
+                                           maxlength="13"
+                                           *ngIf="showKpiAmountMeasure"
+                                           [(ngModel)]="kpiQuestion.alertValue"
+                                           #alertLevelCtrl="ngModel"
+                                           (focus)="onfocus($event)"
+                                           (blur)="onBlur($event,i)"
+                                           (keyup)="onkeyup($event,i)">
+                                    <input type="number"
+                                           *ngIf="showKpiDaysMeasure"
+                                           name="alertValue"
+                                           [(ngModel)]="kpiQuestion.alertValue"
+                                           min="0"
+                                           (keyup)="daysKeyUp($event,i)"
+                                           #alertLevelCtrl="ngModel" />
+
+                                    <input *ngIf="showKpiPercentageMeasure"
+                                           type="text"
+                                           maxlength="6"
+                                           name="alertValue"
+                                           [(ngModel)]="kpiQuestion.alertValue"
+                                           required
+                                           #alertLevelCtrl="ngModel"
+                                           (focus)="percentageOnfocus($event)"
+                                           (blur)="percentageOnBlur($event,i)"
+                                           (keyup)="percentageOnkeyup($event,i)">
+                                    <label *ngIf="!showDefaultStandard" class="control-label pl-10">{{ kpiQuestion.kpi.m3MeasureViewModel.measureUnit }}</label>
+                                    <div *ngIf="showDefaultStandardError" class="error-message_color">{{ labels.STANDARD_ERROR }}</div>
+                                    <div *ngIf="enteredStandardAmountValid && showKpiAmountMeasure" class="error-message_color">{{ adminLabels.STANDARD_AMOUNT_FORMAT }}</div>
+                                    <div *ngIf="enteredStandardDayValid && showKpiDaysMeasure" class="error-message_color">{{ adminLabels.STANDARD_DAYS_FORMAT }}</div>
+                                    <div *ngIf="enteredStandardPercentageValid && showKpiPercentageMeasure" class="error-message_color">{{ adminLabels.STANDARD_PERCENT_FORMAT }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt">
+                            <div class="col-lg-4 col-md-4 padding-l-0" *ngIf="kpiQuestion.kpi?.companyStandard!=null">
+                                <label class="pull-right"><b>{{labels.COMPANYSTANDARD}}</b></label>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <div *ngIf="kpiQuestion.kpi!=null">
+                                    <label>{{kpiQuestion.kpi.companyStandard}}</label>
+                                    <label *ngIf="!showDefaultStandard" class="control-label pl-10" >{{ kpiQuestion.kpi.m3MeasureViewModel.measureUnit }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt" *ngIf="kpiQuestion.kpi?.checklistTypeViewModel?.checkListTypeCode=='M3'">
+                            <div class="col-lg-4 col-md-4">
+                                <label class="pull-right"><b>{{labels.SLA}}</b></label>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <div *ngIf="kpiQuestion.kpi!=null">
+                                    <input type="checkbox" name="sla" required [(ngModel)]="kpiQuestion.sla" #alertLevelCtrl="ngModel">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt">
+                            <div class="col-lg-4 col-md-4">
+                                <label class="pull-right"><b>{{labels.SENDALERTS}}</b></label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 w-250">
+                                <p-multiSelect [options]="users" name="users" placeholder="Select" maxSelectedLabels="1" selectedItemsLabel="{0} recipients selected" [(ngModel)]="kpiQuestion.sendTo" autoWidth="false" required="true"></p-multiSelect>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 mt-120">
+                    <button type="submit" class="btn btn-dark btn-sm btn-round pull-right"> {{sharedLabels.SAVE}}</button>
+                </div>
+            </form>
+        </div>
+    </p-dialog>
+</div>
+<div *ngIf="displayKpiUsers">
+    <p-dialog header="Assigned Users" [(visible)]="displayKpiUsers" [responsive]="true" showEffect="fade" [modal]="true">
+        <div>
+            <span>Alerts would be sent to the following users on KPI deviation:</span><br />
+        </div>
+        <div class="ui-g ui-fluid verticalScroll" *ngIf="selectedUsers">
+            <ul>
+                <li *ngFor="let user of selectedUsers">{{user.firstName}}-{{user.lastName}}</li>
+            </ul>
+        </div>
+        <div class="ui-g-12">
+            <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeUserDialog()">
+                {{sharedLabels.BUTTONS.OK}}
+            </button>
+        </div>
+    </p-dialog>
+</div>
+<div *ngIf="displayNoKPIToAdd">
+    <p-dialog header="Information" [(visible)]="displayNoKPIToAdd" [responsive]="true" showEffect="fade" [modal]="true" [width]="200" [height]="100">
+        <div>
+            <span>No KPIs to add!!!</span><br />
+        </div>
+        <div class="ui-g-12">
+            <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="displayNoKPIToAddDialog()">
+                {{sharedLabels.BUTTONS.OK}}
+            </button>
+        </div>
+    </p-dialog>
+</div>
+
+<style>
+
+</style>

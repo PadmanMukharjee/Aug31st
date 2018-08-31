@@ -1,0 +1,61 @@
+<p-growl [(value)]="growlMsgs"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.PAGE_TITLE}}</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="container">
+                <div class="row">                    
+                    <p-table [value]="attributes" [paginator]="true" [rows]="rowsIn" (onPage)="onTablePageChange($event)" selectionMode="single" [scrollable]="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Field Name</th>
+                                <th>Field Value</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-attribute>
+                            <tr>
+                                <td>
+                                    <span *ngIf="canEdit" class="fa fa-pencil" (click)="onAttributeEdit(attribute)"></span>
+                                    {{attribute.attributeName}}
+                                </td>
+                                <td>
+                                    {{attribute.attributeValue}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <tr>
+                                <td class="table-style"> <b>{{paginationCount}}</b></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>                                      
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="displayDialog" class="admin dialog-height">
+        <p-dialog header="Configuration" [(visible)]="displayDialog" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true" [width]="400" (onHide)="closePopUp()">
+            <div class="ui-g-12">
+                <div class="ui-g-7">
+                    {{selectedAttribute.attributeName}}
+                </div>
+                <div class="ui-g-5"  *ngIf="controlType== labels.CONTROL_TYPES.TEXTBOX">
+                    <input id="tbConfigValue" type="number" [(ngModel)]="updatedConfigValue" />
+                </div>
+            </div>
+            <div class="ui-g-12 padding-l-15" *ngIf ="showProjectedCashInformation"> <p><b>{{labels.INFORMATION}}</b> {{labels.INFO_MESSAGE}} </p></div>
+            <div class="ui-g-12">
+                <p-messages [(value)]="msgs"></p-messages>
+            </div>
+            <div class="ui-g-12">
+                <button type="button" class="btn btn-dark btn-xs btn-round pull-right" (click)="closePopUp()" [disabled]="disableCancel">{{labels.CANCEL}}</button>
+                <button type="submit" class="btn btn-dark btn-xs btn-round pull-right" (click)="updateAttributeValue()" [disabled]="disableSave">{{labels.SAVE}}</button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

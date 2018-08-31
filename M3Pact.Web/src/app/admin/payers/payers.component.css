@@ -1,0 +1,12 @@
+﻿.text_underline{
+    text-decoration:underline;
+}
+@media screen and (max-width: 640px) {
+    .right_col {
+        padding-top: 180px !important;
+    }
+
+    :host >>> .ui-table .ui-table-thead > tr > th, :host >>> .ui-table .ui-table-tbody > tr > td, :host >>> .ui-table .ui-table-tfoot > tr > td {
+        width: 200px !important;
+    }
+}

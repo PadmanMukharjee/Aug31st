@@ -1,0 +1,38 @@
+﻿>>> .ui-table .ui-table-thead > tr > .kpi_widthh_res, >>> .ui-table .ui-table-tbody > tr > .kpi_widthh_res, >>> .ui-table .ui-table-tfoot > tr > .kpi_widthh_res {
+    width: 200px !important;
+}
+
+.admin .ui-dialog .ui-dialog-content {
+    overflow-y: scroll !important;
+}
+
+:host >>> .ui-dropdown .ui-dropdown-trigger {
+    border-right: 1px solid #ccc !important;
+}
+
+@media screen and (min-width:1024px) {
+    >>> .ui-table-wrapper {
+        overflow: initial !important;
+    }
+}
+
+:host >>> .ui-multiselect-panel .ui-multiselect-items-wrapper {
+    height: 120px;
+}
+
+@media screen and (max-width: 640px) {
+    :host >>> .ui-table .ui-table-thead > tr > th, :host >>> .ui-table .ui-table-tbody > tr > td {
+        width: 200px;
+    }
+}
+
+.padding-l-0 {
+    padding-left : 0px !important;
+}
+.p_relative{
+    position:relative;
+}
+.p_absolute{
+    position:absolute;
+    right:10px;
+}

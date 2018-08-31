@@ -1,0 +1,31 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    height: auto;
+}
+
+.titleSize {
+    font-size: 22px;
+}
+
+a{
+    color:black;
+}
+
+.height {   
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+li, .task-with-0-clients {
+    cursor: pointer;
+}
+
+.task-name {
+    position: relative;
+    left: 5px;
+    top: -2px
+}
+
+

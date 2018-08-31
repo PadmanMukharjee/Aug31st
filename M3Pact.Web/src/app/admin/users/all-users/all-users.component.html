@@ -1,0 +1,93 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.ALL_USER}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p-table [value]="users" [paginator]="true" [rows]="rowsIn" (onFilter)="onTableFilter($event)" (onPage)="onTablePageChange($event)" selectionMode="single" class="word-Wrap all-users_table" #table>
+                    <ng-template pTemplate="caption">
+                        <div class="text-left">
+                            <p-multiSelect selectedItemsLabel="{{labels.COLUMN_FILTER_TEXT}}" [options]="tableColumns" optionLabel="columnText" (onChange)="changeStatus()" [(ngModel)]="selectedColumns"></p-multiSelect>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="w-120"> {{sharedLabels.ID}} </th>
+                            <th class="w-120" *ngIf="displaycolumns.firstName" pSortableColumn="firstName">{{sharedLabels.FIRSTNAME}}<p-sortIcon field="firstName"></p-sortIcon></th>
+                            <th class="w-120" pSortableColumn="lastName">{{sharedLabels.LASTNAME}}<p-sortIcon field="lastName"></p-sortIcon></th>
+                            <th class="w-250" *ngIf="displaycolumns.email" pSortableColumn="email">{{sharedLabels.EMAIL}}<p-sortIcon field="email"></p-sortIcon></th>
+                            <th *ngFor="let col of cols" [pSortableColumn]="col.field" [style.width]="col.field == 'site'||col.field == 'title' ? '200px' : '120px'">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                            </th>
+                            <th class="w-120" *ngIf="displaycolumns.Clients" pSortableColumn="selectedClientsCount">{{sharedLabels.SELECTEDCLIENTS}}<p-sortIcon field="selectedClientsCount"></p-sortIcon></th>
+                        </tr>
+                        <tr>
+                            <th class="w-120" *ngFor="let col of filteredCols">
+                                <input pInputText type="text" (input)="table.filter($event.target.value, col.field, 'contains')" class="filterTextbox">
+                            </th>
+                            <th *ngIf="displaycolumns.Clients"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-user>
+                        <tr>
+                            <td> <span class="fa fa-pencil" (click)="onRowSelect(user)">&nbsp;</span>{{user.userId}}</td>
+                            <td *ngIf="displaycolumns.firstName">{{user.firstName}}</td>
+                            <td>{{user.lastName}}</td>
+                            <td *ngIf="displaycolumns.email">{{user.email}}</td>
+                            <td *ngFor="let col of cols" [style.width]="col.field == 'site'||col.field == 'title' ? '300px' : '120px'">
+                                <span *ngIf="displaycolumns[col.field]"> {{user[col.field]}}</span>
+                            </td>
+                            <td *ngIf="displaycolumns.Clients">
+                                <span *ngIf="user.selectedClientsCount === 0">{{user.selectedClientsCount}}</span>
+                                <span *ngIf="user.selectedClientsCount !== 0" (click)="onSelectClientsColumnSelect(user)" class="text_underline">{{user.selectedClientsCount}}</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td *ngIf="filteredUserData==undefined" [attr.colspan]="selectedColumns.length + 2">
+                                Loading...
+                            </td>
+                            <td *ngIf="filteredUserData!=undefined" [attr.colspan]="selectedColumns.length + 2">
+                                {{sharedLabels.NO_DATA}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="paginatorright">
+                        <tr>
+                            <td class="table-style"> <b>{{paginationCount}}</b></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="displayDialog">
+        <p-dialog header="Clients List" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+            <div>
+                <span>{{user.firstName}} {{user.lastName}} is {{user.role}} for below clients</span>
+            </div>
+            <div class="ui-g ui-fluid verticalScroll" *ngIf="selectedClients">
+                <ul>
+                    <li *ngFor="let selectedClient of selectedClients">{{selectedClient.clientCode}} - {{selectedClient.name}}</li>
+                </ul>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeDialog()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

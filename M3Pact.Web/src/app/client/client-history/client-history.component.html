@@ -1,0 +1,90 @@
+﻿<p-growl [(value)]="msgs"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3> {{ clientName }} {{ labels.HISTORY }} </h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row mb-5">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>{{ labels.DATE_RANGE }}</h4>
+                    <span class="col-lg-6">
+                        <input type="text" name="daterangeInput" daterangepicker (selected)="selectedDate($event, daterange)" />
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-5 margin-20">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
+                <h4 class="font-black col-lg-4 col-md-12 col-sm-12 col-xs-12"> {{ labels.CREATED_DATE + clientCreatedDate }}</h4>
+                <h4 class="font-black col-lg-4 col-md-12 col-sm-12 col-xs-12"> {{ labels.CREATED_BY + clientCreatedBy }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-xs-12 table_responsive_style">
+                    <p-table #dt [value]="clientHistoryData" [paginator]="true" [rows]="rowsIn" (onFilter)="onTableFilter($event)" (onPage)="onTablePageChange($event)" selectionMode="single">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="modifiedOrAddedBy" class="vac_width_200"> {{ labels.MODIFIED_ADDED_BY }} <p-sortIcon field="modifiedOrAddedBy"></p-sortIcon></th>
+                                <th pSortableColumn="modifiedOrAddedDate" class="vac_width_200"> {{ labels.MODIFIED_ADDED_DATE }} <p-sortIcon field="modifiedOrAddedDate"></p-sortIcon></th>
+                                <th pSortableColumn="updatedOrAddedProperty" class="vac_width_200"> {{ labels.UPDATED_ADDED_PROPERTY }}  <p-sortIcon field="updatedOrAddedProperty"></p-sortIcon></th>
+                                <th pSortableColumn="action" class="vac_width_200"> {{ labels.ACTION }}  <p-sortIcon field="action"></p-sortIcon></th>
+                                <th pSortableColumn="oldValue" class="vac_width_200"> {{ labels.OLD_VALUE  }} <p-sortIcon field="oldValue"></p-sortIcon> </th>
+                                <th pSortableColumn="newValue" class="vac_width_200"> {{ labels.NEW_VALUE }} <p-sortIcon field="newValue"></p-sortIcon></th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'modifiedOrAddedBy' , 'contains')" class="filterTextbox" [(ngModel)]="modifiedOrAddedBy">
+                                </th>
+                                <th></th>
+                                <th class="dropdownStyle">
+                                    <p-multiSelect [(ngModel)]="selectedMSelectValue" appendTo="body" defaultLabel="{{labels.ALL_PROPERTIES}}" [options]="columnPropertyOptions" (onChange)="dt.filter($event.value, 'updatedOrAddedProperty' , 'in')"></p-multiSelect>
+                                </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'action' , 'contains')" class="filterTextbox" [(ngModel)]="action">
+                                </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'oldValue' , 'contains')" class="filterTextbox" [(ngModel)]="oldValue">
+                                </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'newValue' , 'contains')" class="filterTextbox" [(ngModel)]="newValue">
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-history>
+                            <tr class="wrap-word">
+                                <td>{{history.modifiedOrAddedBy}}</td>
+                                <td>{{history.modifiedOrAddedDate}}</td>
+                                <td>{{history.updatedOrAddedProperty}}</td>
+                                <td>{{history.action}}</td>
+                                <td>{{history.oldValue}}</td>
+                                <td>{{history.newValue}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td *ngIf="filteredClientHistoryData==undefined" [attr.colspan]="6"> 
+                                    Loading...
+                                </td>
+                                <td *ngIf="filteredClientHistoryData!=undefined" [attr.colspan]="6">
+                                    {{labels.NO_DATA}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <tr>
+                                <td class="table-style"> <b>{{paginationCount}}</b></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

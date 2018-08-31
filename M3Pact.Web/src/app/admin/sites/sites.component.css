@@ -1,0 +1,14 @@
+﻿
+@media screen and (max-width: 640px) {
+    >>> .ui-dialog {
+        width: 340px !important;
+    }
+
+    .right_col {
+        padding-top: 180px !important;
+    }
+ :host >>> .ui-table .ui-table-thead > tr > th, :host >>> .ui-table .ui-table-tbody > tr > td, :host >>> .ui-table .ui-table-tfoot > tr > td {
+    width: 150px !important;
+}
+
+}

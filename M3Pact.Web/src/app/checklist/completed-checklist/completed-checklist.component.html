@@ -1,0 +1,102 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{pageTitle}}</h3>
+        </div>
+    </div>
+    <div>
+        <span class="btn-group btn-toggle pad-top-10 monthlyweeklyswitch float_button">
+            <button id="weekly" class="btn btn-sm btn-primary active checkListBtn" (click)="initWeeklyChecklist()">{{labels.WEEKLY}}</button>
+            <button id="monthly" class="btn btn-sm btn-default" (click)="initMonthlyChecklist()">{{labels.MONTHLY}}</button>
+        </span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_title">
+            <div class="row mb-5">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="isWeekly">
+                    <h4>{{checklistTitle}}</h4>
+                    <span class="col-lg-6">
+                        <input type="text" name="daterangeInput" daterangepicker (selected)="selectedDate($event, daterange)" />
+                        <span *ngIf="showErrorMessage" class="error_msg">{{errorMessage}}</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!isWeekly">
+                    <h4>{{checklistTitle}}</h4>
+                    <span class="date_span"> {{labels.FROM}} <span class="date_picker_span"><input [(ngModel)]="fromMonth" name="monthPicker" (onChange)="onFromDateChange()" [dpDayPicker]="datePickerConfig" mode="month" [theme]="theme"></span></span>
+                    <span class="date_span">{{labels.TO}} <span class="date_picker_span"><input [(ngModel)]="toMonth" name="monthPicker" (onChange)="onEndDateChange()" [dpDayPicker]="datePickerConfig" mode="month" [theme]="theme"></span></span>
+                    <span *ngIf="showErrorMessage" class="error_msg">{{errorMessage}}</span>
+
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!showCompletedChecklists" class="text-center">
+            <h4>{{noChecklistMessage}}</h4>
+        </div>
+        <p-table *ngIf="showCompletedChecklists" [value]="checklists" dataKey="RowSelector">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th rowspan="2" class="question_responsive question_width">{{labels.QUESTION}}</th>
+                    <th class="text-center" colspan="1" *ngFor="let col of columns">
+                        <span *ngIf="col.checklistStatus == 'C' && canEdit">
+                            <a attr.data-tooltip="{{labels.OPEN}}" (click)="openChecklist(col.header)" class="btn btn-sm btn-round white"><i class="fa fa-external-link f-size-16" aria-hidden="true"></i></a>
+                        </span>
+                        <span *ngIf="col.checklistStatus == 'P'">{{labels.PENDING}}</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center" *ngFor="let col of columns">{{col.header}}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded">
+                <tr class="ui-widget-header" *ngIf="rowGroupMetadata[rowData.ChecklistName].index === rowIndex">
+                    <td [attr.colspan]="columns.length + 1">
+                        <span><b>{{rowData.ChecklistName}}</b></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span [pRowToggler]="rowData">
+                            <i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"></i>
+                            <span>{{rowData.QuestionText}}</span>
+                        </span>
+                    </td>
+                    <td class="text-center" *ngFor="let col of columns">
+                        <span *ngIf="rowData[col.field]">{{rowData[col.field].SubmittedResponse}}</span>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
+                <tr>
+                    <td [attr.colspan]="columns.length + 1">
+                        <table border="1" class="mini_table">
+                            <tr>
+                                <th class="date_width">{{labels.EFFECTIVE_DATE}}</th>
+                                <th class="answer_width">{{labels.ANSWER}}</th>
+                                <th class="explanation_width">{{labels.EXPLANATION}}</th>
+                            </tr>
+                            <ng-container *ngFor="let col of columns">
+                                <tr *ngIf="rowData[col.field] && rowData[col.field].SubmittedResponse && rowData[col.field].SubmittedResponse != '--'">
+                                    <td>{{col.header}}</td>
+                                    <td>{{rowData[col.field].SubmittedResponse}}</td>
+                                    <td *ngIf="rowData[col.field].FreeformResponse != ''">{{rowData[col.field].FreeformResponse}}</td>
+                                    <td *ngIf="rowData[col.field].FreeformResponse == ''">{{labels.NO_EXPLANATION}}</td>
+                                </tr>
+                            </ng-container>
+                        </table>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<p-dialog header="Confirm" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="400">
+    <label class="text-left">{{dialogMessage}}</label>
+    <div class="pull-right">
+        <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="openCompletedChecklist()">{{labels.YES}}</button>
+        <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="closeDialog()">{{labels.NO}}</button>
+    </div>
+</p-dialog>

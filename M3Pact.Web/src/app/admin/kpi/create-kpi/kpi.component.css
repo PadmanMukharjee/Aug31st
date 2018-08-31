@@ -1,0 +1,19 @@
+﻿@media screen and (max-width: 640px) {
+    :host >>> .ui-dropdown {
+        width: 100% !important;
+    }
+
+    input {
+        width: 100%;
+    }
+
+}
+.alignInput_res input {
+    width: auto;
+}
+.pl-10{
+    padding-left:10px;
+}
+.text-kpi-allign{
+    text-align:right !important;
+}

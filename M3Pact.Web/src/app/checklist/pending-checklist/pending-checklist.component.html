@@ -1,0 +1,150 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="right_col">
+    <div class="page-title row">
+        <div class="title_left col-xs-12">
+            <h2 class="titleSize">{{pageTitle}}</h2>
+        </div>
+        <div class="title_right monthlyweeklyswitch col-xs-12">
+            <span *ngIf="showWeekly" class="btn-group btn-toggle">
+                <button class="btn btn-sm btn-default active " (click)="switchToWeekly($event)">Weekly</button>
+                <button class="btn btn-sm btn-default" (click)="switchToMonthly($event)">Monthly</button>
+            </span>
+            <span *ngIf="showMonthly" class="btn-group btn-toggle">
+                <button class="btn btn-sm btn-default " (click)="switchToWeekly($event)">Weekly</button>
+                <button class="btn btn-sm btn-default active " (click)="switchToMonthly($event)">Monthly</button>
+            </span>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="container">
+                <div class="row">
+                    <div *ngIf="showWeekly" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <div class="title_left checklistTitle">
+                                            <h4 class="pendingCheckList"> Weekly Checklist <span *ngIf="selectedDate&& selectedDate <= today" class="pendingCheckList">  - {{selectedDate}}</span> </h4>                                           
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <p-dropdown *ngIf="pendingWeeklyChecklists.length>0" class="pull-right" [options]="pendingWeeklyChecklists" [(ngModel)]="selectedDate"></p-dropdown>
+                                    </div>-->
+                                </div>
+                                <hr />                                
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div *ngIf="clientChecklistResponses.length>0">
+                                                <div *ngFor="let cr of clientChecklistResponses;let i=index" class="questions" #radio>
+                                                    <div>
+                                                        <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+                                                            <label class="question">
+                                                                {{cr.QuestionText}}
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+
+                                                            <label>
+                                                                <input type="radio" id="WeeklyReponse{{i}}" name="WeeklyReponse{{i}}" [value]="true" [(ngModel)]="cr.ActualResponse" 
+                                                                       (change)="onRadioButtonSelect(i,'weekly')" />Yes
+                                                            </label>
+                                                            &nbsp;
+                                                            <label>
+                                                                <input type="radio" id="WeeklyReponse{{i}}" name="WeeklyReponse{{i}}" [value]="false" [(ngModel)]="cr.ActualResponse" 
+                                                                       (change)="onRadioButtonSelect(i,'weekly')" />No
+                                                            </label>
+
+                                                            <label *ngIf="checklistResponseNotSelected[i] && checklistType==='weekly'" class="error-message_color">{{labels.RESPONSE_ERROR}}</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                                        <input *ngIf="cr.RequireFreeform" id="WeeklyFreeForm{{i}}" class="explain" name="explain" type="text" placeholder="Explain" pInputText [(ngModel)]="cr.ActualFreeForm" (keyup)="onKeyUp(i)" maxlength="100" >
+                                                        <label *ngIf="cr.RequireFreeform && checklistFreeFormNotFilled[i] && checklistType==='weekly'" class="error-message_color">{{labels.FREEFORM_ERROR}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="pendingWeeklyChecklists.length==0">
+                                                <b> {{labels.NO_WEEKLY_PENDING}} </b>
+                                            </div>
+                                            <div *ngIf="pendingWeeklyChecklists.length>0 && selectedDate>today ">
+                                                <b>{{weeklyChecklistEffective}}</b>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div *ngIf="pendingWeeklyChecklists.length>0 && clientChecklistResponses.length>0 " class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="pull-right">
+                                                <button class="btn btn-dark btn-round btn-sm" type="button" (click)="saveOrSubmitWeeklyChecklistResponse(false)">{{labels.BTN_SAVE}}</button>
+                                                <button class="btn btn-dark btn-round btn-sm" type="submit" (click)="submitChecklistResponse('weekly')">{{labels.BTN_SUBMIT}}</button>
+                                            </div>
+                                        </div>
+                                    </div>                               
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="showMonthly" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+                                    <div class="title_left">
+                                        <h3 class="pendingCheckList"> Monthly Checklist<span *ngIf="selectedMonth && selectedMonth <= today" class="pendingCheckList">  - {{selectedMonthLabel}}</span>   </h3>
+                                    </div>
+                                </div>
+                                <!--<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                    <p-dropdown *ngIf="pendingMonthlyChecklists.length>0" class="pull-right" [options]="pendingMonthlyChecklists" [(ngModel)]="selectedMonth"></p-dropdown>
+                                </div>-->
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div *ngIf="monthlyChecklistResponses.length>0">
+                                        <div *ngFor="let mr of monthlyChecklistResponses;let i=index" class="questions">
+                                            <div>
+                                                <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12">
+                                                    <label class="question">
+                                                        {{mr.QuestionText}}
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                                                    <label><input type="radio" name="MonthlyResponse{{i}}" [value]="true" [(ngModel)]="mr.ActualResponse" (change)="onRadioButtonSelect(i,'monthly')" />Yes</label>
+                                                    &nbsp;
+                                                    <label><input type="radio" name="MonthlyResponse{{i}}" [value]="false" [(ngModel)]="mr.ActualResponse" (change)="onRadioButtonSelect(i,'monthly')" />No</label>
+                                                    <label *ngIf="checklistResponseNotSelected[i]&& checklistType==='monthly'" class="error-message_color">{{labels.RESPONSE_ERROR}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                                <input *ngIf="mr.RequireFreeform" id="MonthlyFreeForm{{i}}" class="explain" name="explain" type="text" placeholder="Explain" pInputText [(ngModel)]="mr.ActualFreeForm" (keyup)="onKeyUp(i)" maxlength="100">
+                                                <label *ngIf="mr.RequireFreeform && checklistFreeFormNotFilled[i]&& checklistType==='monthly'" class="error-message_color">{{labels.FREEFORM_ERROR}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="pendingMonthlyChecklists.length==0">
+                                        <b>   {{labels.NO_MONTHLY_PENDING}} </b>
+                                    </div>
+                                    <div *ngIf="pendingMonthlyChecklists.length>0 && selectedMonth > today ">
+                                        <b>{{monthlyChecklistEffective}}</b>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <hr />
+                            <div *ngIf="pendingMonthlyChecklists.length>0 && monthlyChecklistResponses.length>0" class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="pull-right">
+                                        <button class="btn btn-dark btn-round btn-sm" type="submit" (click)="saveOrSubmitMonthlyChecklistResponse(false)">{{labels.BTN_SAVE}}</button>
+                                        <button class="btn btn-dark btn-round btn-sm" type="button" (click)="submitChecklistResponse('monthly')">{{labels.BTN_SUBMIT}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

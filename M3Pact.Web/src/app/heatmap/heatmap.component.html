@@ -1,0 +1,138 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.HEAT_MAP}}</h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <form class="form-horizontal form-label-left " #filterForm="ngForm" (ngSubmit)="applyFilterToGetClientsHeatMap()">
+
+            <div class="row">
+                <div class="form-group col-lg-5 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label col-lg-4 col-md-7 col-sm-6 col-xs-12"><b>System</b></label>
+                    <div class="col-lg-8 col-md-5 col-sm-6 col-xs-12">
+                        <p-dropdown [options]="systemOptions" placeholder="Select" optionLabel="systemName" name="System" [disabled]="disableSystem"
+                                    filter="true" autoWidth="false" required="true" [(ngModel)]="selectedSystem" (onChange)="onChangeSystem()" [style]="{'width':'220px'}"></p-dropdown>
+                    </div>
+                </div>
+                <div class="form-group col-lg-5 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label col-lg-4 col-md-7 col-sm-6 col-xs-12"><b>Business Unit</b></label>
+                    <div class="col-lg-8 col-md-5 col-sm-6 col-xs-12">
+                        <p-dropdown [options]="businessUnitsOptions" placeholder="Select" optionLabel="businessUnitName" name="BusinessUnit" [disabled]="disableBusinessUnit"
+                                    filter="true" autoWidth="false" required="true" [(ngModel)]="selectedBusinessUnit" (onChange)="onChangeBusinessUnit()" [style]="{'width':'220px'}"></p-dropdown>
+</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-5 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label col-lg-4 col-md-7 col-sm-6 col-xs-12"><b>Employee</b></label>
+                    <div class="col-lg-8 col-md-5 col-sm-6 col-xs-12">
+                        <p-dropdown [options]="employeeOptions" placeholder="Select" optionLabel="fullName" name="Employee" [disabled]="disableEmployee"
+                                    filter="true" autoWidth="false" required="true" [(ngModel)]="selectedEmployee" (onChange)="onChangeEmployee()" [style]="{'width':'220px'}"></p-dropdown>
+                    </div>
+                </div>
+                <div class="form-group col-lg-5 col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label col-lg-4 col-md-7 col-sm-6 col-xs-12"><b>Specialty</b></label>
+                    <div class="col-lg-8 col-md-5 col-sm-6 col-xs-12">
+                        <p-dropdown [options]="specialityOptions" placeholder="Select" optionLabel="specialityName" name="Speciality" [disabled]="disableSpeciality"
+                                    filter="true" autoWidth="false" required="true" [(ngModel)]="selectedSpeciality" (onChange)="onChangeSpeciality()" [style]="{'width':'220px'}"></p-dropdown>
+                    </div>
+                </div>
+                <div class="form-group col-lg-2 col-md-3 col-sm-12 col-xs-12 responsive_style text-right">
+                    <button type="button" class="btn btn-dark btn-sm btn-round text-right" (click)="reset()">Reset</button>
+                    <button type="submit" class="btn btn-dark btn-sm btn-round text-right">Apply</button>
+                </div>
+            </div>
+        </form>
+        <p-table #heatmapGrid *ngIf="showHeatMapGrid" [value]="clientHeatMaps" [paginator]="true" [rows]="15" selectionMode="single">
+            <ng-template pTemplate="header">
+                <tr class="w_color">
+                    <th rowspan="3"  class="responsive_width w-6">
+                        {{labels.SITE}}
+                    </th>
+                    <th rowspan="3"  class="client_responsive_width w-20">
+                        {{labels.CLIENT}}
+                    </th>
+                    <th rowspan="3" class="responsive_width w-10">
+                        {{labels.LTM_DEPOSITS}}
+                    </th>
+                    <th colspan="6"  class="text-center rowPadding responsive_width_nested w_color">
+                        {{labels.METRICS}}
+                    </th>
+                    <th colspan="6"  class="text-center rowPadding responsive_width_nested w_color th_border">
+                        <span  class="risk_factors_position risk-factors">{{labels.RISK_FACTORS}}</span>
+                    </th>
+                    <th *ngIf="checklistColumnCount == 2" colspan="2"  class="checklist_td_responsive w-12 w_color">
+                    </th>
+                    <th *ngIf="checklistColumnCount == 1" colspan="1"  class="singlechecklist_td_responsive w-7 w_color">
+                    </th>
+                    <th rowspan="3"  class="responsive_width w-6">
+                        <div><span>{{labels.RISK}}</span></div>
+                    </th>
+                    <th rowspan="3"  class="rotate_header responsive_width w-4">
+                        <div><span>{{labels.TREND}}</span></div>
+                    </th>
+                </tr>
+                <tr>
+                    <th rowspan="2" class="rotate" *ngFor="let col of metricRiskColumns">
+                        <div><span>{{col.header}}</span></div>
+                    </th>
+                    <th [attr.colspan]="checklistColumnCount" class="text-center responsive_width">
+                        {{labels.CHECKLIST_OF}}
+                    </th>
+                </tr>
+                <tr class="height_30">
+                    <th *ngIf="weeklyRiskFactorCount != 0" class="text-center">{{labels.WEEK}}</th>
+                    <th *ngIf="monthlyRiskFactorCount != 0" class="text-center">{{labels.MONTH}}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+                <tr>
+                    <td  class="responsive_width_td">{{rowData.SiteAcronym}}</td>
+                    <td  class="truncate responsive_width_td">
+                        <span [escape]="false" tooltipPosition="top" pTooltip="<ul><li>{{labels.SPECIALTY}} : {{rowData.Specialty}}</li><li>{{labels.SYSTEM}} : {{rowData.SystemCode}}</li><li>{{labels.BUSINESS_UNIT}} : {{rowData.BusinessUnitCode}}</li><li>{{labels.CLIENT_CODE}} : {{rowData.ClientCode}}</li><li>{{labels.CLIENT_NAME}} : {{rowData.ClientName}}</li></ul>">
+                            {{rowData.ClientName}}
+                        </span>
+                    </td>
+                    <td class="responsive_width_td">
+                        <span *ngIf="rowData.LTM !== null">{{rowData.LTM | currency}}</span>
+                        <span *ngIf="rowData.LTM === null">{{labels.NOT_APPLICABLE}}</span>
+                    </td>
+                    <ng-container *ngFor="let col of metricRiskColumns">
+                        <td *ngIf="col.header != 'Score' && rowData[col.field] && col.type === 'Metric'" class="responsive_width_nested_td text-center"  [attr.title]="rowData[col.field].ActualValue !== null ? 'Actual Value: ' + rowData[col.field].ActualValue + ' &#013;Alert Level: ' + rowData[col.field].AlertLevel : ''" [ngClass]="rowData[col.field].Score != null ? (rowData[col.field].Score == 20 ? 'redMark' : 'greenMark') : ''">
+                            <span *ngIf="rowData[col.field].Score == null">{{labels.NOT_APPLICABLE}}</span>
+                        </td>
+                        <td *ngIf="col.header != 'Score' && rowData[col.field] && col.type !== 'Metric'" class="responsive_width_nested_td text-center" [attr.title]="rowData[col.field].Score" [ngClass]="rowData[col.field].Score != null ? (rowData[col.field].Score == 20 ? 'redMark' : 'greenMark') : ''">
+                            <span *ngIf="rowData[col.field].Score == null">{{labels.NOT_APPLICABLE}}</span>
+                        </td>
+                        <td *ngIf="col.header != 'Score' && !rowData[col.field]" class="responsive_width_nested_td" attr.title="{{labels.NOT_APPLICABLE}}">{{labels.NOT_APPLICABLE}}</td>
+                        <td *ngIf="col.header == 'Score' && rowData[col.field] != null" attr.title="{{rowData[col.field]}}" class="text-center center_harvey responsive_width_nested_td">
+                            <span *ngIf="rowData[col.field] == 0"><i class="fa fa-circle green" aria-hidden="true"></i></span>
+                            <div *ngIf="rowData[col.field] == 20" class='pie'>
+                                <div class="circle circleQuater"></div>
+                            </div>
+                            <div *ngIf="rowData[col.field] == 40" class="fa fa-adjust red"></div>
+                            <div *ngIf="rowData[col.field] == 60" class='pie'>
+                                <div class="circle circleThreeFouth"></div>
+                            </div>
+                            <span *ngIf="rowData[col.field] > 60"><i class="fa fa-circle red" aria-hidden="true"></i></span>
+                        </td>
+                        <td *ngIf="col.header == 'Score' && rowData[col.field] == null" class="text-center responsive_width_nested_td">
+                            <span>{{labels.NOT_APPLICABLE}}</span>
+                        </td>
+                    </ng-container>
+                    <td  *ngIf="weeklyRiskFactorCount != 0" class="text-center responsive_width_td">{{rowData.ChecklistWeeklyDate}}</td>
+                    <td  *ngIf="monthlyRiskFactorCount != 0" class="text-center responsive_width_td">{{rowData.ChecklistMonthlyDate}}</td>
+                    <td  class="responsive_width_td" *ngIf="rowData.RiskPercentClass != ''" [ngClass]="rowData.RiskPercentClass" attr.title="{{rowData.Risk}}"></td>
+                    <td  class="responsive_width_td" *ngIf="rowData.RiskPercentClass == ''">{{labels.NOT_APPLICABLE}}</td>
+                    <td  class="text-center height_33 responsive_width_td">
+                        <span *ngIf="rowData.Trend == ''">{{labels.NOT_APPLICABLE}}</span>
+                        <i *ngIf="rowData.Trend != ''" class="fa {{rowData.Trend}}" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

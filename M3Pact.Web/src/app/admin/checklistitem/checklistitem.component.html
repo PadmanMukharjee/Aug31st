@@ -1,0 +1,267 @@
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.CREATE_EDIT_CHECKLIST_ITEM}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+        <div class="x_panel">
+            <h4 class="checkListItemTittle">{{ isEditPage ? labels.Edit_CHECKLIST_ITEM : labels.NEW_CHECKLIST_ITEM}}</h4>
+            <form [formGroup]="questionForm" (ngSubmit)="onChecklistItemSubmit()" class="form-horizontal">
+                <div class="x_panel">
+                    <br />
+                    <div class="row ">
+                        <div class="form-group res_width">
+                            <label class="col-xs-5 col-sm-3 col-md-3 col-lg-2 control-label no_padding res_width res_left">
+                                <span class="required">*</span>
+                                {{labels.CHALLENGE_QUESTION}}
+                            </label>
+                            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 no_padding">
+                                <input type="text" class="form-control" formControlName="question" [autofocus]="true" #qtn (keyup)="removeValidationMessage()"/>
+                                <div class="error-validation-message" *ngIf="required('question')">
+                                    {{labels.QUESTION_REQUIRED}}
+                                </div>
+                                <span *ngIf="!required('question') && ifQuestionExists" class="error-validation-message">{{validationConstants.QUESTION_EXITS}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4 no_padding">
+                            <label class="col-xs-5 col-sm-4 col-md-6 expected-response-label res_width">
+                                {{labels.EXPECTED_RESPONSE}}
+                            </label>
+                            <div class="col-xs-6 col-sm-4 col-md-6 no_padding">
+                                <label for="exp-res-y" class="radio-inline">
+                                    <input type="radio" id="exp-res-y" formControlName="expectedResponse" [value]=true /> {{labels.YES}}
+                                </label>
+                                <label for="exp-res-n" class="radio-inline">
+                                    <input type="radio" id="exp-res-n" formControlName="expectedResponse" [value]=false /> {{labels.NO}}
+                                </label>
+                                <div class="error-validation-message" *ngIf="required('expectedResponse')">
+                                    {{labels.EXPECTED_RESPONSE_REQUIRED}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-1">
+                            <label for="kpi-y" class="checkbox-inline inline-height-checkbox">
+                                <input type="checkbox" id="kpi-y" formControlName="kpi" [value]=true />{{labels.KPI}}
+                            </label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label for="free-form-y" class="checkbox-inline inline-height-checkbox">
+                                <input type="checkbox" id="free-form-y" formControlName="freeform" [value]=true /> {{labels.REQUIRE_FREEFORM}}
+                            </label>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-5">
+                            <label class="col-sm-3 col-md-12 col-lg-5 no_padding control-label responsivenessAllign">
+                                <span class="required">*</span>
+                                {{labels.CHECKLIST_TYPE}}
+                            </label>
+                            <div class="col-md-7 no_padding">
+                                <p-dropdown [options]="checklistTypeOptions" formControlName="checklistType" [disabled]="isEditPage" placeholder="Select a Checklist type" (onChange)="onChecklistTypeSelect()">
+                                </p-dropdown>
+                                <div class="error-validation-message" *ngIf="required('checklistType')">
+                                    {{labels.CHECKLIST_TYPE_REQUIRED}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div [ngClass]="{hide:!parseBoolean(questionForm.get('kpi').value)}" class="col-lg-offset-2">
+                        <div class="row">
+                            <div class="form-group col-xs-6 col-sm-3 col-md-6 col-lg-2 text-left res_width checkbox-margin">
+                                <label for="unive-y" class="checkbox-inline inline-height-checkbox">
+                                    <input type="checkbox" id="unive-y" formControlName="universal" [value]=true /> {{labels.UNIVERSAL}}
+                                </label>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-9 col-md-6 col-lg-8">
+                                <label class="col-xs-12 col-sm-4 col-md-6 col-lg-4 control-label">
+                                    <span class="required">*</span>
+                                    {{kpiLabels.KPI_DESCRIPTION}}
+                                </label>
+                                <div class="col-xs-6 col-sm-8 col-md-9 col-lg-5 res_width">
+                                    <input type="text" class="form-control res_width" maxlength="25" formControlName="kpiDescription" #kpiDescription (keyup)="removeKPIDescriptionValidationMessage()" />
+                                    <div class="error-validation-message res_width" *ngIf="required('kpiDescription')">
+                                        {{labels.KPI_DESCRIPTION_REQUIRED}}
+                                    </div>
+                                    <span *ngIf="!required('kpiDescription') &&isKPIDescription" class="error-validation-message">{{validationConstants.KPIDESCRIPTION_EXISTS}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-6 col-sm-4 col-md-6 col-lg-2 text-left">
+                                <label for="sendAlert-y" class="checkbox-inline inline-height-checkbox">
+                                    <input type="checkbox" id="sendAlert-y" formControlName="sendAlert" [value]=true (change)="sendToSelection()" />{{kpiLabels.SENDALERTS}}
+                                </label>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-8" [ngClass]="{hide:!parseBoolean(questionForm.get('sendAlert').value)}">
+                                <label class="col-xs-5 col-sm-3 col-md-6 col-lg-4">
+                                    <span class="required">*</span>
+                                    {{kpiLabels.SEND_TO}}
+                                </label>
+                                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-7 ">
+                                    <label for="rm-res-y">
+                                        <input type="checkbox" id="rm-res-y" formControlName="relationshipManager" [value]=false (change)="sendToSelection()" /> {{kpiLabels.RELATIONSHIP_MANAGER}}
+                                    </label>&nbsp;
+                                    <label for="bm-res-y">
+                                        <input type="checkbox" id="bm-res-y" formControlName="billingManager" [value]=false (change)="sendToSelection()"/> {{kpiLabels.BILLING_MANAGER}}
+                                    </label>
+                                    <span class="error-validation-message">{{sendToErrorMsg}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" [ngClass]="{hide:!parseBoolean(questionForm.get('sendAlert').value)}">
+                            <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-2 text-left" >
+                                <label for="escalte-y" class="checkbox-inline inline-height-checkbox">
+                                    <input type="checkbox" id="escalte-y" formControlName="escalateAlert" [value]=true /> {{kpiLabels.ESCALATE_ALERT}}
+                                </label>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-8" [ngClass]="{hide:!parseBoolean(questionForm.get('escalateAlert').value)}">
+                                <label class="col-xs-5 col-sm-3 col-md-3 col-lg-4">
+                                    <span class="required">*</span>
+                                    {{kpiLabels.AFTER}}
+                                </label>
+                                <div class="col-xs-6 col-sm-8 col-md-9 col-lg-7 alignInput">
+                                    <input type="number" formControlName="after" min="0" oninput="validity.valid||(value='');" class="numberTextBoxWidth validate-msg"/>
+                                    <label>{{kpiLabels.CONSECUTIVE}}</label>
+                                    <label>{{afterText}}</label>
+                                    <div class="error-validation-message" *ngIf="required('after')">
+                                        {{labels.AFTER_REQUIRED}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mar-t-1">
+                            <button class="btn btn-dark btn-sm pull-right btn-round" type="button" (click)="resetForm()" [disabled] ="saveCall">{{labels.RESET}}</button>
+                            <button class="btn btn-dark btn-round btn-sm pull-right ng-star-inserted" type="submit" [disabled] ="saveCall">{{isEditPage ? labels.UPDATE : labels.ADD}}</button>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+            </form>
+
+            <div class="x_panel">
+                <h4 class="checkListItemTittle">{{labels.CHECKLIST_ITEMS}}</h4>
+                <div>
+                    <p-table #table [paginator]="true" [rows]="rowsIn" (onFilter)="onTableFilter($event)" (onPage)="onTablePageChange($event)" selectionMode="single" [value]="tableBody">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="checkList_item_reponsive width-250">{{labels.CHECKLIST_ITEMS}}</th>
+                                <th class="width-150">{{labels.CHECKLIST_TYPE}}</th>
+                                <th class="width-130 text-center">{{labels.EXPECTED_RESPONSE}}</th>
+                                <th class="text-center width-120">{{labels.KPI}}</th>
+                                <th class="text-center width-120">{{labels.UNIVERSAL}}</th>
+                                <th class="text-center width-130">{{labels.REQUIRE_FREEFORM}}</th>
+                                <th class="width-200">{{kpiLabels.KPI_DESCRIPTION}}</th>
+                                <th class="text-center width-120">{{kpiLabels.SENDALERTS}}</th>
+                                <th class="text-center width-120">{{kpiLabels.ESCALATE_ALERT}}</th>
+                            </tr>
+                            <tr>
+                                <th class="checkList_item_reponsive width-250">
+                                    <input pInputText type="text" (input)="table.filter($event.target.value, 'question', filterMatchMode)" class="filterTextbox">
+                                </th>
+                                <th class="width-150">
+                                    <p-multiSelect appendTo="body" [options]="checklistTypeOptions" defaultLabel="All Options" (onChange)="table.filter($event.value,'checklistType.value', 'in')" class="dropdownStyle"></p-multiSelect>
+                                </th>
+                                <th class="text-center width-130">
+                                    <p-multiSelect appendTo="body" [options]="yesNoOptions" defaultLabel="All Options" (onChange)="table.filter($event.value,'expectedResponse.value', 'in')" class="dropdownStyle"></p-multiSelect>
+                                </th>
+                                <th class="text-center width-120">
+                                    <p-multiSelect appendTo="body" [options]="yesNoOptions" defaultLabel="All Options" (onChange)="table.filter($event.value,'KPI.value', 'in')" class="dropdownStyle"></p-multiSelect>
+                                </th>
+                                <th class="text-center width-120">
+                                    <p-multiSelect appendTo="body" [options]="yesNoOptions" defaultLabel="All Options" (onChange)="table.filter($event.value,'universal.value', 'in')" class="dropdownStyle"></p-multiSelect>
+                                </th>
+                                <th class="text-center width-130">
+                                    <p-multiSelect appendTo="body" [options]="yesNoOptions" defaultLabel="All Options" (onChange)="table.filter($event.value,'freeform.value', 'in')" class="dropdownStyle"></p-multiSelect>
+                                </th>
+                                <th class="width-200">
+                                    <input pInputText type="text" (input)="table.filter($event.target.value, 'kpiDescription', filterMatchMode)" class="filterTextbox">
+                                </th>
+                                <th class="text-center width-120">
+                                    <p-multiSelect appendTo="body" [options]="Options" defaultLabel="All Options" (onChange)="table.filter($event.value,'sendAlert.value', 'in')" class="dropdownStyle"></p-multiSelect>
+                                </th>
+                                <th class="text-center width-120">
+                                    <p-multiSelect appendTo="body" [options]="Options" defaultLabel="All Options" (onChange)="table.filter($event.value,'escalateAlert.value', 'in')" class="dropdownStyle"></p-multiSelect>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-sale>
+                            <tr class="wrap-word">
+                                <td class="checkList_item_reponsive">
+                                    <span class="fa fa-pencil" (click)="editItem(sale)">&nbsp;</span>{{sale.question}}
+                                </td>
+                                <td>
+                                    {{sale['checklistType']['label']}}
+                                </td>
+                                <td class="text-center">
+                                    {{sale['expectedResponse']['text']}}
+                                </td>
+                                <td class="text-center">
+                                    {{sale['KPI']['text']}}
+                                </td>
+                                <td class="text-center">
+                                    {{sale['universal']['text']}}
+                                </td>
+                                <td class="text-center">
+                                    {{sale['freeform']['text']}}
+                                </td>
+                                <td>
+                                    {{sale['kpiDescription']}}
+                                </td>
+                                <td class="text-center">
+                                    {{sale['sendAlert']['text']}}
+                                </td>
+                                <td class="text-center">
+                                    {{sale['escalateAlert']['text']}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td *ngIf="filterCheckListItem==undefined" [attr.colspan]="9">
+                                    Loading...
+                                </td>
+                                <td *ngIf="filterCheckListItem!=undefined" [attr.colspan]="9">
+                                    {{sharedLabels.NO_DATA}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <tr>
+                                <td class="table-style"> <b>{{paginationCount}}</b></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-dialog header="{{sharedLabels.DISPLAYLABEL}}"
+              [(visible)]="displayDialog"
+              [responsive]="true"                 
+              showEffect="fade"
+              [modal]="true" 
+              [contentStyle]="{'overflow':'visible'}"
+              [height]="150"
+              [width]="350"
+              (onHide)="displayDialogClose()">
+        <div>
+            <span *ngIf="showDialogMessage">{{dialogueMsg}}</span>
+            <span *ngIf="displayHeatMapMessage">{{heatMapMessage}}</span>
+        </div>
+        <div class="ui-g-12">
+            <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="displayDialogClose()">
+                {{sharedLabels.BUTTONS.OK}}
+            </button>
+        </div>
+    </p-dialog>

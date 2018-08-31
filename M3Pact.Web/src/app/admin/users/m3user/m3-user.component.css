@@ -1,0 +1,15 @@
+﻿.mt-5{
+    margin-top:5px;
+}
+:host >>> .ui-multiselect .ui-multiselect-panel {
+    width: 200px;
+}
+@media screen and (max-width: 640px) {
+    :host >>> .ui-inputtext {
+        width: 100%;
+    }
+
+    >>> .ui-multiselect .ui-multiselect-panel {
+        width: 200px !important;
+    }
+}

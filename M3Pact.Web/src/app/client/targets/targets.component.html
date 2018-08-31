@@ -1,0 +1,233 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="x_title">
+            <div class="clearfix"></div>
+        </div>
+        <div class="client_details">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6"> <h4>Monthly Targets</h4></div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                        <div class="pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <span class="fa-stack fa-lg" data-toggle="tooltip" title="{{labels.GRAPH_VIEW}}" (click)="changeToGraphView()" attr.data-tooltip="{{labels.GRAPH_VIEW}}">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-bar-chart fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                    <span class="fa-stack fa-lg" title="{{labels.GRID_VIEW}}" (click)="changeToTableView()" attr.data-tooltip="{{labels.GRID_VIEW}}">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-th fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div *ngIf="graphView" class="client_details">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                            <fieldset class="scheduler-border" [disabled]="!canEdit">
+                                <legend class="scheduler-border">Target Details</legend>
+                                <div class="col-xs-12">
+                                    <form class="form-horizontal form-label-left input_mask" #monthlyTarget="ngForm" (ngSubmit)="saveTargetData(monthlyTarget)">
+                                        <div class="row">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-6 col-md-6 col-sm-12 col-xs-12">{{labels.CALENDAR_YEAR}}</label>
+                                                    <select class="col-lg-6 col-md-6 col-sm-12 col-xs-12 dropdownHeight text-right"  name="CalendarYear" required #cldYr="ngModel" (change)="onDropdownChange($event.target.value)" [(ngModel)]="CalendarYear">
+                                                        <option *ngFor="let year of calendarYears" class="dropdownColor text-right">
+                                                            {{year}}
+                                                        </option>
+                                                    </select>
+                                                    <validation-message class="pull-right" [frmcontrol]="cldYr" [frmSubmitted]="monthlyTarget.submitted" [fldText]="'Calendar Year'">
+                                                    </validation-message>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-6 col-md-6 col-sm-12 col-xs-12">{{labels.ENTER_ANNUAL_CHARGES}}</label>
+                                                    <input type="text" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" name="AnnualCharges" #charges="ngModel" required
+                                                           min="0" [(ngModel)]="AnnualCharges"
+                                                           (keyup)="onkeyup($event)"
+                                                           (focus)="onfocus($event)"
+                                                           (blur)="onBlur($event)" />
+                                                    <label *ngIf="!isAnnualChargesValid" class="pull-right error-message_color">{{labels.ANNUAL_CHARGES_FORMAT_MESSAGE}}</label>
+                                                    <validation-message class="pull-right" [frmcontrol]="charges" [frmSubmitted]="monthlyTarget.submitted" [fldText]="'Annual Charges'">
+                                                    </validation-message>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-6 col-md-6 col-sm-12 col-xs-12">{{labels.ENTER_GROSS_COLLECTION}}</label>
+                                                    <input type="text" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right" name="GrossCollection" #grosCollec="ngModel" required
+                                                           [(ngModel)]="GrossCollection" (focus)="onfocusGC($event)" (blur)="onBlurGC($event)"
+                                                           (keyup)="onkeyUpGC($event)" />
+                                                    <label *ngIf="!isGrossCollectionValid" class="pull-right error-message_color">{{labels.GROSS_COLLECTION_FORMAT_MESSAGE}}</label>
+                                                    <validation-message class="pull-right" [frmcontrol]="grosCollec" [frmSubmitted]="monthlyTarget.submitted" [fldText]="'Gross Collection'">
+                                                    </validation-message>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-5 col-md-6 col-sm-12 col-xs-12">{{labels.TOTAL_CHARGES}}</label>
+                                                    <label class="control-label col-lg-7 col-md-6 col-sm-12 col-xs-12"><b>{{TotalCharges|currency}}</b></label>
+                                                    <!--<input type="text" class="col-lg-7 col-md-6 col-sm-12 col-xs-12" name="TotalCharges" disabled value="{{TotalCharges|currency}}" />-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-5 col-md-6 col-sm-12 col-xs-12">{{labels.TOTA_PAYMENTS}}</label>
+                                                    <label class="control-label col-lg-7 col-md-6 col-sm-12 col-xs-12 pull-left"><b>{{TotalPayments|currency}}</b></label>
+                                                    <!-- <input type="text" class="col-lg-7 col-md-6 col-sm-12 col-xs-12" name="TotalPayments" disabled value="{{TotalPayments|currency}}" />-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-lg-5 col-md-6 col-sm-12 col-xs-12">{{labels.TOTAL_REVENUE}}</label>
+                                                    <label class="control-label col-lg-7 col-md-6 col-sm-12 col-xs-12"><b>{{TotalRevenue|currency}}</b></label>
+                                                    <!-- <input type="text" class="col-lg-7 col-md-6 col-sm-12 col-xs-12" name="TotalRevenue" disabled value="{{TotalRevenue|currency}}" />-->
+                                                </div>
+                                            </div>
+                                            <div class="row" *ngIf="canEdit">
+                                                <button type="submit" #targetsDataFormSubmit class="btn btn-dark btn-sm pull-right">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-xs-12 col-xm-12 col-md-12 col-lg-8 client_chart_area">
+                            <fieldset class="scheduler-border tragets_responsive">
+                                <legend class="scheduler-border">{{labels.PAYMENTS_CHARGES_REVENUES}} {{CalendarYear}}</legend>
+                                <div class="x-content mediaChartResize d_grid">
+                                        <ngx-charts-line-chart [scheme]="colorScheme"
+                                                               [results]="targetData"
+                                                               [gradient]="gradient"
+                                                               [xAxis]="showXAxis"
+                                                               [yAxis]="showYAxis"
+                                                               [legend]="showLegend"
+                                                               [legendTitle]="legendTitle"
+                                                               [showXAxisLabel]="showXAxisLabel"
+                                                               [showYAxisLabel]="showYAxisLabel"
+                                                               xAxisLabel="{{xAxisLabel}}"
+                                                               yAxisLabel="{{yAxisLabel}}"
+                                                               [autoScale]="autoScale">
+                                        </ngx-charts-line-chart>
+                                </div>
+</fieldset>
+                        </div>
+                        <!--<div class="row">
+                            <button type="submit" class="btn btn-dark btn-sm pull-right">Save</button>
+                        </div>-->
+                    </div>
+                    <div *ngIf="tableView">
+                        <p-table id="monthlyTargetsGrid" [value]="tableData" [columns]="columns" [paginator]="false" [rows]="13" selectionMode="single"  (onEditComplete)="onCellEdit($event)" [(selection)]="selectedLogSetup" *ngIf="canEdit" [scrollable]="true">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-data let-columns="columns">
+                                <tr>
+                                    <td>
+                                        {{data.month}}
+                                    </td>
+                                    <td class="targetTableData">{{data.businessDays}}</td>
+                                    <td class="targetTableData" [pEditableColumn]="data" [pEditableColumnField]="'charges'">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input type="number" [(ngModel)]="data.charges">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{data.charges|currency}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td class="targetTableData" pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input type="number" [(ngModel)]="data.payments">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{data.payments|currency}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td class="targetTableData" pEditableColumn>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input type="number" [(ngModel)]="data.revenue">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{data.revenue|currency}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td>Total</td>
+                                    <td class="targetTableData">{{businessDaysInYear}}</td>
+                                    <td class="targetTableData">{{TotalCharges|currency}}</td>
+                                    <td class="targetTableData">{{TotalPayments|currency}}</td>
+                                    <td class="targetTableData">{{TotalRevenue|currency}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <p-table id="monthlyTargetsGrid" [value]="tableData" [columns]="columns" [paginator]="false" [rows]="13" *ngIf="!canEdit">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th *ngFor="let col of columns" [pSortableColumn]="col">
+                                        {{col}}
+                                        <p-sortIcon [field]="col"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-data>
+                                <tr>
+                                    <td>
+                                        {{data.month}}
+                                    </td>
+                                    <td class="targetTableData">{{data.businessDays}}</td>
+                                    <td class="targetTableData">
+                                        {{data.charges|currency}}
+                                    </td>
+                                    <td class="targetTableData">
+                                        {{data.payments|currency}}
+                                    </td>
+                                    <td class="targetTableData">
+                                        {{data.revenue|currency}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td>Total</td>
+                                    <td class="targetTableData">{{businessDaysInYear}}</td>
+                                    <td class="targetTableData">{{TotalCharges|currency}}</td>
+                                    <td class="targetTableData">{{TotalPayments|currency}}</td>
+                                    <td class="targetTableData">{{TotalRevenue|currency}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="row" *ngIf="canEdit">
+                            <button type="submit" class="btn btn-dark btn-sm pull-right" (click)="saveManuallyEditedTargets()">Save</button>
+                        </div>
+                    </div>
+                    <div *ngIf="displayMonthlyTargetsErrorMessage">
+                        <p-dialog header="Monthly Targets !" [(visible)]="displayMonthlyTargetsErrorMessage" [responsive]="true" [modal]="true" [height]="170" (onHide)="closeMonthlyTargetsMessage()">
+                            <div>
+                                <label>
+                                    {{ labels.MANUALSAVE_TARGET_ERRORMSG }}
+                                </label>
+                            </div>
+                            <div class="right b_style">
+                                <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="closeMonthlyTargetsMessage()">OK</button>
+                            </div>
+                        </p-dialog>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

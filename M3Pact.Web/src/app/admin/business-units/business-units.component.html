@@ -1,0 +1,125 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col admin_padding_res">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.BUSINESS_UNITS}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <button *ngIf="canEdit" type="button" class="btn btn-dark btn-sm btn-round pull-right" (click)="showDialogToAdd()"><span class="fa fa-plus">&nbsp;</span>{{sharedLabels.BUTTONS.ADD}}</button>
+                    </div>
+                    <p-table [value]="businessUnits" [paginator]="true" [rows]="rowsIn" (onPage)="onTablePageChange($event)" (onFilter)="onTableFilter($event)" selectionMode="single" [(selection)]="selectedBusinessUnit">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>{{labels.BUSINESS_UNIT}}</th>
+                                <th class="text-center">{{sharedLabels.ACTIVE}}</th>
+                                <th>{{sharedLabels.SELECTEDCLIENTS}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-businessUnit>
+                            <tr>
+                                <td>
+                                    <span *ngIf="businessUnit.isActive && canEdit" class="fa fa-pencil" (click)="onRowSelect(businessUnit)"></span>
+                                    {{businessUnit.businessUnitCode}}
+                                </td>
+                                <td class="textCenter">
+                                    <label class="switch">
+                                        <input type="checkbox" [(ngModel)]="businessUnit.isActive" (change)="changeStateOfBusinessUnit(businessUnit)" [disabled]="!(canEdit)" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <span *ngIf="businessUnit.clientsCount === 0">{{businessUnit.clientsCount}}</span>
+                                    <span *ngIf="businessUnit.clientsCount !== 0" (click)="onClientsColumnSelect(businessUnit)" class="businessunit-client">{{businessUnit.clientsCount}}</span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td *ngIf="businessUnitsFiltered==undefined" [attr.colspan]="3">
+                                    Loading...
+                                </td>
+                             </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <tr>
+                                <td class="table-style"> <b>{{paginationCount}}</b></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="displayDialog" class="admin admin_popup">
+        <p-dialog header="{{popupHeading}}" [(visible)]="displayDialog" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true" [width]="400" (onHide)="clearMessages()" class="admin_dialogbox">
+            <div class="" *ngIf="businessUnit">
+                <form #businessUnitForm="ngForm" (ngSubmit)="saveBusinessUnit()">
+                    <div class="ui-g-12">
+                        <div class="ui-g-4">
+                            <label class="pull-right" for="businessUnit">{{labels.BUSINESS_UNIT}}<span class="required">*</span></label>
+                        </div>
+                        <div class="ui-g-6 margin-top-3">
+                            <input type="text" class="res_busi_unit" id="businessUnit" name="businessUnitCode" required [(ngModel)]="businessUnit.businessUnitCode" #businessUnitCode="ngModel" />
+                            <div *ngIf="!valid" class="validation-message">
+                                {{validationConstants.BUSINESSUNIT_REQUIRED}}
+                            </div>
+                        </div>
+                    </div>
+                    <input pInputText id="businessUnit" name="businessUnitId" [(ngModel)]="businessUnit.id" type="hidden" />
+                    <div class="ui-g-12">
+                        <p-messages [(value)]="msgs"></p-messages>
+                    </div>
+                    <div class="ui-g-12">
+                        <button type="submit" class="btn btn-dark btn-sm btn-round pull-right">{{sharedLabels.BUTTONS.SAVE}}</button>
+                    </div>
+                </form>
+            </div>
+        </p-dialog>
+    </div>
+    <div *ngIf="displayClients" class="admin">
+        <p-dialog header="Info!" [(visible)]="displayClients" [resizable] = "false" [responsive]="true" [modal]="true" (onHide)="keepActiveBusinessUnit()">
+            <label>
+                {{labels.REPLACE_BU_FOR_CLIENTS_INFO}}
+            </label>                      
+            <div class="ui-g ui-fluid verticalScroll">
+                <ul>
+                    <li *ngFor="let client of clientsOfBusinessUnit">
+                        {{client}}
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="keepActiveBusinessUnit()">{{sharedLabels.BUTTONS.OK}}</button>
+            </div>
+        </p-dialog>
+    </div>
+    <div *ngIf="displayingClients">
+        <p-dialog header="Clients List" [(visible)]="displayingClients" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true">
+            <div>
+                <span>{{sharedLabels.CLIENT_COUNT_HEADER_MEASSAGE}} {{businessUnit.businessUnitCode}} {{labels.BUSINESS_UNIT}}</span>
+            </div>
+            <div class="ui-g ui-fluid verticalScroll">
+                <ul>
+                    <li *ngFor="let client of businessUnit.clients">
+                        {{client}}
+                    </li>
+                </ul>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeClients()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

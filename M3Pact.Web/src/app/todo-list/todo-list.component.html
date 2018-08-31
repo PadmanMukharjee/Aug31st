@@ -1,0 +1,35 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="right_col">
+    <div class="page-title row">
+        <div class="title_left col-xs-12">
+            <h2 class="titleSize">{{labels.TITLE}}</h2>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="container">
+                <div class="row">
+                    <div *ngFor="let todo of todoList; let i=index">
+                        <div class="card">
+                            <div>
+                                <i *ngIf="!collapsed[i] && todo.clients.length>0" class="fa fa-2x fa-chevron-circle-right" (click)="expandOrCollapse(i)"></i>
+                                <i *ngIf="collapsed[i]" class="fa fa-2x fa-chevron-circle-down" (click)="expandOrCollapse(i)"></i>
+                                <b *ngIf="todo.clients.length>0" class="task-name" > {{todo.taskName}} </b>
+                                <b *ngIf="todo.clients.length==0" class="task-name task-with-0-clients" (click)="redirect(todo.taskName)"> {{todo.taskName}} </b>
+                            </div>
+                            <div *ngIf="collapsed[i]" >
+                                <hr />
+                                <ul class="height">
+                                    <li *ngFor="let client of todo.clients" (click)="redirect(todo.taskName,client.clientCode,client.clientName)">
+                                        {{client.clientName}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

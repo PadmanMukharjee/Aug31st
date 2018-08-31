@@ -1,0 +1,29 @@
+
+.postion_menu-sub {
+    float: right !important;
+    text-align: right !important;
+    margin: -10px 15px 0 0 !important;
+}
+.menu_position {
+    height: 35px;
+    width: 35px;
+    line-height: 35px;
+    vertical-align: middle;
+    border-radius: 100px;
+    text-align: center;
+    position: relative;
+    padding-left: 4px;
+    font-size: 17px;
+    color: #fff;
+}
+.d_block {
+    display: block !important;
+}
+.ul-style {
+    float: right;
+    text-align: right !important;
+    margin-top: -10px !important;
+}
+.b_zero {
+    border: 0;
+}

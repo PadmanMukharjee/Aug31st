@@ -1,0 +1,74 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col admin_padding_res">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.VIEW_KPIS}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p-table [value]="kpis" [paginator]="true" [rows]="rowsIn" (onPage)="onTablePageChange($event)" (onFilter)="onTableFilter($event)" selectionMode="single" class="word-Wrap" #table>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th class="width-120">{{labels.KPI_DESCRIPTION}}</th>
+                            <th class="width-120">{{labels.MEASURE}}</th>
+                            <th class="width-120">{{labels.STANDARD}}</th>
+                            <th class="text-center width-120">{{labels.UNIVERSAL}}</th>
+                            <th class="text-center width-120">{{labels.HEAT_MAP_ITEM}}</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input pInputText type="text" (input)="table.filter($event.target.value, 'kpiDescription', 'contains')" class="filterTextbox">
+                            </th>
+                            <th>
+                                <input pInputText type="text" (input)="table.filter($event.target.value, 'measure', 'contains')" class="filterTextbox">
+                            </th>
+                            <th>
+                                <input pInputText type="text" (input)="table.filter($event.target.value, 'standard', 'contains')" class="filterTextbox">
+                            </th>
+                            <th class="kpi_filter text-center">
+                                <p-multiSelect appendTo="body" [options]="yesNoOptions" defaultLabel="All Options" (onChange)="table.filter($event.value,'isUniversal.value', 'in')"></p-multiSelect>
+                            </th>
+                            <th class="kpi_filter text-center">
+                                <p-multiSelect appendTo="body" [options]="yesNoOptions" defaultLabel="All Options" (onChange)="table.filter($event.value,'isHeatMapItem.value', 'in')"></p-multiSelect>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-kpi>
+                        <tr>
+                            <td>
+                                <span [ngClass]="canEdit ? 'fa fa-pencil' : 'fa fa-eye'" (click)="onRowSelect(kpi)">&nbsp;</span>
+                                {{kpi.kpiDescription}}
+                            </td>
+                            <td>{{kpi.measure}}</td>
+                            <td>{{kpi.standard}}</td>
+                            <td class="text-center">{{kpi.isUniversal.text}}</td>
+                            <td class="text-center">{{kpi.isHeatMapItem.text}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td *ngIf="kpifiltered==undefined" [attr.colspan]="5">
+                                Loading...
+                            </td>
+                            <td *ngIf="kpifiltered!=undefined" [attr.colspan]="5">
+                                {{sharedLabels.NO_DATA}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="paginatorright">
+                        <tr>
+                            <td class="table-style"> <b>{{paginationCount}}</b></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

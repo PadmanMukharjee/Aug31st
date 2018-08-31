@@ -1,0 +1,11 @@
+﻿CREATE TABLE APIMethod(
+APIMethodId INT NOT NULL IDENTITY,
+APIControllerName VARCHAR(100) NOT NULL,
+APIMethod VARCHAR(100) NOT NULL,
+RecordStatus VARCHAR(1) NOT NULL,
+CreatedBy VARCHAR(100),
+CreatedDate DATE,
+ModifiedBy VARCHAR(100),
+ModifiedDate DATE, 
+    CONSTRAINT [PK_APIMethod] PRIMARY KEY ([APIMethodId])
+)

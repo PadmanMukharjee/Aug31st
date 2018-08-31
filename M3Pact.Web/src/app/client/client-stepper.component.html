@@ -1,0 +1,87 @@
+﻿
+<p-growl [(value)]="msgs"></p-growl>
+<div class="right_col resp_client" role="main">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{pageLabel}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content" *ngIf="!isSingleStepAccessOnly">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                        <ul class="progress-indicator" role="tablist" id="ul_amn_menu" name="ul_amn_menu">
+                            <ng-container *ngFor="let stepDetail of stepDetails">
+                                <li *ngIf="stepDetail.canView" role="presentation" class="{{stepDetail.stepStatusClass}}" id="{{stepDetail.stepID}}">
+                                    <a href="{{stepDetail.stepLink}}" data-toggle="tab" attr.aria-controls="{{stepDetail.stepShortName}}" role="tab" title="{{stepDetail.stepName}}">
+                                        <span class="{{stepDetail.stepBubbleType}}"><i class="{{stepDetail.stepIconClass}}"></i></span>
+                                    </a>
+                                    <h6 class="hidden-xs">
+                                        <span>{{stepDetail.stepName}}</span>
+                                    </h6>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3" id="btn_next_prev">
+                        <span class="btn_nxt_prev">
+                            <button *ngIf="!isFirstStep" class="btn btn-link red-link btn-sm text-left" (click)="onPrevious()" title="{{labels.PREVIOUS}}">
+                                <i aria-hidden="true" class="fa fa-chevron-circle-left fa-3x"></i>
+                            </button>
+                        </span>
+                        <button *ngIf="isSaveExitVisible" class="btn btn-dark btn-md" (click)="saveAndExit()" title="{{labels.SAVE_AND_EXIT}}">
+                            {{labels.SAVE_AND_EXIT}}
+                        </button>
+                        <span class="btn_nxt_prev">
+                            <button *ngIf="!isLastStep" class="btn btn-link red-link btn-sm" (click)="onNext()" title="{{labels.NEXT}}" [attr.disabled]="clientCode === '' ? '' : null">
+                                <i aria-hidden="true" class="fa fa-chevron-circle-right fa-3x"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="tab-content" *ngFor="let stepDetail of stepDetails">
+                    <div *ngIf="stepDetail.canView && stepDetail.stepID == constants.STEP.CLIENT_DATA" [ngClass]="(activeStep == constants.STEP.CLIENT_DATA)?'tab-pane active':'tab-pane'" role="tabpanel" id="step1">
+                        <client-data #clientDataStep [clientCode]="clientCode" (saveClientData)="saveClientData($event)"></client-data>
+                    </div>
+                    <div *ngIf="stepDetail.canView && stepDetail.stepID == constants.STEP.LOG_SETUP" [ngClass]="(activeStep == constants.STEP.LOG_SETUP)?'tab-pane active':'tab-pane'" role="tabpanel" id="step2">
+                        <log-setup #logSetupStep [clientCode]="clientCode" (saveLogSetup)="saveLogSetup($event)"></log-setup>
+                    </div>
+                    <div *ngIf="stepDetail.canView && stepDetail.stepID == constants.STEP.ASSIGN_USER" [ngClass]="(activeStep == constants.STEP.ASSIGN_USER)?'tab-pane active':'tab-pane'" role="tabpanel" id="step3">
+                        <assign-user #assignUserStep [clientCode]="clientCode" (saveAssignedUsers)="saveAssignedUsers($event)"></assign-user>
+                    </div>
+                    <div *ngIf="stepDetail.canView && stepDetail.stepID == constants.STEP.MONTHLY_TARGETS" [ngClass]="(activeStep == constants.STEP.MONTHLY_TARGETS)?'tab-pane active':'tab-pane'" role="tabpanel" id="step4">
+                        <monthly-targets #monthlyTargetsStep [clientCode]="clientCode" [isSaveAndExit]="isSaveAndExit" (saveTargetStepStatus)="saveTargetStepStatus($event)"></monthly-targets>
+                    </div>
+                    <div *ngIf="stepDetail.canView && stepDetail.stepID == constants.STEP.KPI_SETUP" [ngClass]="(activeStep == constants.STEP.KPI_SETUP)?'tab-pane active':'tab-pane'" role="tabpanel" id="complete">
+                        <kpi-setup #kpiSetupStep [clientCode]="clientCode"  (saveKPISetup)="saveKPISetup($event)" (saveKPISetupStatusDetail)="saveKPISetupStatusDetail()"></kpi-setup>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <p-dialog header="Information" [(visible)]="showCompletedMsg" [responsive]="true" [modal]="true">
+        <label>{{clientCreationSuccessMsg}}</label>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="submit" (click)="redirectToLandingPage()">{{labels.OK}}</button>
+        </div>
+    </p-dialog>
+
+    <p-dialog header="Warning!" [(visible)]="displayWarning" [responsive]="true" [modal]="true">
+        <span [innerHTML]="labels.DATA_LOST_IF_NO_SAVE"></span>
+        <br />
+        <div class="pull-right">
+            <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="goToClientStep()">{{labels.YES}}</button>
+            <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="beInCurrentStep()">{{labels.NO}}</button>
+        </div>
+    </p-dialog>
+</div>

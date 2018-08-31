@@ -1,0 +1,10 @@
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\bin\Debug\Meridian_M3Pact_DB.dacpac
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\obj\Debug\Meridian_M3Pact_DB.sqlprojResolveAssemblyReference.cache
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\obj\Debug\Model.xml
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\obj\Debug\refactor.xml
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\obj\Debug\postdeploy.sql
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\obj\Debug\predeploy.sql
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\obj\Debug\Meridian_M3Pact_DB.dll
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\obj\Debug\Meridian_M3Pact_DB.pdb
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\bin\Debug\Meridian_M3Pact_DB.dll
+E:\M3Pact\Development\Dev2.0\Database\Meridian_M3Pact_DB\Meridian_M3Pact_DB\bin\Debug\Meridian_M3Pact_DB.pdb

@@ -1,0 +1,383 @@
+/*input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}*/
+
+/*Css for the text over progress bar*/
+.progressTxt {
+    color: black;
+    margin: 0 0 0 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/*Css for progress bar color*/
+.progressIndicator {
+    /*background-color: #404969*/
+    background-color: #2e9732
+}
+
+.textright {
+    float:right;
+    color:white;
+}
+
+[data-hidden="true"] {
+    display: none !important;
+}
+
+
+.slidecontainer {
+    width: 100%;
+    float:right;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 15%;
+    height: 15px;
+    float: right;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #01579b;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #01579b;
+        cursor: pointer;
+    }
+
+.slider-value {
+    float:right;
+    padding-right : 10%;
+    color : black;
+}
+  
+.right {
+      float : right;
+      color : black;
+      padding : 0px 2px 4px 2px;
+}
+
+
+.depositDataText {
+    font-weight : bold;
+}
+
+.depositLogFooter {
+    background-color: rgb(64, 64, 64) !important;
+    color: white !important;
+}
+
+.monthPickerIcon {
+    height: 25px;
+    width: 25px;
+    float: left;
+    border-top: 2px;
+    border-right: 2px;
+    border-bottom: 2px;
+    border-style: groove;
+    cursor : pointer;
+}
+
+.allignIcon {
+    margin-right: 4px;
+    margin-top: 3px;
+}
+
+.monthPicker[disabled] {
+    cursor: default;
+    background-color: white;
+}
+
+@media screen and (max-width: 640px) {
+    >>> .ui-dialog {
+        width: 290px !important;
+        margin-left: 30px !important;
+    }
+    .table_responsive_style{
+        width:240px;
+    }
+}
+
+.panel-default {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    height: auto;
+}
+
+.panel-default .panel-heading button {
+    float: right;
+}
+
+.green_met_percent {
+    color: #00B050;
+    font-size: 20px;
+}
+
+.red_met_percent {
+    color: red;
+    font-size: 20px;
+    position: absolute;
+    padding-top: 2px;
+    padding-left: 3px;
+}
+.month_font{
+    font-size:1.2rem;
+}
+
+.save_Button_Entered_Values {
+    margin-left: 5px;
+    cursor: pointer;
+    position: absolute;
+    padding-top: 5px;
+}
+
+.font_color_red {
+    color: red;
+}
+
+.text_align_right {
+    text-align: right;
+}
+
+.month_picker_padding {
+    padding-top: 8px;
+}
+
+.input_width {
+    width: 50px;
+}
+
+.deposit_right {
+    float: right;
+}
+
+.popup_margin {
+    margin-top: 15px;
+}
+
+.font_size_close_month {
+    font-size: 22px;
+}
+
+.red-color{
+    color: red;
+}
+
+.green-color {
+    color: green;
+}
+
+.year-picker-icon{
+    text-align: right;
+    color: black;
+}
+
+.black-color {
+    color: black;
+}
+
+>>> .datepicker table tr td span.active.active {
+    background-color: #BC3036 !important;  
+}
+
+>>> .datepicker table tr td span.active {
+    background-image: none !important;
+}
+
+>>> .datepicker table tr td span.focused {
+    background: #BC3036 !important;
+    color: #FFF !important;
+}
+
+:host >>> .dp-popup {
+    z-index: 3 !important;
+}
+:host >>> .ui-table-wrapper {
+    width: 100%;
+    overflow: auto !important;
+}
+:host >>> .ui-datepicker.ui-widget {
+    z-index: 1 !important;
+}
+.pt-8{
+    padding-top:8px;
+}
+.f-22{
+    font-size:22px;
+}
+.f_right{
+    float:right;
+}
+.w-150{
+    width:100px;
+}
+.mt-15{
+    margin-top:15px;
+}
+>>>.ngx-graph_responsive {
+    width: 100% !important;
+    overflow: auto !important;
+}
+
+:host >>> .ui-datepicker {
+    width: auto !important;
+}
+
+:host >>> .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active {
+    border: 1px solid #ccc;
+    transform: scale(1.1);
+    border-radius: 5px;
+}
+
+:host >>> .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active.datePicker-color {
+background: #c2f0c2 !important;
+}
+
+:host >>> .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active.shadow {
+    box-shadow: 0 6px 4px 0px grey;
+    color: #000000;
+
+}
+
+:host >>> .ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-active.date-transparent {
+    background-color:transparent !important;
+    color: #000000 !important;
+
+}
+
+:host >>>.ui-datepicker.ui-widget .ui-datepicker-calendar td a.ui-state-highlight {
+color: #ffffff !important;
+}
+
+>>> .export-dialog .ui-multiselect-panel .ui-multiselect-items-wrapper {
+    height: 100px !important;
+}
+>>> .export-dialog .ui-dialog.ui-widget .ui-dialog-content {
+    height: 300px !important;
+}
+.mt-130 {
+    margin-top: 130px;
+}
+>>> .export-dialog .ui-multiselect {
+    width: 100% !important;
+}
+.dropdownHeight{
+    width:100%;
+    height:20px;
+}
+:host >>>.ui-datepicker .ui-datepicker-calendar td:not(.ui-state-disabled) a:hover{
+    color:green;
+}
+
+.range {
+    height: 13.5px;
+    width: 25px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    
+}
+.fa-sort-asc{
+    padding-left:8px;
+}
+.fa-sort-desc {
+    padding-left: 8px;
+    top: -3px;
+    position: absolute;
+}
+.p_relative{
+    position:relative;
+}
+.range:hover {
+    background-color: lightgrey;
+}
+.ml-20{
+    margin-left:20px;
+}
+.rect_top_corner {
+    border-top-left-radius: 4px;
+    border-top-right-radius:4px
+}
+.rect_bottom_corner {
+    border-bottom-left-radius:4px;
+    border-bottom-right-radius: 4px
+}
+
+.highlight-addDeposit {
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,0.75);    
+}
+.margin-10 {
+    margin-top: 10px;
+}
+@media screen and (max-width: 768px) {
+    .date_picker {
+        width: 200px;
+    }
+
+    .mt-130 {
+        margin-top: 100px;
+    }
+}
+
+.fontsize-change {
+    font-size: 1.1em !important;
+}
+
+.deposit_edit {
+    cursor : pointer;
+}
+
+.float-l {
+    float : left;
+}
+
+.width-115 {
+    width:115px;
+}
+@media screen and (max-width: 640px) {
+    .right_col {
+        padding-top: 180px !important;
+    }
+    .responsive-height{
+        height:180px !important;
+    }
+}
+
+
+.projection-header {
+    text-align: left;
+    font-weight: 600 !important;
+    padding-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.padding-b-8 {
+    padding-bottom:8px !important;
+}
+
+.shadow-n {
+    box-shadow:none !important;
+}

@@ -1,0 +1,65 @@
+﻿@media screen and (max-width: 1024px) {
+    :host >>> .ui-widget input {
+        width: 100% !important;
+    }
+
+    :host >>> .ui-table .ui-table-thead > tr > th, :host >>> .ui-table .ui-table-tbody > tr > td {
+        width: 150px !important;
+    }
+   
+}
+:host >>> .ui-multiselect .ui-multiselect-trigger .fa {
+    margin-top: 0px !important;
+}
+
+:host >>> .dropdownStyle .ui-multiselect .ui-multiselect-label {
+    font-size: 11px;
+    height: 19px;
+    padding-bottom: 1.3em;
+}
+
+@media screen and (max-width: 1366px) {
+    :host >>> .ui-table-wrapper {
+        overflow: auto !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    :host > > > .ui-table-wrapper {
+        overflow: scroll !important;
+    }
+}  
+
+@media screen and (max-width: 640px) {
+    .right_col {
+        padding-top: 180px !important;
+    }
+}
+
+input {
+    color: rgb(84, 84, 84) !important;
+}
+
+.margin-20 {
+    margin-top: 20px;
+}
+
+
+.font-black {
+    color: black;
+}
+
+.padding-l-35 {
+    padding-left : 35px;
+}
+
+.padding-left-15 {
+    padding-left: 15px;
+}
+
+:host >>> th div.ui-multiselect.ui-widget.ui-state-default.ui-corner-all {
+    width : 95% !important;
+}
+.vac_width_200 {
+    width: 200px !important;
+}

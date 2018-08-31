@@ -1,0 +1,98 @@
+﻿<p-growl [(value)]="msgs"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <h3> {{ labels.ALL_CLIENTS }} </h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-dark btn-sm btn-round pull-right" (click)="exportToExcel()"><i class="fa fa-file-excel-o" style="padding-right:5px"></i>{{labels.EXPORT}}</button>
+                </div>
+                <div class="col-xs-12 table_responsive_style">
+                    <p-table #dt [value]="client" [paginator]="true" [autoLayout]="true" [rows]="rowsIn" selectionMode="single" [scrollable]="true" (onFilter)="onTableFilter($event)" (onPage)="onTablePageChange($event)" class="view-all-clients">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="clientCode" class="vac_width_200"> {{ labels.CLIENT_CODE }} <p-sortIcon field="clientCode"></p-sortIcon></th>
+                                <th pSortableColumn="clientName" class="vac_width_200"> {{ labels.CLIENT_NAME }} <p-sortIcon field="clientName"></p-sortIcon></th>
+                                <th pSortableColumn="site" class="vac_width_200"> {{ labels.SITE }}  <p-sortIcon field="site"></p-sortIcon></th>
+                                <th pSortableColumn="relationshipManager" class="vac_width_200"> {{ labels.RELATIONSHIP_MANAGER  }} <p-sortIcon field="relationshipManager"></p-sortIcon> </th>
+                                <th pSortableColumn="billingManager" class="vac_width_200"> {{ labels.BILLING_MANAGER }} <p-sortIcon field="billingManager"></p-sortIcon></th>
+                                <th pSortableColumn="mtdDeposit" class="vac_width_120">{{ labels.MTD_DEPOSIT  }} <p-sortIcon field="mtdDeposit"></p-sortIcon> </th>
+                                <th pSortableColumn="mtdTarget" class="vac_width_120"> {{ labels.MTD_TARGET }} <p-sortIcon field="mtdTarget"></p-sortIcon> </th>
+                                <th pSortableColumn="projectedCash" class="vac_width_125"> {{ labels.PROJECTED_CASH }}  <p-sortIcon field="projectedCash"></p-sortIcon></th>
+                                <th pSortableColumn="monthlyTarget" class="vac_width_120"> {{ labels.MONTHLY_TARGET }}  <p-sortIcon field="monthlyTarget"></p-sortIcon></th>
+                                <th pSortableColumn="actualM3Revenue" *ngIf="editActions.includes('ViewActualM3Revenue')" class="vac_width_120"> {{ labels.ACTUAL_M3_REVENUE }} <p-sortIcon field="actualM3Revenue"></p-sortIcon> </th>
+                                <th pSortableColumn="forecastedM3Revenue" *ngIf="editActions.includes('ViewForecastedM3Revenue')" class="vac_width_120"> {{ labels.FORECASTED_M3_REVENUE }} <p-sortIcon field="forecastedM3Revenue"></p-sortIcon> </th>
+                                <th pSortableColumn="status" class="vac_width_150"> {{ labels.STATUS }} <p-sortIcon field="status"></p-sortIcon> </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'clientCode' , 'contains')" class="filterTextbox">
+                                </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'clientName' , 'contains')" class="filterTextbox">
+                                </th>
+                                <th class="dropdownStyle">
+                                    <p-multiSelect appendTo="body" [options]="siteOptions" defaultLabel="All Sites" (onChange)="dt.filter($event.value, 'site' , 'in')"></p-multiSelect>
+                               </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'relationshipManager' , 'contains')" class="filterTextbox">
+                                </th>
+                                <th>
+                                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'billingManager' , 'contains')" class="filterTextbox">
+                                </th>
+                                <th class="vac_width_120"></th>
+                                <th class="vac_width_120"></th>
+                                <th class="vac_width_125"></th>
+                                <th class="vac_width_120"></th>
+                                <th *ngIf="editActions.includes('ViewActualM3Revenue')" class="vac_width_120"></th>
+                                <th *ngIf="editActions.includes('ViewForecastedM3Revenue')" class="vac_width_120"></th>
+                                <th class="dropdownStyle" style="width:150px !important">
+                                    <p-multiSelect appendTo="body" [options]="statusOptions" defaultLabel="All Status" (onChange)="dt.filter($event.value, 'status' , 'in')"></p-multiSelect>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-clients>
+                            <tr class="wrap-word">
+                                <td>  <i *ngIf="editActions.includes('ViewClientHistory')" class="fa fa-history" aria-hidden="true" (click) = "redirectToClientHistory(clients)"></i> &nbsp; <span [ngClass]="canEdit ? 'fa fa-pencil' : 'fa fa-eye'" (click)="onRowSelect(clients)">&nbsp;</span>{{clients.clientCode}}</td>
+                                <td>{{clients.clientName}}</td>
+                                <td>{{clients.site}}</td>
+                                <td>{{clients.relationshipManager}}</td>
+                                <td>{{clients.billingManager}}</td>
+                                <td class="targetTableData vac_width_120">{{clients.mtdDeposit | currency }}</td>
+                                <td class="targetTableData vac_width_120">{{clients.mtdTarget | currency }}</td>
+                                <td class="targetTableData vac_width_125">{{clients.projectedCash | currency }}</td>
+                                <td class="targetTableData vac_width_120">{{clients.monthlyTarget | currency }}</td>
+                                <td class="targetTableData vac_width_120" *ngIf="editActions.includes('ViewActualM3Revenue')">{{clients.actualM3Revenue | currency }}</td>
+                                <td class="targetTableData vac_width_120" *ngIf="editActions.includes('ViewForecastedM3Revenue')">{{clients.forecastedM3Revenue | currency }}</td>
+                                <td class="vac_width_150">{{clients.status}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td *ngIf="filteredClientData==undefined" [attr.colspan]="12">
+                                    Loading...
+                                </td>
+                                <td *ngIf="filteredClientData!=undefined" [attr.colspan]="filteredClientData.length">
+                                    {{labels.NO_DATA}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <tr>
+                                <td class="table-style"> <b>{{paginationCount}}</b></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

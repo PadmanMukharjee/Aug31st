@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.NPOI" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\M3Pact.BusinessModel\M3Pact.BusinessModel.csproj" />
+    <ProjectReference Include="..\M3Pact.DataAccess\M3Pact.Repository.csproj" />
+    <ProjectReference Include="..\M3Pact.Infrastructure.Interfaces\M3Pact.Infrastructure.Interfaces.csproj" />
+    <ProjectReference Include="..\M3Pact.Infrastructure\M3Pact.Infrastructure.csproj" />
+    <ProjectReference Include="..\M3Pact.ViewModel\M3Pact.ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

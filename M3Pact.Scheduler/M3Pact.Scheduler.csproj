@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0-preview2-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0-preview2-final" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0-preview2-final" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0-preview2-final" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0-preview2-final" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConfigManager\ConfigManager.csproj" />
+    <ProjectReference Include="..\M3Pact.BusinessModel\M3Pact.BusinessModel.csproj" />
+    <ProjectReference Include="..\M3Pact.Business\M3Pact.Business.csproj" />
+    <ProjectReference Include="..\M3Pact.DataAccess\M3Pact.Repository.csproj" />
+    <ProjectReference Include="..\M3Pact.DomainModel\M3Pact.DomainModel.csproj" />
+    <ProjectReference Include="..\M3Pact.Infrastructure.Interfaces\M3Pact.Infrastructure.Interfaces.csproj" />
+    <ProjectReference Include="..\M3Pact.Infrastructure\M3Pact.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

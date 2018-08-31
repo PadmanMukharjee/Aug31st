@@ -1,0 +1,63 @@
+>>> .dropdownStyle .ui-multiselect .ui-multiselect-label {
+    font-size: 11px;
+    height: 16px;
+    padding-bottom: 1.25em;
+}
+.checkbox-margin {
+    margin: 0 auto;
+}
+.width-150{
+    width:150px;
+}
+.width-130 {
+    width: 130px;
+}
+.width-250{
+    width:250px;
+}
+.width-200{
+    width:200px;
+}
+.width-120 {
+    width: 120px;
+}
+:host >>> .ui-table-wrapper {
+    overflow: auto;
+}
+:host >>> .ui-multiselect .ui-multiselect-trigger .fa {
+    margin-top: 0px !important;
+}
+.validate-msg {
+    text-align: right
+}
+@media screen and (min-width: 1440px) {
+    :host >>> .ui-table-wrapper {
+        overflow: initial;
+    }
+}  
+@media screen and (max-width: 640px) {
+        .btn_reponsive {
+            margin-top: 20px;
+        }
+
+        .right_col {
+            padding-top: 180px !important;
+        }
+    }
+
+    @media screen and (max-width: 1240px) {
+        .responsivenessAllign {
+            text-align: left;
+        }
+
+        .res_width {
+            width: 100%;
+        }
+        .res_left{
+            text-align:left;
+        }
+        :host >>> .ui-table-wrapper {
+            overflow: auto !important;
+        }
+    }
+

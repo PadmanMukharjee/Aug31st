@@ -1,0 +1,63 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="right_col">
+    <div class="page-title">
+        <div class="title_left">
+            <div class="row">
+                <div class="titleSize col-lg-6 col-md-6">{{labels.PAGE_TITLE}}</div>
+                <div class="col-lg-6 col-md-6"><span class="pull-right pt-10"> <span class="label_color">*</span><span>{{labels.MESSAGES.SELECT_FIVE_ITEMS}}</span></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="card">
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <h4 class="heatmap-label"><span class="label_color">*</span>{{labels.RISK_FACTORS}}</h4>
+                    </div>
+                    <div class="col-md-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <dual-list [sort]="keepSorted" [source]="universalChecklistItems" [(destination)]="heatMapItemsFromChecklist"
+                                 (destinationChange)="onDestinationChange($event)" [key]="key" [display]="display" [format]="format" height="200px"></dual-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <h4 class="heatmap-label"><span class="label_color">*</span>{{labels.METRICS}}</h4>
+                    </div>
+                    <div class="col-md-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <dual-list [sort]="keepSorted" [source]="universalM3Metrics" [(destination)]="heatMapItemsFromMetrics"
+                             (destinationChange)="onMetricDestinationChange($event)" [key]="key" [display]="display" [format]="format" height="200px"></dual-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="pull-right">
+                <button class="btn btn-dark btn-round btn-sm" type="submit" (click)="saveHeatMapItems()">{{labels.SUBMIT}}</button>
+            </div>
+        </div>
+    </div>
+    <p-dialog header="{{dialogHeader}}"
+              [(visible)]="displayDialog"
+              [responsive]="true"
+              showEffect="fade"
+              [modal]="true"
+              [contentStyle]="{'overflow':'visible'}"
+              [height]="150"
+              [width]="350"
+              (onHide)="displayDialogClose()">
+        <div>
+            <span>{{dialogueMsg}}</span>
+        </div>
+        <div class="ui-g-12">
+            <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="displayDialogClose()">
+                {{labels.OK}}
+            </button>
+        </div>
+    </p-dialog>
+</div>

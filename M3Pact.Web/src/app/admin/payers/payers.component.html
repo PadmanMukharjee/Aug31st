@@ -1,0 +1,130 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col admin_padding_res">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>{{labels.PAYERS}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row" *ngIf="canEdit && editActions.includes('AddPayer')">
+                        <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="showDialogToAdd()"><span class="fa fa-plus">&nbsp;</span>{{sharedLabels.BUTTONS.ADD}}</button>
+                    </div>
+                    <p-table [value]="payers" [paginator]="true" [rows]="rowsIn" (onPage)="onTablePageChange($event)" (onFilter)="onTableFilter($event)" selectionMode="single" [(selection)]="selectedpayer">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="payers_header_table">{{labels.PAYER}}</th>
+                                <th class="textCenter">{{sharedLabels.ACTIVE}}</th>
+                                <th>{{sharedLabels.SELECTEDCLIENTS}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-payer>
+                            <tr>
+                                <td class="payers_header_table">
+                                    <span *ngIf="payer.isActive && canEdit && editActions.includes('EditPayerName')" class="fa fa-pencil" (click)="onRowSelect(payer)">&nbsp;</span>
+                                    {{payer.payerCode}}
+                                </td>
+                                <td class="textCenter">
+                                    <label class="switch">
+                                        <input type="checkbox" [(ngModel)]="payer.isActive" (change)="changeStateOfPayer(payer)" [attr.disabled]="!(canEdit && editActions.includes('MakePayerActiveInActive')) ? '' : null" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <span *ngIf="payer.clientsCount === 0">{{payer.clientsCount}}</span>
+                                    <span *ngIf="payer.clientsCount !== 0" (click)="onClientsColumnSelect(payer)" class="text_underline">{{payer.clientsCount}}</span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td *ngIf="payersFiltered==undefined" [attr.colspan]="3">
+                                    Loading...
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                            <tr>
+                                <td class="table-style"> <b>{{paginationCount}}</b></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="displayDialog" class="admin">
+        <p-dialog header="{{dialogHeader}}" [(visible)]="displayDialog" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true" (onHide)="clearMessages()" class="admin_dialogbox" >
+            <div class="ui-g ui-fluid" *ngIf="payer">
+                <form #payerForm="ngForm" (ngSubmit)="save()">
+                    <div class="ui-g-12">
+                        <div class="ui-g-3">
+                            <label for="site">{{labels.PAYER}}<span class="required">*</span></label>
+                        </div>
+                        <div class="ui-g-6 margin-top-3">
+                            <input class="res_busi_unit" id="payer" type="text" name="payer" required [(ngModel)]="payer.payerCode" value="" #payerctrl="ngModel" />
+                            <div *ngIf="!valid" class="error-message_color">
+                                {{validationConstants.PAYERS_REQUIRED}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12">
+                        <p-messages [(value)]="messageList"></p-messages>
+                    </div>
+                    <input pInputText id="vin" name="payerID" [(ngModel)]="payer.id" type="hidden" />
+
+                    <div class="ui-g-12 text-center">
+                        <button class="btn btn-dark btn-round btn-sm pull-right" type="submit">{{sharedLabels.BUTTONS.SAVE}}</button>
+                    </div>
+                </form>
+            </div>
+
+        </p-dialog>
+    </div>
+    <div *ngIf="displayPayers" class="admin">
+        <p-dialog header="Warning!" [(visible)]="displayPayers" [responsive]="true" [resizable] = "false" [modal]="true" (onHide)="keepActivePayer()">
+            <label>
+                The following clients will get affected if the selected Payer is deactivated
+            </label>
+            <br />
+            <label>Do you want to continue?</label>
+            <div class="ui-g ui-fluid verticalScroll">
+                <ul>
+                    <li *ngFor="let client of clientsOfPayer">
+                        {{client}}
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="activeOrInactivePayer()">Yes</button>
+                <button type="submit" class="btn btn-dark btn-sm btn-round" (click)="keepActivePayer()">No</button>
+            </div>
+        </p-dialog>
+    </div>
+
+    <div *ngIf="displayingClients">
+        <p-dialog header="Clients List" [(visible)]="displayingClients" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true">
+            <div>
+                <span>{{sharedLabels.CLIENT_COUNT_HEADER_MEASSAGE}} {{payer.payerCode}} payer</span>
+            </div>
+            <div class="ui-g ui-fluid verticalScroll">
+                <ul>
+                    <li *ngFor="let client of payer.clients">
+                        {{client}}
+                    </li>
+                </ul>
+            </div>
+            <div class="ui-g-12">
+                <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="closeDialog()">
+                    {{sharedLabels.BUTTONS.OK}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

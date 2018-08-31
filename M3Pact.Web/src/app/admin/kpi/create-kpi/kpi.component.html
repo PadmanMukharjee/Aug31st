@@ -1,0 +1,214 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="right_col admin_padding_res">
+    <div class="page-title">
+        <div class="title_left">
+            <h3 *ngIf="isCreateOperation">{{labels.CREATE_KPI}}</h3>
+            <h3 *ngIf="!isCreateOperation">{{canEdit?labels.EDIT_KPI:labels.VIEW_KPI}}</h3>
+        </div>
+        <div class="title_right">
+            &nbsp;
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <form class="form-horizontal form-label-left input_mask" #kpiDetailsForm="ngForm" (ngSubmit)="saveKPIDetails(kpiDetailsForm)">
+            <div class="x_title">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class=""><h4>{{labels.KPI_DETAILS}}</h4></div>
+                </div>
+            </div>
+            <div class="x_content">
+                <div class="col-xs-12 col-xm-12 col-md-12 col-lg-6">
+                    <fieldset class="scheduler-border" [disabled]="!canEdit">
+                        <legend class="scheduler-border">{{labels.DESCRIPTION}}</legend>
+                        <div class="form-group alignClientInput">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12 textLabelPadding"><b>{{labels.SOURCE}}</b></label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                <label>{{labels.M3METRICS}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group alignClientInput">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12"><label class="required">*</label><b>{{labels.MEASURE}}</b></label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                <p-dropdown [options]="measures" name="measures" placeholder="Select" optionLabel="measureText" optionValue="measureId" [(ngModel)]="kpi.measure" autoWidth="false" required = "true" (onChange)="OnQuestionSelect()" #measureCtrl="ngModel" [disabled]="!canEdit"></p-dropdown>
+                                <div *ngIf="showMeasureError" class="error-message_color">{{ labels.MEASURE_ERROR }}</div>
+                            </div>
+                        </div>
+                        <div class="form-group alignClientInput">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12"><label class="required">*</label><b>{{labels.KPI_DESCRIPTION}}</b></label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                <input type="text" name="kpiDescription" [(ngModel)]="kpi.kpiDescription" maxlength="25" required #kpiDescriptionctrl="ngModel" (keyup)="removeValidationMessage()" [ngClass]="{'disabled_textbox':!canEdit}">
+                                <validation-message [frmcontrol]="kpiDescriptionctrl" [fldText]="labels.KPI_DESCRIPTION" [frmSubmitted]="kpiDetailsForm.submitted" [frmControlEmptyCheck]="kpiDetailsForm.submitted">
+                                </validation-message>
+                                <span *ngIf="isKPIDescription" class="error-validation-message">{{validationConstants.KPIDESCRIPTION_EXISTS}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group alignClientInput">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12">
+                                <label class="required">*</label><b>{{labels.STANDARD}}</b>
+                            </label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                <input type="number" 
+                                       *ngIf="showDefaultStandard" 
+                                       name="standard" 
+                                       [(ngModel)]="kpi.standard"
+                                       min="0" 
+                                       max="99999999999"
+                                       oninput="validity.valid||(value='');" 
+                                       required 
+                                       #standardCtrl="ngModel" 
+                                       [ngClass]="{'disabled_textbox':!canEdit}" 
+                                       (keyup) ="checkValidStandard()" 
+                                       (change) ="checkValidStandard()">
+                                <input *ngIf="showKpiAmountMeasure"
+                                       type="text"
+                                       maxlength="13"
+                                       name="standard"
+                                       [(ngModel)]="kpi.standard"
+                                       oninput="validity.valid||(value='');" required
+                                       #standardCtrl="ngModel"
+                                       [ngClass]="{'disabled_textbox':!canEdit}"
+                                       (focus)="onfocus($event)"
+                                       (blur)="onBlur($event,i)"
+                                       (keyup)="onkeyUp($event,i)">
+                                <input type="number" *ngIf="showKpiDaysMeasure" name="standard" [(ngModel)]="kpi.standard" min="0" (keyup)="daysKeyUp($event,i)" oninput="validity.valid||(value='');" required #standardCtrl="ngModel" 
+                                       [ngClass]="{'disabled_textbox':!canEdit}">
+                                <input *ngIf="showKpiPercentageMeasure"
+                                       type="text"
+                                       maxlength="6"
+                                       name="standard"
+                                       [(ngModel)]="kpi.standard"
+                                       oninput="validity.valid||(value='');" required
+                                       #standardCtrl="ngModel"
+                                       [ngClass]="{'disabled_textbox':!canEdit}"
+                                       (focus)="percentageOnfocus($event)"
+                                       (blur)="percentageOnBlur($event,i)"
+                                       (keyup)="percentageOnkeyUp($event,i)">
+                                <label class="control-label pl-10" *ngIf="!showDefaultStandard">{{kpi.measure.measureUnit}}</label>
+                                <div *ngIf="showDefaultStandardError" class="error-message_color">{{ labels.STANDARD_ERROR }}</div>
+                                <div *ngIf="enteredStandardAmountValid && showKpiAmountMeasure" class="rror-message_color" >{{ labels.STANDARD_AMOUNT_FORMAT }}</div>
+                                <div *ngIf="enteredStandardDayValid && showKpiDaysMeasure" class="rror-message_color" >{{ labels.STANDARD_DAYS_FORMAT }}</div>
+                                <div *ngIf="enteredStandardPercentageValid && showKpiPercentageMeasure" class="rror-message_color" >{{ labels.STANDARD_PERCENT_FORMAT }}</div>
+                            </div>
+                        </div>
+                        <div class="form-group alignClientInput">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12"><label class="required">*</label><b>{{labels.ALERT_LEVEL}}</b></label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                <p-dropdown [options]="alertLevel" name="alertLevels" placeholder="Select" [(ngModel)]="alert" autoWidth="false" required="true" [disabled]="!canEdit" #alertLevelDropdownCtrl="ngModel"></p-dropdown>
+                                <label class="control-label pl-10">{{kpi.standard}}</label>
+                                <validation-message [frmcontrol]="alertLevelDropdownCtrl" [fldText]="'valid alert level'" [frmSubmitted]="kpiDetailsForm.submitted" [frmControlEmptyCheck]="kpiDetailsForm.submitted">
+                                </validation-message>
+                            </div>
+                        </div>
+                        <div class="form-group alignClientInput">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12"><label class="required">*</label><b>{{labels.MEASURE_WHEN}}</b></label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                <p-dropdown [options]="measureWhen" name="measureWhen" placeholder="Select" optionLabel="measure" optionValue="kpiMeasureId" [(ngModel)]="kpi.kpiMeasure" autoWidth="false" required="true" #measureWhenCtrl="ngModel" [disabled]="!canEdit" (onChange)="afterMessage()"></p-dropdown>
+                                <validation-message [frmcontrol]="measureWhenCtrl" [frmSubmitted]="kpiDetailsForm.submitted" [selectRequiredMessage]="labels.MEASURE_WHEN">
+                                </validation-message>
+                            </div>
+                        </div>
+                        <div class="form-group alignClientInput responsive_flex">
+                            <label class="checkboxPadding control-label col-lg-4 col-md-6 col-sm-3 col-xs-12"><b>{{labels.HEAT_MAP_ITEM}}</b></label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-3 alignInput">
+                                <input type="checkbox" [(ngModel)]="kpi.isHeatMapItem" name="heatMapItem" (change)="settingHeatMapScore()" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-xm-12 col-md-12 col-lg-6">
+                    <fieldset class="scheduler-border" [disabled]="!canEdit">
+                        <legend class="scheduler-border">{{labels.ALERT_DESCRIPTION}}</legend>
+                        <div class="form-group alignClientInput responsive_flex responsive_width">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12 checkboxPadding">{{labels.SENDALERTS}}</label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                <input type="checkbox" [(ngModel)]="kpi.sendAlert" name="sendAlerts" (change)="sendToSelection()" />
+                            </div>
+                        </div>
+                        <div *ngIf="kpi?.sendAlert" class="form-group alignClientInput ">
+                            <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12"><label class="required">*</label>{{labels.SEND_TO}}</label>
+                            <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput alignInput_res">
+                                <label>
+                                    <input  type="checkbox" [(ngModel)]="kpi.sendToRelationshipManager" name="relationshipManager" class="sendtoAlignment" (change)="sendToSelection()" />
+                                    {{labels.RELATIONSHIP_MANAGER}}
+                                </label>
+                                <label>
+                                    <input type="checkbox" [(ngModel)]="kpi.sendToBillingManager" name="billingManager" class="sendtoAlignment" (change)="sendToSelection()" />
+                                    {{labels.BILLING_MANAGER}}
+                                </label>
+                                <span class="error-validation-message">{{sendToErrorMsg}}</span>
+                            </div>
+                        </div>
+                        <div *ngIf="kpi?.sendAlert">
+                            <div class="form-group alignClientInput responsive_flex">
+                                <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12 checkboxPadding">{{labels.ESCALATE_ALERT}}</label>
+                                <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                    <input type="checkbox" [(ngModel)]="kpi.escalateAlert" name="sendEscalateAlerts" (change) ="afterMessage()" />
+                                </div>
+                            </div>
+                            <div *ngIf="kpi?.escalateAlert" class="form-group alignClientInput">
+                                <label class="control-label col-lg-4 col-md-6 col-sm-3 col-xs-12"><label class="required">*</label>{{labels.AFTER}}</label>
+                                <div class="col-lg-8 col-md-6 col-sm-9 col-xs-12 alignInput">
+                                    <input type="number" name="after" [(ngModel)]="escalateLimt" min="0" oninput="validity.valid||(value='');" required #afterCtrl="ngModel" class="numberTextBoxWidth"
+                                           [ngClass]="{'disabled_textbox':!canEdit}">
+                                    <label>{{labels.CONSECUTIVE}}</label>
+                                    <label>{{after}}</label>
+                                    <validation-message [frmcontrol]="afterCtrl" [fldText]="'a value'" [frmSubmitted]="kpiDetailsForm.submitted" [frmControlEmptyCheck]="kpiDetailsForm.submitted">
+                                    </validation-message>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <div *ngIf="canEdit" class="col-xs-12">
+                        <button *ngIf="isCreateOperation" type="button" class="btn btn-dark btn-sm btn-round pull-right" (click)="reset()">{{sharedLabels.BUTTONS.RESET}}</button>
+                        <button type="submit" [disabled] = "disableSave" #kpiDetailsFormBtn class="btn btn-dark btn-sm btn-round pull-right">{{sharedLabels.BUTTONS.SAVE}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p-dialog header="{{sharedLabels.DISPLAYLABEL}}"
+              [(visible)]="displayDialog"
+              [responsive]="true"
+              showEffect="fade"
+              [modal]="true"
+              [contentStyle]="{'overflow':'visible'}"
+              [height]="150"
+              [width]="350"
+              (onHide)="displayDialogclose()">
+        <div>
+            <span>{{dialogueMsg}}</span>
+        </div>
+        <div class="ui-g-12">
+            <button class="btn btn-dark btn-round btn-sm pull-right" type="button" (click)="displayDialogclose()">
+                 {{sharedLabels.BUTTONS.OK}}
+            </button>
+        </div>
+    </p-dialog>
+    <div>
+        <p-dialog [header]="labels.CONFIRMATION_HEADER"
+                  [(visible)]="showConfirmation"
+                  [responsive]="true"
+                  showEffect="fade"
+                  [modal]="true"
+                  [contentStyle]="{'overflow':'visible'}"
+                  [height]="150"
+                  [width]="350"
+                  (onHide)="confirmationClick('n')">
+            <div>
+                <span>{{confirmationMsg}}</span>
+            </div>
+
+            <div class="ui-g-12 pull-right">
+                <button class="btn btn-dark btn-round btn-sm" type="submit" (click)="confirmationClick('y')">
+                     {{sharedLabels.BUTTONS.YES}}
+                </button>
+                <button class="btn btn-dark btn-round btn-sm" type="button" (click)="confirmationClick('n')">
+                     {{sharedLabels.BUTTONS.NO}}
+                </button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

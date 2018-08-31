@@ -1,0 +1,14 @@
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\bin\Debug\netstandard2.0\M3Pact.LoggerUtility.deps.json
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\bin\Debug\netstandard2.0\M3Pact.LoggerUtility.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\bin\Debug\netstandard2.0\M3Pact.LoggerUtility.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\bin\Debug\netstandard2.0\ConfigManager.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\bin\Debug\netstandard2.0\Notification.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\bin\Debug\netstandard2.0\ConfigManager.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\bin\Debug\netstandard2.0\Notification.pdb
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\obj\Debug\netstandard2.0\M3Pact.LoggerUtility.csprojResolveAssemblyReference.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\obj\Debug\netstandard2.0\M3Pact.LoggerUtility.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\obj\Debug\netstandard2.0\M3Pact.LoggerUtility.AssemblyInfoInputs.cache
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\obj\Debug\netstandard2.0\M3Pact.LoggerUtility.AssemblyInfo.cs
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\obj\Debug\netstandard2.0\M3Pact.LoggerUtility.csproj.CopyComplete
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\obj\Debug\netstandard2.0\M3Pact.LoggerUtility.dll
+E:\M3Pact\Development\Dev2.0\M3Pact.LoggerUtility\obj\Debug\netstandard2.0\M3Pact.LoggerUtility.pdb

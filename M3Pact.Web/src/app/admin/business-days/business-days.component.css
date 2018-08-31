@@ -1,0 +1,25 @@
+﻿
+@media screen and (max-width: 640px) {
+    .right_col {
+        padding-top: 180px !important;
+    }
+
+    >>> .ui-table .ui-table-thead > tr > th, >>> .ui-table .ui-table-tbody > tr > td {
+        width: 100px !important;
+    }
+    >>> .bussiness-day-Flex .ngx-charts-outer {
+        transform: translate(-150px,-20px) rotate(180deg) scale(-0.4,-0.4);
+    }
+}
+.year_label {
+    padding-left: 0px !important;
+    text-align: left;
+}
+.msg_color {
+    color: red;
+    font-size: 11px;
+}
+>>> .bussiness-day-Flex .ngx-charts-outer {
+    margin: 0 auto !important;
+}
+

@@ -1,0 +1,9 @@
+E:\M3Pact\Development\Dev2.0\ConfigManager\bin\Debug\netstandard2.0\ConfigManager.deps.json
+E:\M3Pact\Development\Dev2.0\ConfigManager\bin\Debug\netstandard2.0\ConfigManager.dll
+E:\M3Pact\Development\Dev2.0\ConfigManager\bin\Debug\netstandard2.0\ConfigManager.pdb
+E:\M3Pact\Development\Dev2.0\ConfigManager\obj\Debug\netstandard2.0\ConfigManager.csproj.CoreCompileInputs.cache
+E:\M3Pact\Development\Dev2.0\ConfigManager\obj\Debug\netstandard2.0\ConfigManager.AssemblyInfoInputs.cache
+E:\M3Pact\Development\Dev2.0\ConfigManager\obj\Debug\netstandard2.0\ConfigManager.AssemblyInfo.cs
+E:\M3Pact\Development\Dev2.0\ConfigManager\obj\Debug\netstandard2.0\ConfigManager.dll
+E:\M3Pact\Development\Dev2.0\ConfigManager\obj\Debug\netstandard2.0\ConfigManager.pdb
+E:\M3Pact\Development\Dev2.0\ConfigManager\obj\Debug\netstandard2.0\ConfigManager.csprojResolveAssemblyReference.cache

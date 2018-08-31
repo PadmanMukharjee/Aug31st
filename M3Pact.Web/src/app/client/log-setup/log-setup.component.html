@@ -1,0 +1,86 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="row">
+    <div class="client_details">
+        <div class="x_panel">
+            <div class="x_title">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6"> <h4>Log Setup</h4></div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="float_R" *ngIf="canEdit && editActions.includes('AddPayerAssociationToClient')">
+                        <button type="button" (click)="showDialogToAdd()" class="btn btn-dark btn-sm btn-round"><span class="fa fa-plus"></span>&nbsp;{{labels.ADD}}</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="p_tbl">
+                <p-table [value]="logSetups" [paginator]="true" [rows]="10" selectionMode="single" [(selection)]="selectedLogSetup">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{labels.PAYERS}}</th>
+                            <th class="text-center" *ngIf="isM3FeeColumnVisible">{{labels.M3_FEE_EXEMPT}}</th>
+                            <th class="text-center">{{labels.ACTIVE}}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                        <tr>
+                            <td>
+                                <span class="fa fa-trash" *ngIf=" canEdit && editActions.includes('EditPayerAssociationToClient') && rowData.canDelete" (click)="onRowSelect(rowData)"></span>
+                                &nbsp;{{rowData.payerName}}
+                            </td>
+                            <td class="textCenter" *ngIf="isM3FeeColumnVisible">
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="rowData.isM3FeeExempt" (change)="onToggle(rowData)" [attr.disabled]="!(canEdit && rowData.isEditable) ? '' : null" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="textCenter">
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="rowData.isActive" (change)="onStatusToggle(rowData)" [attr.disabled]="!(canEdit && rowData.isEditable) ? '' : null" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="form-group">
+        <div class="x_title">
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-xs-12">
+            <button (click)="save()" class="btn btn-dark btn-sm btn-round pull-right">{{sharedLabels.SAVE}}</button>
+        </div>
+    </div>-->
+</div>
+
+<div *ngIf="displayDialog"class="admin admin_dialog">
+    <p-dialog header="{{popupHeader}}" [(visible)]="displayDialog" [resizable] = "false" [responsive]="true" showEffect="fade" [modal]="true" (onHide)="disbleEdit()">
+        <div class="ui-g ui-fluid log-setup_height">
+            <form #payerForm="ngForm" (ngSubmit)="saveClientPayer()">
+                <div class="ui-g-12 row" *ngIf="!isEditPayer">
+                    <div class="ui-g-3">
+                        <label class="pull-right">{{labels.PAYERS}}<span class="required">*</span></label>
+                    </div>
+                    <div class="ui-g-6 admin_dialog_width">
+                        <!--<div *ngIf="isEditPayer">
+                            <p-dropdown [options]="payers" name="payer" placeholder="{{labels.SELECT}}" [(ngModel)]="logSetup.payerCode"></p-dropdown>
+                        </div>-->
+                        <div *ngIf="!isEditPayer">
+                            <p-multiSelect [options]="payers" [filter]="true" [(ngModel)]="selectedPayers" [name]="payers" #payersCtrl="ngModel"></p-multiSelect>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-g-12 row" *ngIf="isEditPayer">
+                    Are you sure you want to delete this payer ?
+                </div>
+                <div class="ui-g-12 row">
+                    <button type="button" *ngIf="isEditPayer" class="btn btn-dark btn-sm btn-round pull-right" (click)="disbleEdit()"> {{sharedLabels.BUTTONS.NO}}</button>
+                    <button type="submit" *ngIf="isEditPayer" class="btn btn-dark btn-sm btn-round pull-right"> {{sharedLabels.BUTTONS.YES}}</button>
+                    <button type="submit" *ngIf="!isEditPayer" class="btn btn-dark btn-sm btn-round pull-right logsetup-btn"> {{sharedLabels.BUTTONS.SAVE}}</button>
+                </div>
+            </form>
+        </div>
+    </p-dialog>
+</div>

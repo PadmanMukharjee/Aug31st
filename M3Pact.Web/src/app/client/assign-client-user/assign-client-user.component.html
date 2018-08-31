@@ -1,0 +1,23 @@
+﻿<p-growl [(value)]="messages"></p-growl>
+<div class="row">
+    <div>
+        <div class="x_panel">
+            <div class="x_title">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6"> <h4>{{labels.ASSIGN_USER}}</h4></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="container-fluid">
+                <dual-list [sort]="keepSorted" [source]="allUsers" [key]="key" [display]="display" [filter]="filter"
+                           [(destination)]="selectedUsers" height="265px" [format]="format" [disabled]="disabled"></dual-list>
+            </div>
+            <div class="form-group">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-xs-12">
+                    <button (click)="saveAssignedUsers()" class="btn btn-dark btn-sm btn-round pull-right">{{sharedLabels.SAVE}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

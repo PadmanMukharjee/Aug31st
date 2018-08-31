@@ -1,0 +1,13 @@
+﻿CREATE TABLE ScreenAction(
+ScreenActionId INT NOT NULL IDENTITY,
+ScreenId INT NOT NULL,
+ActionName VARCHAR(100) NOT NULL,
+RecordStatus VARCHAR(1) NOT NULL,
+CreatedBy VARCHAR(100),
+CreatedDate DATE,
+ModifiedBy VARCHAR(100),
+ModifiedDate DATE
+CONSTRAINT FK_SCREENACTIONS_SCREENID  FOREIGN KEY (ScreenId) REFERENCES Screen(ScreenId), 
+    CONSTRAINT [PK_ScreenActions] PRIMARY KEY ([ScreenActionId]),
+	CONSTRAINT [UNIQUEACTIONNAME] UNIQUE ([ActionName])
+)

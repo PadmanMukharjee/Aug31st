@@ -1,0 +1,356 @@
+﻿<p-growl [(value)]="msgs"></p-growl>
+<div class="client_details">
+    <div class="x_panel">
+        <form class="form-horizontal form-label-left input_mask" #clientDataForm="ngForm" (ngSubmit)="saveClientData(clientDataForm)">
+            <div class="x_title">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="">
+                        <h4>Client Data</h4>
+                    </div>
+                </div>
+                <div *ngIf="canEdit && editActions.includes('PerformClientActivateInactivate') && clientData.completedClient" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <label class="isActiveClient pull-right">{{labels.ACTIVE}}</label>
+                    <label class="switch pull-right">
+                        <input type="checkbox" [(ngModel)]="clientData.clientActive" name="active" />
+                        <span class="slider round"></span>
+                    </label>
+                    <label class="isActiveClient pull-right">
+                        {{labels.INACTIVE}}
+                    </label>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                    <fieldset class="scheduler-border" [disabled]="!canEdit">
+                        <legend class="scheduler-border">{{labels.CLIENT_DETAILS}}</legend>
+                        <div class="control-group">
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.CLIENT_NAME}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 alignInput">
+                                    <input type="text" class="form-control" name="clientName" [(ngModel)]="clientData.name" value="" required #clientNamectrl="ngModel">
+                                    <validation-message [frmcontrol]="clientNamectrl" [frmSubmitted]="clientDataForm.submitted" [fldText]="'Client Name'" [frmControlEmptyCheck]="clientDataForm.submitted">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.CLIENT_CODE}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 alignInput">
+                                    <input type="text" class="form-control" name="clientCode" (change)="isClientCodeExists(clientData.clientCode)" [(ngModel)]="clientData.clientCode"
+                                           value="" required [disabled]="clientData.clientExist" #clientCodectrl="ngModel">
+                                    <validation-message [frmcontrol]="clientCodectrl" [frmSubmitted]="clientDataForm.submitted" [fldText]="'Client Code'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.ACRONYM}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 alignInput">
+                                    <input type="text" class="form-control" name="acronym" [(ngModel)]="clientData.acronym" value="" required #acronymctrl="ngModel">
+                                    <validation-message [frmcontrol]="acronymctrl" [frmSubmitted]="clientDataForm.submitted" [fldText]="'Acronym'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.SPECIALITY}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 ddn_client_page alignInput">
+                                    <p-dropdown [disabled]="!canEdit" [options]="specialityOptions" name="Speciality" placeholder="Select" optionLabel="specialityCode"
+                                                [(ngModel)]="clientData.speciality" filter="true" autoWidth="false" required="true" #specialityCode="ngModel"></p-dropdown>
+                                    <validation-message [frmcontrol]="specialityCode" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Specialty'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.BUSINESS_UNIT}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 ddn_client_page alignInput">
+                                    <p-dropdown [disabled]="!canEdit" [options]="businessUnitOptions" name="BusinessUnit" placeholder="Select" optionLabel="businessUnitCode"
+                                                optionValue="id" [(ngModel)]="clientData.businessUnit" filter="true" autoWidth="false"
+                                                required="true" #businessUnit="ngModel"></p-dropdown>
+                                    <validation-message [frmcontrol]="businessUnit" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Business Unit'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.SYSTEM}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 ddn_client_page alignInput">
+                                    <p-dropdown [disabled]="!canEdit" [options]="systemOptions" name="System" placeholder="Select" optionLabel="systemCode" optionValue="id"
+                                                [(ngModel)]="clientData.system" filter="true" required="true" #system="ngModel"></p-dropdown>
+                                    <validation-message [frmcontrol]="system" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'System'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.SITE}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 ddn_client_page alignInput">
+                                    <p-dropdown [disabled]="!canEdit" [options]="siteOptions" name="Site" placeholder="Select" [(ngModel)]="clientData.site"
+                                                filter="true" required="true" #site="ngModel"></p-dropdown>
+                                    <validation-message [frmcontrol]="site" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Site'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">{{labels.PROVIDERS}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name="numberOfProviders" [(ngModel)]="clientData.numberOfProviders" value="" #numberOfProviders="ngModel"
+                                           (keypress)="restrictNumeric($event,numberOfProviders.value)">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">{{labels.CONTACT_NAME}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name="contactName" [(ngModel)]="clientData.contactName" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">{{labels.CONTACT_PHONE}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name="contactPhone" minlength="10" maxlength="10" [(ngModel)]="clientData.contactPhone"
+                                           value="" #contactPhone="ngModel" (keypress)="restrictNumeric($event,contactPhone.value)">
+                                    <validation-message [frmcontrol]="contactPhone" [fldText]="'Contact Phone'" [frmSubmitted]="clientDataForm.submitted">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">{{labels.CONTACT_EMAIL}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12">
+                                    <input type="email" class="form-control" name="contactEmail" [(ngModel)]="clientData.contactEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                           #contactEmail="ngModel" value="">
+                                    <validation-message [fldText]="'Email'" [frmcontrol]="contactEmail" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Contact Email'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                    <fieldset class="scheduler-border" [disabled]="!canEdit">
+                        <legend class="scheduler-border">{{labels.CONTRACT_DETAILS}}</legend>
+                        <div class="control-group">
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.START_DATE}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 date_picker_client alignInput">
+                                    <p-calendar [(ngModel)]="clientData.contractStartDate" name="contractStartDate" [showIcon]="true" required #contractstartctrl="ngModel" class="zIndex_calender"></p-calendar>
+                                    <validation-message [frmcontrol]="contractstartctrl" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Contract Start Date'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.END_DATE}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 date_picker_client alignInput">
+                                    <p-calendar [(ngModel)]="clientData.contractEndDate" name="contractEndDate" [showIcon]="true" required #contractendctrl="ngModel"></p-calendar>
+                                    <validation-message [frmcontrol]="contractendctrl" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Contract End Date'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <p-dialog header="Error" [(visible)]="showErrorMsg" [responsive]="true" [modal]="true">
+                                <label>{{errorMsg}}</label>
+                                <br />
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-dark btn-sm btn-round" (click)="redirect()">OK</button>
+                                </div>
+                            </p-dialog>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.NOTICE_PERIOD}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12">
+                                    <div class="row res_flex">
+                                        <div class="col-lg-7 col-md-6 col-sm-9 col-xs-12 alignInput res_width_client">
+                                            <input type="number" min="0" class="form-control" name="noticePeriod" [(ngModel)]="clientData.noticePeriod" value="" required
+                                                #noticeperiod="ngModel" (keypress)="restrictNumeric($event,noticeperiod.value)">
+                                        </div>
+                                        <div class="mt-5">
+                                            <span class="lbl_notice_period">{{labels.DAYS}}</span>
+                                        </div>
+                                    </div>
+                                    <validation-message [frmcontrol]="noticeperiod" [frmSubmitted]="clientDataForm.submitted" [fldText]="'Notice Period'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">{{labels.CONTRACT}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12">
+                                    <input type="file" name="contract" accept=".pdf" (change)="onFileSelect($event)" class="hide_file_label">
+                                    <label class = "file-Label f-12"> {{ fileNameOrLabel }}</label><br/>
+                                    <button type="button" *ngIf="clientData.contractFilePath!=null && clientData.contractFilePath!=''" (click)="openDocument()" class="f-24">
+                                        <i class="fa fa-file-text-o"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12"> <label class="required">*</label>{{labels.SEND_ALERTS}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 alignInput send-alert-width">
+                                    <p-multiSelect [options]="sendAlertUsers" defaultLabel="Select Users" required [(ngModel)]="clientData.sendAlertsUsers" name="sendAlertsUsers" #sendAlertsUsers="ngModel"></p-multiSelect>
+                                    <validation-message [frmcontrol]="sendAlertsUsers" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'User'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div>
+                        <fieldset class="scheduler-border client-margin_reponsive" [disabled]="!canEdit">
+                            <legend class="scheduler-border">{{labels.CHECKLISTS}}</legend>
+                            <div class="control-group">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-lg-4">
+                                            <label class="required">*</label>
+                                            {{labels.WEEKLY}}
+                                        </label>
+                                        <div [ngClass]="{'col-lg-6 ui-fluid' : showWeeklyChecklistInfo == true , 'col-lg-7 col-md-7 col-sm-9 col-xs-12 ui-fluid alignInput' : showWeeklyChecklistInfo == false}">
+                                            <p-dropdown required="true" [options]="weeklyCheckListOptions" [autoWidth]="false" [disabled]="!(clientData && clientData.system && clientData.site && canEdit)" placeholder="Select a Checklist"
+                                                        name="WeeklyChecklist" [(ngModel)]="clientData.weeklyChecklist" filter="true" #wk_checklist="ngModel" (onChange) = "onChangeChecklist('W')">
+                                            </p-dropdown>
+
+                                            <validation-message [frmcontrol]="wk_checklist" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Weekly Checklist'">
+                                            </validation-message>
+                                        </div>
+                                        <div class="col-lg-2 icon weekly_checklist" *ngIf="showWeeklyChecklistInfo">
+                                            <span data-toggle="tooltip" attr.data-tooltip="{{ weeklyCheckListInfo }}">
+                                                <i class="fa fa-info-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="control-label col-lg-4">
+                                            <label class="required">*</label> {{labels.MONTHLY}}
+                                        </label>
+                                        <div [ngClass]="{'col-lg-6 col-md-6 ui-fluid ' : showMonthlyChecklistInfo == true , 'col-lg-7 col-md-7 col-sm-9 col-xs-12 ui-fluid alignInput' : showMonthlyChecklistInfo == false}">
+                                            <p-dropdown required="true" [options]="monthlyCheckListOptions" [autoWidth]="false" [disabled]="!(clientData && clientData.system && clientData.site && canEdit)"
+                                                        placeholder="Select a Checklist" name="MonthlyChecklist" [(ngModel)]="clientData.monthlyChecklist"
+                                                        filter="true" #mh_checklist="ngModel" (onChange) = "onChangeChecklist('M')">
+                                            </p-dropdown>
+                                            <validation-message [frmcontrol]="mh_checklist" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Monthly Checklist'">
+                                            </validation-message>
+                                        </div>
+                                        <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1 icon weekly_checklist" *ngIf="showMonthlyChecklistInfo">
+                                            <span data-toggle="tooltip" attr.data-tooltip="{{ monthlyCheckListInfo }}">
+                                                <i class="fa fa-info-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p-dialog header="Information" [(visible)]="showChecklistInformation" [responsive]="true" [modal]="true">
+                                    <p>
+                                    {{ labels.MESSAGES.CHECKLIST_CHANGE_INFO_1 }}<br />
+                                    {{ labels.MESSAGES.CHECKLIST_CHANGE_INFO_2 + checklistTypeMessage}} <br />
+                                    {{ labels.MESSAGES.CHECKLIST_CHANGE_INFO_3 }}<br />
+                                    </p>
+                                    <br />
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-dark btn-sm btn-round" (click)="closeChecklistMessage()"> {{ labels.OK }}</button>
+                                    </div>
+                                </p-dialog>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                    <fieldset class="scheduler-border fixed_height_195" [disabled]="!canEdit">
+                        <legend class="scheduler-border">{{labels.FEE_DETAILS}}</legend>
+                        <div class="control-group">
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-6 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.FEE_STRUCTURE}}</label>
+                                <div class="col-lg-7 col-md-6 col-sm-9 col-xs-12">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" [checked]="percentileCashSelected" value="%Cash" id="optionsRadios1" (click)="setradio('%Cash')" name="optionsRadios">{{labels.PERCENTILE_OF_CASH}}
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" [checked]="!percentileCashSelected" value="FlatFee" id="optionsRadios2" (click)="setradio('FlatFee')"
+                                                name="optionsRadios">{{labels.FLAT_FEE}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="percentileCashSelected" class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.PERCENTILE_CASH}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 alignInput">
+                                    <input type="text" [ngModel]="clientData.percentageOfCash" (ngModelChange)="clientData.percentageOfCash=$event" class="form-control"
+                                        name="cash" value="" required #cashctrl="ngModel" min="0" max="100" (keyup)="onkeyup($event)"
+                                        (focus)="onfocus($event)" (blur)="onBlur($event)">
+                                    <label *ngIf="!isPercentageofCashValid" class="pull-right error-message_color">{{validationConstants.CLIENT_DATA_PERCENTAGE_CASH}}</label>
+                                    <validation-message [frmcontrol]="cashctrl" [frmSubmitted]="clientDataForm.submitted" [fldText]="'% of Cash'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div *ngIf="!percentileCashSelected" class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.FLAT_FEE}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 alignInput">
+                                    <input type="text" [(ngModel)]="clientData.flatFee" class="form-control" name="fee" value="" required #feectrl="ngModel"
+                                        min="0" (keyup)="onkeyupFlatFee($event)" (focus)="onfocusFlatFee($event)" (blur)="onBlurFlatFee($event)">
+                                    <label *ngIf="!isFlatFeeValid" class="pull-right error-message_color">{{labels.FLAT_FEE_FORMAT_MESSAGE}}</label>
+                                    <validation-message [frmcontrol]="feectrl" [frmSubmitted]="clientDataForm.submitted" [fldText]="'Flat Fee'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                    <fieldset class="scheduler-border" [disabled]="!canEdit">
+                        <legend class="scheduler-border">{{labels.MANAGER_DETAILS}}</legend>
+                        <div class="control-group">
+                            <div class="form-group alignClientInput">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.RELATIONSHIP}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 ddn_client_page alignInput">
+                                    <p-dropdown placeholder="Select" [disabled]="!canEdit" [options]="users" name="Relationship" [(ngModel)]="clientData.relationShipManager.email"
+                                        filter="true" required #relationship="ngModel"></p-dropdown>
+                                    <validation-message [frmcontrol]="relationship" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Relationship Manager'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-5 col-md-5 col-sm-3 col-xs-12">
+                                    <label class="required">*</label>{{labels.BILLING}}</label>
+                                <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12 ddn_client_page alignInput">
+                                    <p-dropdown placeholder="Select" [disabled]="!canEdit" [options]="users" name="BillingManager" [(ngModel)]="clientData.billingManager.email"
+                                        filter="true" required #BillingManager="ngModel"></p-dropdown>
+                                    <validation-message [frmcontrol]="BillingManager" [frmSubmitted]="clientDataForm.submitted" [selectRequiredMessage]="'Billing Manager'">
+                                    </validation-message>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <button *ngIf="canEdit" type="submit" #clientDataFormSubmit class="btn btn-dark btn-sm btn-round pull-right">{{labels.SAVE}}</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <modal #pdfPopup [closeOnEscape]="false" [closeOnOutsideClick]="false" [modalClass]="'modal-dialog modal-lg'" id="modal_duc_pdfPopup">
+
+                        <modal-header id="mh_duc_pdfPopup">
+
+                        </modal-header>
+                        <modal-content id="mc_duc_pdfPopup">
+                            <div *ngIf="showPdf">
+                                <pdf-viewer-inline [src]="pdfFileData"></pdf-viewer-inline>
+                            </div>
+                        </modal-content>
+                        <modal-footer id="mf_duc_pdfPopup">
+
+                        </modal-footer>
+                    </modal>
+                </div>
+                <!--</form>-->
+            </div>
+        </form>
+    </div>
+</div>
